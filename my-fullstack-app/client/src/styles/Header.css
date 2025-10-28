@@ -1,0 +1,250 @@
+
+@font-face {
+    font-family: 'techno_hideo';
+    src: url("/src/assets/Font/techno_hideo/techno_hideo.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ .Header_Background {
+    background-color: #374151;
+    position: relative;
+    z-index: 10;
+ }
+ 
+ .nav1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-style: none;
+    border-left-style: none;
+    height: 35px;
+    width: 100%;
+    background: linear-gradient(90deg, #008B8B, #006666);;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter:blur(8px);
+    border-color: rgba(255, 255, 255, 0.1);
+    animation: gradient 5s ease infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.nav1 .container {
+    width: 90%;
+    margin: auto;
+}
+
+
+.nav1 .container .flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    width: 100%;
+}
+
+.nav1 .col1 {
+    width: 70%;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.nav1 .col2 {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.nav1 .nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav1 .col1 .SaleFont{
+    font-family: "BBH Sans Hegarty", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.nav1 .list-none {
+    list-style: none;
+}
+
+.Help_Center,
+.Order_Tracking {
+    color: #e0e0e0 !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+
+.Help_Center:hover,
+.Order_Tracking:hover {
+    color: #ffffff !important;
+    text-shadow: 
+        0 0 10px #757F9A,
+        0 0 20px #D7DDE8,
+        0 0 30px #757F9A;
+    transform: scale(1.05);
+}
+
+.header {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.nav2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 2rem;
+    border-bottom-width: 1px;
+    border-bottom-style: groove ;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;/* Thuộc tính quan trọng nhất để căn giữa theo chiều dọc */
+    text-decoration: none;
+    gap :0.1rem
+}
+
+.nav2 .col1 {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav2 .col1 img {
+    width: 80px;
+    height: 80px;
+}
+
+.Shop_Name_Title {
+    font-family : techno_hideo;
+    font-size: 2rem;
+}
+
+.nav2 .col2 {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav2 .col3 {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    padding-left: 1.75rem;
+    justify-content: flex-end;
+}
+
+.col3Tab{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    justify-content: end;
+}  
+
+
+.Login-Resigter{
+    gap: 0.5rem;
+    display: flex;
+    font-size: 18px !important;
+}
+
+
+.LoginButton {
+    color: rgb(229, 225, 231) !important;
+    transition: all;
+    font-weight: 500;
+    text-decoration: solid;
+ 
+}
+
+.ResigterButton{
+    color: rgb(229, 225, 231) !important;
+    transition: all;
+    font-weight: 500;
+    text-decoration: solid;
+}
+
+/* Update existing Login-Resigter styles */
+.Login-Resigter {
+    gap: 0.5rem;
+    display: flex;
+    font-size: 18px !important;
+}
+
+/* Add position relative and transition for both buttons */
+.LoginButton,
+.ResigterButton {
+    color: rgb(229, 225, 231) !important;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding: 4px 8px;
+}
+
+/* Create the underline effect using ::after pseudo-element */
+.LoginButton::after,
+.ResigterButton::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #673ab7, #ff00cc);
+    transition: width 0.3s ease;
+}
+
+/* Expand the underline on hover */
+.LoginButton:hover::after,
+.ResigterButton:hover::after {
+    width: 100%;
+}
+
+/* Optional: Add color change on hover */
+.LoginButton:hover,
+.ResigterButton:hover {
+    color: #ff00cc !important;
+}
+
+.shopIcon{
+    list-style: none;
+    color: rgb(229, 225, 231) !important;
+}
+
+.nav3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

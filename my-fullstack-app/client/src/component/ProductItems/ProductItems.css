@@ -1,0 +1,221 @@
+.ProductItem{
+    width: 100%;
+    max-width: 280px;
+    min-height: 350px;
+    background: white;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #333 !important;
+    padding: 0rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.imgWrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    border-radius: 8px;
+    flex: 0 0 auto;
+}
+
+.imgWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.imgWrapper:hover img {
+    transform: scale(1.05);
+}
+
+.image_1 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.image_2 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+    visibility: hidden;
+  
+}
+
+.image_1 {
+    opacity: 1;
+    /* Ảnh 1 luôn hiển thị ban đầu */
+    visibility: visible;
+}
+
+.image_2 {
+    opacity: 0;
+    /* Ảnh 2 luôn ẩn ban đầu */
+    visibility: hidden;
+}
+
+/* Hiệu ứng khi hover vào toàn bộ thẻ sản phẩm */
+.ProductItem:hover .image_1 {
+    opacity: 0;
+    /* Khi hover, làm mờ và ẩn ảnh 1 */
+    visibility: hidden;
+}
+
+.ProductItem:hover .image_2 {
+    opacity: 1;
+    /* Đồng thời, làm rõ và hiện ảnh 2 */
+    visibility: visible;
+}
+
+.Product_Info {
+    width: 100%;
+    padding: 0.75rem;
+    background: white;
+    margin-top: auto;/* Pushes info to bottom */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);/* Optional: adds separation line */
+    }
+
+
+.Discount {
+    position: absolute;
+    background: linear-gradient(to right, #8A2387, #E94057, #F27121);
+    clip-path: polygon(
+        /* Bắt đầu từ góc trên bên trái và đi xuống */
+        5% 0%,
+        2% 15%,
+        6% 30%,
+        3% 45%,
+        7% 60%,
+        2% 75%,
+        5% 90%,
+        3% 100%,
+        /* Đi ngang sang góc dưới bên phải */
+        95% 100%,
+        /* Đi lên dọc theo cạnh phải */
+        98% 85%,
+        94% 70%,
+        97% 55%,
+        93% 40%,
+        98% 25%,
+        95% 10%,
+        97% 0%
+        /* Trình duyệt sẽ tự động đóng đường path lại */
+            );
+    font-weight: 700;
+    background-position: center;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000 ;
+    text-align: center;
+    line-height: 26px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.Product_Box_Button {
+    position : absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: column !important ;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.ProductItem:hover .Product_Box_Button {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Complex_Button {
+    width: 45px;
+    height: 45px;
+    min-width: 45px !important;
+    border-radius: 9999px !important;
+    background-color: #fff !important;
+    color: #E94057 !important;
+    font-size: 20px !important;
+    opacity: 0.9;
+    transition: all 0.3s ease !important;
+
+}
+
+.Complex_Button:hover{
+    color: #fff !important;
+    background-color: #E94057 !important;
+    opacity: 1;
+    /* transform: translateX(-5px);
+    top : 10px */ /*Di chuyển nhẹ khi hover*/
+}
+
+.Product_Info{
+    padding: 0.5rem 0.5rem;
+    text-align: left !important;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.Product_Name {
+    margin-top: 1rem;
+    margin-bottom: 0rem;
+    padding-right: 0.75rem;
+}
+
+h5 {
+    font-style: none;
+    font-weight: 100;
+}
+
+h5 , h4{
+    color: black !important;
+    margin: 0.25rem 0;
+    line-height: 1.2;
+}
+
+.Old-Price {
+    text-decoration: line-through;
+    color: grey;
+    margin-top: 0.1rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+}
+
+.custom-class {
+    text-align: left !important;
+}
+a {
+    color: black !important
+}
+
+a:link {
+    text-decoration: solid;
+    color: #333 !important;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: blueviolet !important;
+}
+
+a:active {
+    color: #673ab7 !important;
+}

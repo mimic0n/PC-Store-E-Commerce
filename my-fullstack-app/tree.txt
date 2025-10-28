@@ -1,0 +1,93 @@
+my-fullstack-app/
+├── client/
+│   ├── public/
+│   │   ├── images/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── auth/
+│   │   │   │   ├── Login.jsx
+│   │   │   │   └── Register.jsx
+│   │   │   ├── layout/
+│   │   │   │   ├── Navbar.jsx
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   └── Layout.jsx
+│   │   │   ├── products/
+│   │   │   │   ├── ProductList.jsx
+│   │   │   │   ├── ProductCard.jsx
+│   │   │   │   └── ProductDetails.jsx
+│   │   │   └── cart/
+│   │   │       ├── Cart.jsx
+│   │   │       └── CartItem.jsx
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── Shop.jsx
+│   │   │   ├── Profile.jsx
+│   │   │   └── Checkout.jsx
+│   │   ├── context/
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── CartContext.jsx
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   ├── utils/
+│   │   │   └── helpers.js
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/
+│   ├── config/
+│   │   ├── db.js
+│   │   └── default.json
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── productController.js
+│   │   ├── orderController.js
+│   │   └── userController.js
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   ├── error.js
+│   │   └── validation.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Product.js
+│   │   ├── Order.js
+│   │   └── Category.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── products.js
+│   │   ├── orders.js
+│   │   └── users.js
+│   ├── utils/
+│   │   └── helpers.js
+│   ├── .env
+│   ├── package.json
+│   └── index.js
+│
+├── .gitignore
+└── README.md
+
+Client Side (/client)
+    /public - Static assets
+    /src/components - Reusable UI components
+    /src/pages - Main page components
+    /src/context - React context providers
+    /src/services - API calls and services
+    /src/utils - Helper functions and utilities
+
+Server Side (/server)
+    /config - Configuration files
+    /controllers - Route logic
+    /middleware - Custom middleware functions
+    /models - Database models
+    /routes - API route definitions
+    /utils - Helper functions
+
+# Create client folders
+mkdir -p client/public/images
+mkdir -p client/src/components/{auth,layout,products,cart}
+mkdir -p client/src/{pages,context,services,utils}
+
+# Create server folders
+mkdir -p server/{config,controllers,middleware,models,routes,utils}

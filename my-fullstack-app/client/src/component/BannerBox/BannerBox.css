@@ -1,0 +1,13 @@
+.BannerBox {
+    overflow: hidden;
+    border-radius: 0.5rem !important;
+}
+.BannerBoxIMG{
+    width: 100%;
+    cursor: pointer;
+}
+
+.BannerBoxIMG:hover {
+    transition: all 0.3s ease-in-out;
+}
+

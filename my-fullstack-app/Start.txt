@@ -1,0 +1,11 @@
+Start Full Stack app :
+    cd my-fullstack-app
+    npm run dev
+
+Start Server :
+    cd server
+    npm start   
+
+Start Client : 
+    cd client
+    npm run dev

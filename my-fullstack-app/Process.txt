@@ -1,0 +1,57 @@
+First, set up the database : 
+
+    const mongoose = require('mongoose');
+
+    // Add MongoDB connection
+    mongoose.connect('mongodb://localhost:27017/ecommerce')
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
+
+Create basic models for e-commerce : 
+
+    const mongoose = require('mongoose');
+
+    const productSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    description: String,
+    image: String,
+    category: String,
+    stock: Number
+    }, { timestamps: true });
+
+    module.exports = mongoose.model('Product', model);
+
+Update your client-side folder structure:
+    client/src/
+    ├── components/
+    │   ├── ProductList.jsx
+    │   ├── ProductCard.jsx
+    │   ├── Cart.jsx
+    │   └── Navbar.jsx
+    ├── pages/
+    │   ├── Home.jsx
+    │   ├── ProductDetails.jsx
+    │   └── Cart.jsx
+    ├── context/
+    │   └── CartContext.jsx
+    └── services/
+        └── api.js
+
+Next steps to implement:
+
+    Create authentication system (signup/login)
+    Add product management (CRUD operations)
+    Implement shopping cart functionality
+    Add payment integration (e.g., Stripe)
+    Create order management system
+    Add search and filtering capabilities
+    Implement user reviews and ratings
+
+Remember to:
+
+    Plan your database schema
+    Design your API endpoints
+    Create a responsive UI
+    Implement proper error handling
+    Add security measures

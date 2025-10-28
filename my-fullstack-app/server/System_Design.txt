@@ -1,0 +1,31 @@
+#SCHEMA : 
+    *User :
+        username (String, required, unique)
+        email (String, required, unique)
+        password (String, required) - (hashed).
+        role (String, enum: ['user', 'admin'], default: 'user')
+        firstName, lastName, address, phone
+
+    *Category :
+        name (String, required)
+        slug (String, unique) - Dùng cho URL (ví dụ: pc-gaming).
+        parent (ObjectId, ref: 'Category') - Để tạo danh mục đa cấp. Nếu là null thì đó là danh mục cha.
+    
+    *Product :
+        name (String, required)
+        slug (String, unique)
+        description (String)
+        price (Number, required)
+        salePrice (Number)
+        stockQuantity (Number, required)
+        images ([String]) - Mảng các URL ảnh.
+        category (ObjectId, ref: 'Category', required)
+        specifications (Object) - Đối tượng linh hoạt để chứa thông số kỹ thuật.
+
+    *Order :
+        user (ObjectId, ref: 'User', required)
+        orderItems ([{...}]) - Mảng các sản phẩm trong đơn hàng.
+        shippingAddress (Object)
+        totalPrice (Number, required)
+        status (String, enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'], default: 'pending')
+        createdAt, updatedAt

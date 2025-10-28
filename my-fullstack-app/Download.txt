@@ -1,0 +1,17 @@
+Download for Server : 
+cd .\my-fullstack-app\server\
+npm install mongoose express-validator bcryptjs jsonwebtoken
+
+Download For Client : 
+cd client
+npm run : Tải Vite
+npm install @mui/material @emotion/react @emotion/styled react-router-dom axios : Tải React  
+
+
+Download For Fullstack : 
+npm install concurrently
+npm init -y
+
+Download Material UI :
+npm install @mui/material @emotion/react @emotion/styled
+npm i react-icons

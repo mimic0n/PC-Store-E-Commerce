@@ -1,0 +1,22 @@
+API Endpoints :
+
+    #Products & Categories :
+
+        GET /api/products: Lấy danh sách sản phẩm (hỗ trợ filter theo category, sort, pagination).
+        GET /api/products/:slug: Lấy chi tiết một sản phẩm.
+        GET /api/products/search?q=keyword: Tìm kiếm sản phẩm.
+        GET /api/categories: Lấy tất cả danh mục (dạng cây).
+        POST /api/products: (Admin) Tạo sản phẩm mới.
+        PUT /api/products/:id: (Admin) Cập nhật sản phẩm.
+
+    Authentication :
+
+        POST /api/auth/register: Đăng ký người dùng mới.
+        POST /api/auth/login: Đăng nhập, trả về JWT.
+        GET /api/auth/me: Lấy thông tin người dùng hiện tại (dựa vào JWT).
+
+    Orders :
+
+        POST /api/orders: Tạo đơn hàng mới (yêu cầu xác thực).
+        GET /api/orders: Lấy lịch sử đơn hàng của người dùng (yêu cầu xác thực).
+        GET /api/orders/:id: Lấy chi tiết một đơn hàng (yêu cầu xác thực).

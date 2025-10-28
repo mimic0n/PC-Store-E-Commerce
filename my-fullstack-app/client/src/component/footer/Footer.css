@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
+
+.Box {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    background-color: white;
+    z-index: 0 !important;
+    color: black;
+    
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+   
+.Value_Property {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #706d6d;
+     padding-bottom: 1.5rem;
+}
+
+.Value_Column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+
+.ICON {
+    transition: all;
+    transition-duration: 300ms;
+    font-size: 50px;
+}
+
+.ICON:hover {
+    color: #008B8B;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.Value_Column h3 {
+    font-size: 18px;
+    font-weight: bold !important;
+    font-family: "Share Tech", sans-serif;
+    display: block;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.Value_Column p  {
+    font-size: 16px;
+    font-family: "Share Tech", sans-serif;
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    width: 100%;
+}
+
+.Box .col1 {
+    width: 25%;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-left-color: #706d6d;
+}
+
+.Box .col2 {
+    display: flex;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    width: 40%;
+}
+
+.Box .col3 {
+    width: 30%;
+    display: flex;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    flex-direction: column;
+}
+
+.Footer_Font_1 {
+    color: #008B8B;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.Footer_Font_2 {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 1rem;
+}
+
+.Footer_Font_3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.Phone {
+    font-size: 25px;
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    color: #008B8B;
+    font-weight: bold;
+    margin-top: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.footer_ICON {
+    font-size: 40px;
+    color: #008B8B;
+}
+
+.Description {
+    display: flex;
+    align-items: center;
+
+}
+
+.col2_part1 {
+    width: 50%;
+}
+
+.col2_part2 {
+    width: 50%;
+}
+
+.col2_link {
+    list-style-type: none;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    width: 100%;
+}
+
+.col2_link :hover  {
+    color: #008B8B !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+}
+
+.Box .col2 ul {
+    display: block;
+    list-style-type: none;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-inline-start: 0px;
+    unicode-bidi: isolate;
+}
+
+.Col3_Font_1 {
+    color: #008B8B;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.Box.col3 p {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 1rem;
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.Subscribe_Box{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.Subscribe_Input {
+    width: 50%;
+    height: 35px;
+    border: 2px solid transparent;
+    outline: none;
+    padding: 0 1rem;
+    border-radius: 0.125rem;
+    color: black !important;
+    background: 
+        linear-gradient(white, white) padding-box,
+        linear-gradient(90deg, #008B8B, #00CED1) border-box;
+    transition: all 0.3s ease;
+}
+
+.Subscribe_Input:focus {
+    background: 
+        linear-gradient(white, white) padding-box,
+        linear-gradient(90deg, #00CED1, #008B8B) border-box;
+    transform: scale(1.02);
+}
+
+.Subscribe_Input input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+    color: black!important;
+}
+
+.Subscribe_Button {
+    width: 30%;
+    height: 35px;
+    margin-top: 1rem;
+    background: linear-gradient(90deg, #008B8B, #006666);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.Subscribe_Button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.Subscribe_Button:hover::before {
+    left: 100%;
+}
+
+.Subscribe_Button:hover {
+    background: linear-gradient(90deg, #006666, #004d4d);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 139, 139, 0.4);
+}
+
+
+
+
+
+.Box .css-vuhw6e-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked,
+.Box .css-vuhw6e-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    color: #008B8B !important;
+}
+
+.Box .MuiFormControlLabel-label {
+    font-size: 15px !important;
+}
+
+.footer-bottom {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: #374151;
+    border-top-width: 1px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 20rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-bottom p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+
+}
+
+.footer_bottom_Font {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.footer-social-list {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding-inline-start: 0px;
+}
+.footer-social_link {
+    list-style-type: none;
+    border-radius: 9999px;
+    border-width: 2px;
+    /* Reduced from 10px for better appearance */
+    border-style: solid;
+    /* Add this line */
+    border-color: white !important;
+    padding: 0.5rem;
+    /* Add padding for better spacing */
+    /* Better for icon containers */
+    transition: all 0.3s ease;
+}
+
+.footer-social_link:hover {
+    color: #ffffff !important;
+    border-color: #008B8B !important;
+    background-color: rgba(0, 139, 139, 0.1);
+    transform: scale(1.1);
+}
+
+.footer-social_icon {
+    color: white !important;
+    width: 35px;
+    height: 35px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.footer-social_icon:hover {
+    color: #008B8B !important;
+}
+
+.footerBottom_Font {
+    font-size: 14px;
+    font-weight: 400;
+    color: white !important;
+}
+
+.footer-payment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}

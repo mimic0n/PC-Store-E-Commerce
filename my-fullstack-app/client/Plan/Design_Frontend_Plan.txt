@@ -1,0 +1,11 @@
+COMPONENT :
+    #Header :
+        +Navigation:
+            Category
+        +Search
+    #Home :
+        +Home Slider
+        +Home Cat Slider
+        +Product Box
+
+    

@@ -1,0 +1,196 @@
+
+.nav_3{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    width: 95%;
+}
+
+.space{
+    width: 20%;
+}
+
+.space_1 {
+    width: 20%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    width: 95%;
+    margin: auto;
+    box-sizing: content-box;
+   
+}
+
+.nav_3 .col_1 {
+    width: 35%;
+}
+
+.Shop_By_Categories_Button {
+    color: azure !important;
+    gap: 0.25rem;
+    width: 95%;
+    transition: all 0.3s ease;
+   
+}
+
+.Shop_By_Categories_Button:hover {
+    background-color: rgba(248, 246, 246, 0.2) !important;
+    filter: brightness(1.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.Shop_By_Categories_Icon_1{
+    font-size: 18px;
+}
+.Shop_By_Categories_Icon_2{
+    font-size: 14px;
+    margin-left: auto;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav_3 .col_2 {
+    width: 50%;
+}
+
+.col2_page {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.col2_page_item {
+    list-style: none;
+    position: relative;
+}
+
+.Page_link {
+    color: azure;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.Item_Button {
+    text-transform: capitalize !important;
+    color: rgb(229, 225, 231) !important;
+    transition: all 0.3s ease;
+}
+
+.Item_Button:hover {
+    text-transform: capitalize !important;
+    font-weight: bold !important;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    background-color: rgb(241, 237, 242);
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    /* box-shadow: inset 0 0 0 1px rgb(95, 9, 176); */ /*Chỉnh màu border*/
+    color: rgb(95, 9, 176) !important;
+    filter: brightness(1.2);
+    transition: all 0.3s ease;
+    /* Thêm hiệu ứng glow cho text */
+}
+
+.submenu_dropdown {
+    position: absolute;/* Giúp submenu nổi lên trên các thành phần khác */
+    top: 100%;/* Đặt submenu ngay dưới thẻ li cha */
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    list-style: none;
+    padding: 0.5rem 0;
+    /* margin-top: 0.5rem; */ /* Tạo khoảng cách nhỏ với mục cha */
+    width: 200px;
+    z-index: 1000;
+    font-weight: 500;
+    color: aliceblue !important;
+
+}
+
+/* Kiểu cho từng mục trong submenu */
+.submenu_item .submenu_link {
+    display: block; /* Giúp toàn bộ khu vực có thể click được */
+    padding: 0.75rem 1rem;
+    color: #eee;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    box-sizing: border-box;
+        /* Đảm bảo padding không làm vỡ layout */
+} 
+
+/* Hiệu ứng khi di chuột qua các mục con */
+.submenu_item .submenu_link:hover {
+    background: linear-gradient(to right,
+                #757F9A ,
+                #D7DDE8 ,
+                #757F9A );
+        background-size: 400% 400%;
+        animation: gradient 5s ease infinite;
+    color: #673ab7;
+    font-weight: bold;
+    transform: translateX(5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.nav_3.col_3 {
+    width: 50%;
+}
+
+.nav_3 .col_4 {
+    width: 30%;
+}
+
+.col4_text {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    gap: 0.5rem !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.col4_text-icon{
+    font-size: 20px !important;
+}
+
+a:link {
+    text-decoration: solid;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: blueviolet ;
+}
+a:active {
+    color: #673ab7 !important;
+}

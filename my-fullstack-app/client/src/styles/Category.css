@@ -1,0 +1,67 @@
+.CategoryPanel {
+   z-index: 1201;
+}
+
+.Category_Panel_Title {
+    padding: 0rem;
+}
+
+.scoll {
+    overflow: scroll;
+}
+
+.Category_List {
+    width: 100%;
+}
+
+.Category_List_Item {
+    list-style: none;
+    align-items: center;
+    position: relative;
+}
+
+
+.Category_List_Item_Button {
+    width: 90%;
+    right: 20px;
+    text-align: left !important;
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    color: #161515 !important;
+    font-weight: bold !important;
+}
+
+.Plus_icon {
+    cursor: pointer;
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #fc00ff 0%, #00dbde 51%, #fc00ff 100%)
+}
+
+.subMenu {
+    top: 100%;
+    left: 0%;
+    width: 80%;
+    padding-left: 0.75rem;
+}
+
+.subMenu_Item {
+    list-style: none;
+    position: relative;
+}
+
+.subMenu_Item_Button {
+    right: 20px;
+    width: 100%;
+    text-align: left !important;
+    justify-content: space-between !important;
+    align-items: center;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    color: #5a5757 !important;
+    font-weight: bold !important;
+} 
