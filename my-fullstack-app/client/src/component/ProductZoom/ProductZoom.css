@@ -1,0 +1,400 @@
+.ProductZoomWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 0.75rem;
+    position: relative;
+    border-radius: 0.5rem;
+}
+
+.ProductZoomWrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(138, 43, 226, 0.03) 2px, rgba(138, 43, 226, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(138, 43, 226, 0.03) 2px, rgba(138, 43, 226, 0.03) 4px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom {
+    width: 19%;
+    min-width: 80px;
+    max-width: 120px;
+    height: 50%;
+    min-height: 370px;
+    max-height: 600px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg,
+            rgba(138, 43, 226, 0.1) 0%,
+            transparent 50%,
+            rgba(138, 43, 226, 0.1) 100%);
+    pointer-events: none;
+    z-index: 2;
+    animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateY(-100%);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translateY(100%);
+    }
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .Swiper-ProductZoom-Image {
+    cursor: pointer;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    border: 2px solid rgba(138, 43, 226, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    background: linear-gradient(135deg, #1a0033 0%, #0a0015 100%);
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .Swiper-ProductZoom-Image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(138, 43, 226, 0.1) 50%,
+            transparent 70%);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .Swiper-ProductZoom-Image:hover::before {
+    left: 100%;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .Swiper-ProductZoom-Image.active {
+    border-color: #a855f7;
+    box-shadow:
+        0 0 20px rgba(168, 85, 247, 0.6),
+        0 0 40px rgba(138, 43, 226, 0.4),
+        inset 0 0 15px rgba(168, 85, 247, 0.2);
+    animation: glitch 0.3s ease-in-out;
+}
+
+@keyframes glitch {
+
+    0%,
+    100% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .Swiper-ProductZoom-Image .Swiper-ProductZoom-Image-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    aspect-ratio: 3 / 2;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .Swiper-ProductZoom-Image .Swiper-ProductZoom-Image-item:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1) contrast(1.2) drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .swiper .swiper-initialized .swiper-vertical .swiper-backface-hidden .Swiper-ProductZoom-Container {
+    height: 100% !important;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom .swiper {
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    display: block;
+    height: 100% !important;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-button-next {
+    bottom: 0px !important;
+    right: inherit !important;
+    top: inherit !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    height: 30px !important;
+    margin-left: 0 !important;
+    left: 0 !important;
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 0, 21, 0.95) 100%) !important;
+    color: #a855f7 !important;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-button-prev {
+    top: 0px !important;
+    right: inherit !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    height: 30px !important;
+    margin-left: 0 !important;
+    margin-top: 0px !important;
+    left: 0 !important;
+    background: linear-gradient(0deg, transparent 0%, rgba(10, 0, 21, 0.95) 100%) !important;
+    color: #a855f7 !important;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-button-next:hover,
+.ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-button-prev:hover {
+    box-shadow:
+        0 0 20px rgba(168, 85, 247, 0.4),
+        inset 0 0 10px rgba(168, 85, 247, 0.2);
+    opacity: 1 !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%) !important;
+    transition: all 0.3s ease;
+}
+
+.Swiper-ProductZoom .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: linear-gradient(135deg, #1a0033 0%, #0a0015 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 3 / 2;
+    position: relative;
+}
+
+.Swiper-ProductZoom .swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(168, 85, 247, 0.5) 50%,
+            transparent 100%);
+}
+
+.Swiper-ProductZoom .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-slide {
+    height: auto !important;
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom {
+    flex: 1;
+    height: 58%;
+    min-height: 368px;
+    max-height: 600px;
+    overflow: hidden;
+    border: 2px solid rgba(168, 85, 247, 0.5) !important;
+    border-radius: 0.375rem;
+    box-shadow:
+        0 8px 32px rgba(168, 85, 247, 0.3),
+        0 0 60px rgba(138, 43, 226, 0.4),
+        inset 0 0 30px rgba(168, 85, 247, 0.1),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    position: relative;
+    background: linear-gradient(135deg, rgba(10, 0, 21, 0.6) 0%, rgba(26, 0, 51, 0.6) 100%);
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom .Swiper-ProductZoom-Container-2 {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom .iiz {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom .iiz__img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: brightness(1.05) contrast(1.1);
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom .iiz__hint {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom .iiz__zoom-img--visible {
+    object-fit: contain !important;
+    filter: brightness(1.1) contrast(1.15) drop-shadow(0 0 20px rgba(168, 85, 247, 0.3));
+}
+
+.ProductZoomWrapper .InnerImageZoom-ProductZoom .Swiper-ProductZoom-Container-2 .swiper-slide {
+    height: 100% !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+/* Glitch effect on hover */
+@keyframes glitchMain {
+    0% {
+        clip-path: inset(0 0 0 0);
+        transform: translate(0);
+    }
+
+    20% {
+        clip-path: inset(20% 0 30% 0);
+        transform: translate(-5px, 5px);
+    }
+
+    40% {
+        clip-path: inset(60% 0 10% 0);
+        transform: translate(5px, -5px);
+    }
+
+    60% {
+        clip-path: inset(10% 0 50% 0);
+        transform: translate(-5px, -5px);
+    }
+
+    80% {
+        clip-path: inset(40% 0 20% 0);
+        transform: translate(5px, 5px);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+        transform: translate(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .ProductZoomWrapper .Swiper-ProductZoom {
+        width: 18%;
+        min-width: 70px;
+    }
+}
+
+@media (max-width: 992px) {
+    .ProductZoomWrapper {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+
+    .ProductZoomWrapper .Swiper-ProductZoom {
+        width: 100%;
+        height: 100px !important;
+        min-height: 0;
+        max-height: 120px;
+    }
+
+    .ProductZoomWrapper .Swiper-ProductZoom .swiper {
+        height: 100% !important;
+    }
+
+    .ProductZoomWrapper .Swiper-ProductZoom-Container {
+        display: flex !important;
+    }
+
+    .Swiper-ProductZoom .swiper-slide {
+        width: 80px !important;
+        height: 80px !important;
+        flex-shrink: 0;
+    }
+
+    .ProductZoomWrapper .InnerImageZoom-ProductZoom {
+        min-height: 350px;
+        max-height: 500px;
+    }
+
+    .ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-button-next,
+    .ProductZoomWrapper .Swiper-ProductZoom-Container .swiper-button-prev {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .ProductZoomWrapper {
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .ProductZoomWrapper .Swiper-ProductZoom {
+        height: 90px !important;
+        max-height: 100px;
+    }
+
+    .Swiper-ProductZoom .swiper-slide {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .ProductZoomWrapper .InnerImageZoom-ProductZoom {
+        min-height: 300px;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ProductZoomWrapper {
+        padding: 0.5rem;
+    }
+
+    .ProductZoomWrapper .Swiper-ProductZoom {
+        height: 80px !important;
+    }
+
+    .Swiper-ProductZoom .swiper-slide {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .ProductZoomWrapper .InnerImageZoom-ProductZoom {
+        min-height: 250px;
+        max-height: 350px;
+    }
+}

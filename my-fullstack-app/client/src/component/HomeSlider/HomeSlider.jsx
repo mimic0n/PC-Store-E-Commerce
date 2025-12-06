@@ -12,7 +12,7 @@ import './HomeSlider.css';
 
 export const HomeSlider = () => {
   return (
-    <>
+    <div className='HomeSlider'>
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
@@ -34,7 +34,7 @@ export const HomeSlider = () => {
         <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_4-1920x560px.jpg" alt='Banner'></img></div></SwiperSlide>
 
       </Swiper>
-    </>
+    </div>
   )
 }
  

@@ -1,0 +1,150 @@
+/* ===== ADDRESSES SECTION ===== */
+.myaccount-addresses-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.myaccount-addresses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.myaccount-address-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 15px;
+    padding: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.myaccount-address-card:hover {
+    border-color: var(--c-neon-purple);
+    box-shadow: 0 0 20px rgba(191, 0, 255, 0.3);
+}
+
+.myaccount-address-card.myaccount-default {
+    border-color: var(--c-neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.myaccount-default-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, var(--c-neon-cyan), var(--c-neon-purple));
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--ma-primary-dark);
+}
+
+.myaccount-address-type {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: var(--c-neon-pink);
+}
+
+.myaccount-type-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.myaccount-address-text {
+    color: var(--ma-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.myaccount-address-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.myaccount-action-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.myaccount-action-btn.myaccount-edit {
+    border-color: var(--c-neon-cyan);
+    color: var(--c-neon-cyan);
+}
+
+.myaccount-action-btn.myaccount-edit:hover {
+    background: rgba(0, 240, 255, 0.2);
+}
+
+.myaccount-action-btn.myaccount-delete {
+    border-color: var(--c-neon-pink);
+    color: var(--c-neon-pink);
+}
+
+.myaccount-action-btn.myaccount-delete:hover {
+    background: rgba(255, 0, 255, 0.2);
+}
+
+.myaccount-address-card.myaccount-add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    border-style: dashed;
+    cursor: pointer;
+    color: var(--ma-text-secondary);
+}
+
+.myaccount-address-card.myaccount-add-new:hover {
+    color: var(--c-neon-cyan);
+    border-color: var(--c-neon-cyan);
+}
+
+.myaccount-add-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.myaccount-address-card.myaccount-add-new:hover .myaccount-add-icon {
+    transform: rotate(90deg);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

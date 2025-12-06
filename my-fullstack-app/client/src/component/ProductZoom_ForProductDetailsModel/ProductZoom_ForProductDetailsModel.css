@@ -1,0 +1,33 @@
+.Product_Details_Model_Container {
+    background: linear-gradient(135deg, #0a0015 0%, #1a0033 50%, #0f001f 100%);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.Product_Details_Model_Container .Swiper-ProductZoom-Container-2 .swiper-button-next {
+    bottom: auto !important;
+    right: inherit !important;
+    top: inherit !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    height: 30px !important;
+    margin-left: 0 !important;
+    left: 0 !important;
+    background-color: white !important;
+    color: #203a43 !important;
+}
+
+.Product_Details_Model_Container .Swiper-ProductZoom-Container-2 .swiper-button-prev {
+    top: 0px !important;
+    right: inherit !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    height: 30px !important;
+    margin-left: 0 !important;
+    margin-top: 0px !important;
+    left: 0 !important;
+    background-color: white !important;
+    color: #203a43 !important;
+}

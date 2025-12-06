@@ -1,0 +1,779 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap");
+
+/* ============================================
+   ROOT VARIABLES - ADMIN CYBERPUNK THEME
+============================================ */
+.AdminVerify_Page {
+    --c-bg-primary: #0f172a;
+    --c-bg-secondary: #1e293b;
+    --c-bg-panel: rgba(30, 41, 59, 0.9);
+    --c-admin-deep: #1e1b4b;
+    --c-admin-dark: #0f172a;
+    --c-admin-mid: #312e81;
+    --c-neon-primary: #6366f1;
+    --c-neon-secondary: #8b5cf6;
+    --c-neon-accent: #06b6d4;
+    --c-neon-success: #22c55e;
+    --c-neon-warning: #f59e0b;
+    --c-text-primary: #f8fafc;
+    --c-text-secondary: #94a3b8;
+    --c-text-muted: #64748b;
+    --c-border: rgba(99, 102, 241, 0.2);
+    --c-border-hover: rgba(99, 102, 241, 0.5);
+    --c-error: #ef4444;
+    --c-success: #22c55e;
+
+    --shadow-neon-primary: 0 0 20px rgba(99, 102, 241, 0.4);
+    --shadow-neon-secondary: 0 0 20px rgba(139, 92, 246, 0.3);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.2);
+}
+
+/* ============================================
+   BASE STYLES
+============================================ */
+.AdminVerify_Page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.AdminVerify_Page {
+    min-height: 100vh;
+    background: var(--c-bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+/* ============================================
+   BACKGROUND EFFECTS
+============================================ */
+.AdminVerify_Page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 20v20L30 55L5 40V20z' stroke='%236366f1' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, var(--c-admin-deep) 0%, var(--c-bg-primary) 30%, var(--c-bg-primary) 100%);
+    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+    animation: adminGridScroll 25s linear infinite;
+}
+
+@keyframes adminGridScroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(60px);
+    }
+}
+
+.AdminVerify_Page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.05) 2px,
+            rgba(0, 0, 0, 0.05) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   LEFT DESCRIPTION SECTION
+============================================ */
+.AdminVerify_Description {
+    position: relative;
+    z-index: 2;
+    width: 320px;
+    padding: 2.5rem;
+    background: linear-gradient(145deg,
+            rgba(30, 27, 75, 0.6) 0%,
+            rgba(15, 23, 42, 0.8) 100%);
+    border: 1px solid var(--c-border);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+}
+
+.description_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin_badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg,
+            rgba(99, 102, 241, 0.2) 0%,
+            rgba(139, 92, 246, 0.1) 100%);
+    border: 1px solid var(--c-border);
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.badge_icon {
+    color: var(--c-neon-primary);
+    font-size: 1.2rem;
+}
+
+.admin_badge span {
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--c-neon-primary);
+    letter-spacing: 2px;
+}
+
+.description_title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--c-text-primary);
+    text-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+}
+
+.description_text {
+    color: var(--c-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.security_features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.security_item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.security_item:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--c-border-hover);
+    transform: translateX(5px);
+}
+
+.security_icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,
+            var(--c-neon-primary) 0%,
+            var(--c-neon-secondary) 100%);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.security_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.security_label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--c-text-primary);
+}
+
+.security_desc {
+    font-size: 0.75rem;
+    color: var(--c-text-muted);
+}
+
+/* ============================================
+   CENTER - VERIFICATION FORM (RING EFFECT)
+============================================ */
+.admin_ring {
+    position: relative;
+    width: 420px;
+    height: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.admin_ring i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--c-border);
+    border-radius: 50%;
+    animation: adminRingRotate 6s linear infinite;
+}
+
+.admin_ring i:nth-child(1) {
+    border-color: var(--clr);
+    filter: drop-shadow(0 0 15px var(--clr));
+    animation-delay: 0s;
+}
+
+.admin_ring i:nth-child(2) {
+    border-color: var(--clr);
+    filter: drop-shadow(0 0 15px var(--clr));
+    animation-delay: -2s;
+}
+
+.admin_ring i:nth-child(3) {
+    border-color: var(--clr);
+    filter: drop-shadow(0 0 15px var(--clr));
+    animation-delay: -4s;
+}
+
+@keyframes adminRingRotate {
+    0% {
+        transform: rotate(0deg);
+        border-width: 2px;
+    }
+
+    25% {
+        border-width: 4px;
+    }
+
+    50% {
+        transform: rotate(180deg);
+        border-width: 2px;
+    }
+
+    75% {
+        border-width: 4px;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        border-width: 2px;
+    }
+}
+
+.admin_verify_box {
+    position: absolute;
+    width: 360px;
+    padding: 2.5rem;
+    background: var(--c-bg-panel);
+    border: 1px solid var(--c-border);
+    border-radius: 24px;
+    backdrop-filter: blur(30px);
+    box-shadow: var(--shadow-glow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin_logo {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,
+            var(--c-neon-primary) 0%,
+            var(--c-neon-secondary) 100%);
+    border-radius: 20px;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: var(--shadow-neon-primary);
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+
+    0%,
+    100% {
+        box-shadow: var(--shadow-neon-primary);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+    }
+}
+
+.admin_verify_box h2 {
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--c-text-primary);
+    text-align: center;
+}
+
+.verify_subtitle {
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Email Display */
+.email_display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid var(--c-border);
+    border-radius: 10px;
+    width: 100%;
+}
+
+.email_icon {
+    color: var(--c-neon-primary);
+    font-size: 1.2rem;
+}
+
+.email_display span {
+    color: var(--c-text-secondary);
+    font-size: 0.85rem;
+}
+
+.email_display strong {
+    color: var(--c-text-primary);
+}
+
+/* Alert Messages */
+.error_alert,
+.success_alert {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 0.85rem;
+}
+
+.error_alert {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: var(--c-error);
+}
+
+.success_alert {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: var(--c-success);
+}
+
+.error_alert svg,
+.success_alert svg {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* Form Styles */
+.Admin_verify_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* OTP Input Container */
+.otp_container {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.otp_input {
+    width: 45px;
+    height: 55px;
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--c-text-primary);
+    background: rgba(99, 102, 241, 0.05);
+    border: 2px solid var(--c-border);
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+    caret-color: var(--c-neon-primary);
+}
+
+.otp_input:focus {
+    border-color: var(--c-neon-primary);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.otp_input.filled {
+    border-color: var(--c-neon-secondary);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.otp_input.error {
+    border-color: var(--c-error);
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.otp_input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Countdown Container */
+.countdown_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown_text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+}
+
+.countdown_text svg {
+    color: var(--c-neon-accent);
+}
+
+.countdown_time {
+    color: var(--c-neon-primary);
+    font-weight: 700;
+    font-family: "Orbitron", sans-serif;
+}
+
+.resend_btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--c-neon-primary);
+    border-radius: 8px;
+    color: var(--c-neon-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.resend_btn:hover:not(:disabled) {
+    background: rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.resend_btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.resend_btn svg.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Verify Button */
+.verify_btn {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg,
+            var(--c-neon-primary) 0%,
+            var(--c-neon-secondary) 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.verify_btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.verify_btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.verify_btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.verify_btn svg {
+    font-size: 1.3rem;
+}
+
+.btn_loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Back Link */
+.back_link {
+    margin-top: 0.5rem;
+}
+
+.back_link a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back_link a:hover {
+    color: var(--c-neon-primary);
+}
+
+.back_link a svg {
+    font-size: 1rem;
+}
+
+/* ============================================
+   RIGHT - INSTRUCTIONS SECTION
+============================================ */
+.AdminVerify_Instructions {
+    position: relative;
+    z-index: 2;
+    width: 280px;
+    padding: 2rem;
+    background: linear-gradient(145deg,
+            rgba(30, 27, 75, 0.6) 0%,
+            rgba(15, 23, 42, 0.8) 100%);
+    border: 1px solid var(--c-border);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+}
+
+.instructions_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.instructions_title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--c-text-primary);
+}
+
+.instructions_title svg {
+    color: var(--c-neon-primary);
+    font-size: 1.3rem;
+}
+
+.instructions_list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.instructions_list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--c-text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.step_number {
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,
+            var(--c-neon-primary) 0%,
+            var(--c-neon-secondary) 100%);
+    border-radius: 50%;
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.help_text {
+    padding-top: 1rem;
+    border-top: 1px solid var(--c-border);
+    text-align: center;
+}
+
+.help_text p {
+    color: var(--c-text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.help_text a {
+    color: var(--c-neon-primary);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.help_text a:hover {
+    color: var(--c-neon-secondary);
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+@media (max-width: 1200px) {
+    .AdminVerify_Page {
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 2rem;
+    }
+
+    .AdminVerify_Description,
+    .AdminVerify_Instructions {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .admin_ring {
+        width: 380px;
+        height: 480px;
+    }
+
+    .admin_verify_box {
+        width: 320px;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .AdminVerify_Page {
+        padding: 1rem;
+    }
+
+    .AdminVerify_Description {
+        display: none;
+    }
+
+    .admin_ring {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    .admin_verify_box {
+        position: relative;
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .AdminVerify_Instructions {
+        width: 100%;
+        max-width: 340px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin_ring i {
+        display: none;
+    }
+
+    .admin_verify_box {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .otp_container {
+        gap: 0.5rem;
+    }
+
+    .otp_input {
+        width: 40px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .admin_logo {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .admin_verify_box h2 {
+        font-size: 1.5rem;
+    }
+}

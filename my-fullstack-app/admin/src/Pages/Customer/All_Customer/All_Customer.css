@@ -1,0 +1,780 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap");
+
+/* ============================================
+   ROOT VARIABLES - CYBERPUNK THEME
+============================================ */
+.All_Customer_Container {
+    --c-bg-primary: #0f172a;
+    --c-bg-secondary: #1e293b;
+    --c-bg-panel: rgba(30, 41, 59, 0.85);
+    --c-bg-card: rgba(30, 41, 59, 0.9);
+    --c-neon-primary: #6366f1;
+    --c-neon-secondary: #8b5cf6;
+    --c-neon-accent: #06b6d4;
+    --c-neon-success: #22c55e;
+    --c-neon-warning: #f59e0b;
+    --c-neon-danger: #ef4444;
+    --c-text-primary: #f8fafc;
+    --c-text-secondary: #94a3b8;
+    --c-text-muted: #64748b;
+    --c-border: rgba(99, 102, 241, 0.2);
+    --c-border-hover: rgba(99, 102, 241, 0.5);
+
+    --shadow-neon: 0 0 20px rgba(99, 102, 241, 0.4);
+    --shadow-neon-lg: 0 0 40px rgba(99, 102, 241, 0.3);
+    --clip-corner: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+    --clip-corner-sm: polygon(0 6px, 6px 0, calc(100% - 6px) 0, 100% 6px,
+            100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+/* ============================================
+   BASE STYLES
+============================================ */
+.All_Customer_Container {
+    min-height: 100vh;
+    background: var(--c-bg-primary);
+    position: relative;
+    overflow-x: hidden;
+    font-family: "Rajdhani", sans-serif;
+    padding: 24px;
+}
+
+.All_Customer_Container * {
+    box-sizing: border-box;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND
+============================================ */
+.All_Customer_Container .cyber-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.All_Customer_Container .cyber-grid {
+    position: absolute;
+    inset: 0;
+    background:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 20v20L30 55L5 40V20z' stroke='%236366f1' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%;
+    animation: gridScroll 25s linear infinite;
+}
+
+@keyframes gridScroll {
+    0% {
+        background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+    }
+
+    100% {
+        background-position: 60px 60px, 30px 30px, 30px 30px, 0 0, 0 0;
+    }
+}
+
+.All_Customer_Container .cyber-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.03) 2px,
+            rgba(0, 0, 0, 0.03) 4px);
+    pointer-events: none;
+}
+
+.All_Customer_Container .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.All_Customer_Container .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--c-neon-primary);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: floatParticle 8s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--c-neon-primary);
+}
+
+@keyframes floatParticle {
+
+    0%,
+    100% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+        transform: translateY(90vh) scale(1);
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   HEADER
+============================================ */
+.All_Customer_Container .All_Customer_Header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px;
+}
+
+.All_Customer_Container .All_Customer_Title {
+    font-size: 32px;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    color: var(--c-text-primary);
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ============================================
+   STATS CARDS
+============================================ */
+.All_Customer_Container .All_Customer_Stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.All_Customer_Container .Stat_Card {
+    position: relative;
+    background: var(--c-bg-card);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    padding: 20px 24px;
+    clip-path: var(--clip-corner);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.All_Customer_Container .Stat_Card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--c-neon-primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.All_Customer_Container .Stat_Card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--c-neon-primary);
+    transition: width 0.3s ease;
+}
+
+.All_Customer_Container .Stat_Card:hover::before {
+    opacity: 1;
+}
+
+.All_Customer_Container .Stat_Card:hover::after {
+    width: 100%;
+}
+
+.All_Customer_Container .Stat_Card:hover {
+    border-color: var(--c-border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-neon);
+}
+
+.All_Customer_Container .Stat_Card h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: "Rajdhani", sans-serif;
+    margin: 0 0 10px 0;
+}
+
+.All_Customer_Container .Stat_Number {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--c-text-primary);
+    font-family: "Orbitron", sans-serif;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    margin: 0;
+}
+
+.All_Customer_Container .Stat_Number.Active {
+    color: var(--c-neon-success);
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+.All_Customer_Container .Stat_Number.Blocked {
+    color: var(--c-neon-danger);
+    text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   CONTROLS / TOOLBAR
+============================================ */
+.All_Customer_Container .All_Customer_Controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.All_Customer_Container .Search_Input {
+    flex: 1;
+    min-width: 300px;
+}
+
+.All_Customer_Container .Search_Input .MuiOutlinedInput-root {
+    background: var(--c-bg-panel);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-primary);
+    font-family: "Rajdhani", sans-serif;
+    clip-path: var(--clip-corner-sm);
+    transition: all 0.3s ease;
+}
+
+.All_Customer_Container .Search_Input .MuiOutlinedInput-root:hover {
+    border-color: var(--c-border-hover);
+}
+
+.All_Customer_Container .Search_Input .MuiOutlinedInput-root.Mui-focused {
+    border-color: var(--c-neon-primary);
+    box-shadow: var(--shadow-neon);
+}
+
+.All_Customer_Container .Search_Input .MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+
+.All_Customer_Container .Search_Input input {
+    color: var(--c-text-primary);
+}
+
+.All_Customer_Container .Search_Input input::placeholder {
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+.All_Customer_Container .Search_Input .MuiInputAdornment-root svg {
+    color: var(--c-text-muted);
+}
+
+.All_Customer_Container .Filter_Buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.All_Customer_Container .Filter_Buttons .MuiButton-root {
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    clip-path: var(--clip-corner-sm);
+    transition: all 0.3s ease;
+}
+
+.All_Customer_Container .Filter_Buttons .MuiButton-contained {
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+
+.All_Customer_Container .Filter_Buttons .MuiButton-outlined {
+    background: var(--c-bg-panel);
+    color: var(--c-text-secondary);
+    border: 1px solid var(--c-border);
+}
+
+.All_Customer_Container .Filter_Buttons .MuiButton-outlined:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--c-neon-primary);
+}
+
+/* ============================================
+   TABLE CONTAINER
+============================================ */
+.All_Customer_Container .Customer_Table_Container {
+    position: relative;
+    background: var(--c-bg-card) !important;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    clip-path: var(--clip-corner);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.All_Customer_Container .Customer_Table_Container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--c-neon-primary), transparent);
+}
+
+/* Table Header */
+.All_Customer_Container .MuiTableHead-root .MuiTableCell-root {
+    background: rgba(0, 0, 0, 0.3) !important;
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--c-text-muted) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--c-border) !important;
+    padding: 16px;
+}
+
+/* Table Body */
+.All_Customer_Container .MuiTableBody-root .MuiTableCell-root {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1) !important;
+    color: var(--c-text-secondary) !important;
+    font-size: 14px;
+    padding: 16px;
+    transition: all 0.2s ease;
+}
+
+.All_Customer_Container .Customer_Row {
+    transition: all 0.3s ease;
+}
+
+.All_Customer_Container .Customer_Row:hover {
+    background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.All_Customer_Container .Customer_Row:hover .MuiTableCell-root {
+    background: transparent !important;
+}
+
+/* ============================================
+   CUSTOMER INFO CELL
+============================================ */
+.All_Customer_Container .Customer_Info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.All_Customer_Container .Customer_Avatar {
+    width: 50px !important;
+    height: 50px !important;
+    border: 2px solid var(--c-neon-primary) !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+}
+
+.All_Customer_Container .Customer_Row:hover .Customer_Avatar {
+    border-color: var(--c-neon-secondary) !important;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
+    transform: scale(1.05);
+}
+
+.All_Customer_Container .Customer_Details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.All_Customer_Container .Customer_Name {
+    font-weight: 600;
+    color: var(--c-text-primary);
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+.All_Customer_Container .Customer_Row:hover .Customer_Name {
+    color: var(--c-neon-primary);
+}
+
+.All_Customer_Container .Customer_ID {
+    font-size: 11px;
+    color: var(--c-text-muted);
+    font-family: "SF Mono", "Consolas", monospace;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   CONTACT INFO
+============================================ */
+.All_Customer_Container .Contact_Info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.All_Customer_Container .Customer_Email {
+    font-size: 14px;
+    color: var(--c-text-secondary);
+}
+
+.All_Customer_Container .Customer_Phone {
+    font-size: 12px;
+    color: var(--c-text-muted);
+}
+
+/* ============================================
+   BADGES & STATUS
+============================================ */
+.All_Customer_Container .Orders_Badge {
+    display: inline-block;
+    min-width: 40px;
+    text-align: center;
+    padding: 6px 16px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+.All_Customer_Container .Total_Spent {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--c-neon-success) !important;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.All_Customer_Container .Join_Date {
+    font-size: 14px;
+    color: var(--c-text-muted);
+}
+
+/* MUI Chip Status */
+.All_Customer_Container .MuiChip-root {
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 4px;
+}
+
+.All_Customer_Container .MuiChip-colorSuccess {
+    background: rgba(34, 197, 94, 0.15) !important;
+    color: var(--c-neon-success) !important;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.All_Customer_Container .MuiChip-colorError {
+    background: rgba(239, 68, 68, 0.15) !important;
+    color: var(--c-neon-danger) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Rating */
+.All_Customer_Container .MuiRating-root {
+    color: var(--c-neon-warning) !important;
+}
+
+.All_Customer_Container .MuiRating-iconEmpty {
+    color: var(--c-text-muted) !important;
+}
+
+/* ============================================
+   ACTION BUTTONS
+============================================ */
+.All_Customer_Container .MuiIconButton-root {
+    color: var(--c-text-muted);
+    border: 1px solid var(--c-border);
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    clip-path: polygon(0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px));
+}
+
+.All_Customer_Container .MuiIconButton-root:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--c-neon-primary);
+    color: var(--c-neon-primary);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================
+   PAGINATION
+============================================ */
+.All_Customer_Container .Pagination_Container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--c-bg-card);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    clip-path: var(--clip-corner-sm);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.All_Customer_Container .Pagination_Container::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            var(--c-neon-primary),
+            var(--c-neon-secondary),
+            var(--c-neon-primary),
+            transparent);
+    animation: paginationGlow 3s ease-in-out infinite;
+}
+
+@keyframes paginationGlow {
+
+    0%,
+    100% {
+        width: 40%;
+        opacity: 0.5;
+    }
+
+    50% {
+        width: 80%;
+        opacity: 1;
+    }
+}
+
+.All_Customer_Container .MuiPagination-root .MuiPaginationItem-root {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 600;
+    color: var(--c-text-secondary);
+    border: 1px solid var(--c-border);
+    background: rgba(0, 0, 0, 0.2);
+    clip-path: polygon(0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px));
+    transition: all 0.3s ease;
+}
+
+.All_Customer_Container .MuiPagination-root .MuiPaginationItem-root:hover {
+    border-color: var(--c-neon-primary);
+    color: var(--c-neon-primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.All_Customer_Container .MuiPagination-root .Mui-selected {
+    background: linear-gradient(135deg, var(--c-neon-primary), var(--c-neon-secondary)) !important;
+    border-color: var(--c-neon-primary) !important;
+    color: white !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+}
+
+/* ============================================
+   MENU DROPDOWN
+============================================ */
+.All_Customer_Container .MuiMenu-paper {
+    background: var(--c-bg-secondary) !important;
+    border: 1px solid var(--c-border);
+    clip-path: var(--clip-corner-sm);
+    box-shadow: var(--shadow-neon-lg);
+}
+
+.All_Customer_Container .MuiMenuItem-root {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--c-text-secondary);
+    transition: all 0.2s ease;
+}
+
+.All_Customer_Container .MuiMenuItem-root:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--c-neon-primary);
+}
+
+.All_Customer_Container .MuiMenuItem-root svg {
+    color: var(--c-text-muted);
+    transition: color 0.2s ease;
+}
+
+.All_Customer_Container .MuiMenuItem-root:hover svg {
+    color: var(--c-neon-primary);
+}
+
+/* ============================================
+   SCROLLBAR
+============================================ */
+.All_Customer_Container ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.All_Customer_Container ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.All_Customer_Container ::-webkit-scrollbar-thumb {
+    background: var(--c-border);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.All_Customer_Container ::-webkit-scrollbar-thumb:hover {
+    background: var(--c-neon-primary);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+@media (max-width: 1200px) {
+    .All_Customer_Container .All_Customer_Stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .All_Customer_Container {
+        padding: 16px;
+    }
+
+    .All_Customer_Container .All_Customer_Title {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+
+    .All_Customer_Container .All_Customer_Stats {
+        grid-template-columns: 1fr;
+    }
+
+    .All_Customer_Container .Stat_Number {
+        font-size: 28px;
+    }
+
+    .All_Customer_Container .All_Customer_Controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .All_Customer_Container .Search_Input {
+        min-width: 100%;
+    }
+
+    .All_Customer_Container .Filter_Buttons {
+        flex-wrap: wrap;
+    }
+
+    .All_Customer_Container .Filter_Buttons .MuiButton-root {
+        flex: 1;
+        min-width: calc(33% - 7px);
+    }
+
+    .All_Customer_Container .Customer_Table_Container {
+        overflow-x: auto;
+        margin: 0 -16px;
+        border-radius: 0;
+        clip-path: none;
+    }
+
+    .All_Customer_Container .MuiTable-root {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 480px) {
+    .All_Customer_Container {
+        padding: 12px;
+    }
+
+    .All_Customer_Container .All_Customer_Title {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+    .All_Customer_Container .Stat_Card {
+        padding: 16px;
+    }
+
+    .All_Customer_Container .Stat_Number {
+        font-size: 24px;
+    }
+
+    .All_Customer_Container .Filter_Buttons .MuiButton-root {
+        font-size: 10px;
+        padding: 8px 12px;
+    }
+
+    .All_Customer_Container .Pagination_Container {
+        padding: 16px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+    .All_Customer_Container *,
+    .All_Customer_Container *::before,
+    .All_Customer_Container *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .All_Customer_Container .floating-particles,
+    .All_Customer_Container .particle {
+        display: none;
+    }
+}
+
+.All_Customer_Container *:focus-visible {
+    outline: 2px solid var(--c-neon-primary);
+    outline-offset: 2px;
+}

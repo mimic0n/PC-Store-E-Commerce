@@ -1,0 +1,1205 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap");
+
+/* ============================================
+   ROOT VARIABLES - CYBERPUNK THEME (Matching CheckOut)
+============================================ */
+.Login_Page {
+    --c-bg-primary: #050508;
+    --c-bg-secondary: #0a0a12;
+    --c-bg-panel: rgba(15, 10, 25, 0.85);
+    --c-purple-deep: #1a0b2e;
+    --c-purple-dark: #12001a;
+    --c-purple-mid: #2d1b4e;
+    --c-neon-cyan: #00f3ff;
+    --c-neon-pink: #ff00ff;
+    --c-neon-purple: #bc13fe;
+    --c-neon-blue: #0080ff;
+    --c-text-primary: #e8e8f0;
+    --c-text-secondary: #9090a8;
+    --c-text-muted: #606080;
+    --c-border: rgba(188, 19, 254, 0.2);
+    --c-border-hover: rgba(0, 243, 255, 0.5);
+    --c-error: #ff3366;
+    --c-success: #00ff88;
+
+    --shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.3);
+    --shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.3);
+    --shadow-glow: 0 0 40px rgba(188, 19, 254, 0.2);
+}
+
+/* ============================================
+   BASE STYLES
+============================================ */
+.Login_Page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.Login_Page {
+    min-height: 100vh;
+    background: var(--c-bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================
+   BACKGROUND EFFECTS - CYBER GRID & CIRCUIT
+============================================ */
+.Login_Page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        /* Circuit pattern */
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v20M30 40v20M0 30h20M40 30h20M30 30m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0' stroke='%23bc13fe' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        /* Grid */
+        linear-gradient(rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+        /* Radial glow */
+        radial-gradient(ellipse at 20% 20%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.08) 0%, transparent 50%),
+        /* Base gradient */
+        linear-gradient(180deg, var(--c-purple-dark) 0%, var(--c-bg-primary) 30%, var(--c-bg-primary) 100%);
+    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+    animation: gridScroll 20s linear infinite;
+}
+
+@keyframes gridScroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(60px);
+    }
+}
+
+/* Scanlines Overlay */
+.Login_Page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px);
+    pointer-events: none;
+    z-index: 1;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100vh;
+    }
+}
+
+/* ============================================
+   CYBERPUNK RING CONTAINER
+============================================ */
+.Login_Page .ring {
+    position: relative;
+    width: 650px;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 50px rgba(188, 19, 254, 0.5));
+    z-index: 2;
+}
+
+.Login_Page .ring i {
+    position: absolute;
+    inset: 0;
+    border: 3px solid;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 20px currentColor);
+}
+
+.Login_Page .ring i:nth-child(1) {
+    border-color: var(--c-neon-pink);
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: cyberRotate 8s linear infinite, glitchPulse 3s ease-in-out infinite;
+}
+
+.Login_Page .ring i:nth-child(2) {
+    border-color: var(--c-neon-purple);
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: cyberRotate 6s linear infinite reverse, glitchPulse 4s ease-in-out infinite;
+}
+
+.Login_Page .ring i:nth-child(3) {
+    border-color: var(--c-neon-cyan);
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    animation: cyberRotate 10s linear infinite, scalePulse 5s ease-in-out infinite;
+}
+
+@keyframes cyberRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glitchPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 20px currentColor);
+    }
+
+    50% {
+        opacity: 0.7;
+        filter: drop-shadow(0 0 40px currentColor) hue-rotate(20deg);
+    }
+}
+
+@keyframes scalePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.Login_Page .ring:hover i {
+    border-width: 5px;
+    filter: drop-shadow(0 0 40px currentColor) brightness(1.5);
+}
+
+/* ============================================
+   LOGIN CARD - METALLIC PANEL (Matching CheckOut)
+============================================ */
+.Login_Page .login {
+    position: absolute;
+    width: 380px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background: var(--c-bg-panel);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    box-shadow:
+        var(--shadow-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    clip-path: polygon(0 15px,
+            15px 0,
+            calc(100% - 15px) 0,
+            100% 15px,
+            100% calc(100% - 15px),
+            calc(100% - 15px) 100%,
+            15px 100%,
+            0 calc(100% - 15px));
+    transition: all 0.4s ease;
+}
+
+/* Corner decorations - Tech corners */
+.Login_Page .login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--c-neon-cyan) 0%, transparent 50%);
+    opacity: 0.6;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    transition: opacity 0.4s ease;
+}
+
+.Login_Page .login::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(315deg, var(--c-neon-pink) 0%, transparent 50%);
+    opacity: 0.6;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+    transition: opacity 0.4s ease;
+}
+
+.Login_Page .login:hover {
+    border-color: var(--c-border-hover);
+    box-shadow:
+        var(--shadow-neon-cyan),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.Login_Page .login:hover::before,
+.Login_Page .login:hover::after {
+    opacity: 1;
+}
+
+/* ============================================
+   TITLE - GLITCH EFFECT (Matching CheckOut)
+============================================ */
+.Login_Page .login h2 {
+    font-size: 2.5em;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--c-text-primary);
+    position: relative;
+    text-shadow:
+        0 0 10px var(--c-neon-cyan),
+        0 0 20px var(--c-neon-cyan),
+        0 0 40px var(--c-neon-purple);
+    animation: glitch-skew 4s infinite linear alternate-reverse;
+}
+
+.Login_Page .login h2::before,
+.Login_Page .login h2::after {
+    content: 'LOGIN';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.Login_Page .login h2::before {
+    left: 3px;
+    text-shadow: -2px 0 var(--c-neon-pink);
+    clip: rect(24px, 9999px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.Login_Page .login h2::after {
+    left: -3px;
+    text-shadow: 2px 0 var(--c-neon-cyan);
+    clip: rect(85px, 9999px, 140px, 0);
+    animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(42px, 9999px, 44px, 0);
+        transform: skew(0.5deg);
+    }
+
+    5% {
+        clip: rect(12px, 9999px, 59px, 0);
+        transform: skew(0.3deg);
+    }
+
+    10% {
+        clip: rect(48px, 9999px, 29px, 0);
+        transform: skew(0.6deg);
+    }
+
+    15% {
+        clip: rect(42px, 9999px, 73px, 0);
+        transform: skew(0.1deg);
+    }
+
+    20% {
+        clip: rect(63px, 9999px, 27px, 0);
+        transform: skew(0.4deg);
+    }
+
+    25% {
+        clip: rect(34px, 9999px, 55px, 0);
+        transform: skew(0.7deg);
+    }
+
+    30% {
+        clip: rect(86px, 9999px, 73px, 0);
+        transform: skew(0.2deg);
+    }
+
+    35% {
+        clip: rect(20px, 9999px, 20px, 0);
+        transform: skew(0.5deg);
+    }
+
+    40% {
+        clip: rect(26px, 9999px, 60px, 0);
+        transform: skew(0.3deg);
+    }
+
+    45% {
+        clip: rect(25px, 9999px, 66px, 0);
+        transform: skew(0.8deg);
+    }
+
+    50% {
+        clip: rect(57px, 9999px, 98px, 0);
+        transform: skew(0.1deg);
+    }
+
+    55% {
+        clip: rect(5px, 9999px, 46px, 0);
+        transform: skew(0.4deg);
+    }
+
+    60% {
+        clip: rect(82px, 9999px, 31px, 0);
+        transform: skew(0.6deg);
+    }
+
+    65% {
+        clip: rect(54px, 9999px, 27px, 0);
+        transform: skew(0.2deg);
+    }
+
+    70% {
+        clip: rect(28px, 9999px, 99px, 0);
+        transform: skew(0.5deg);
+    }
+
+    75% {
+        clip: rect(45px, 9999px, 69px, 0);
+        transform: skew(0.3deg);
+    }
+
+    80% {
+        clip: rect(23px, 9999px, 85px, 0);
+        transform: skew(0.7deg);
+    }
+
+    85% {
+        clip: rect(54px, 9999px, 84px, 0);
+        transform: skew(0.1deg);
+    }
+
+    90% {
+        clip: rect(45px, 9999px, 47px, 0);
+        transform: skew(0.4deg);
+    }
+
+    95% {
+        clip: rect(37px, 9999px, 20px, 0);
+        transform: skew(0.6deg);
+    }
+
+    100% {
+        clip: rect(4px, 9999px, 91px, 0);
+        transform: skew(0.2deg);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(65px, 9999px, 100px, 0);
+        transform: skew(0.3deg);
+    }
+
+    5% {
+        clip: rect(52px, 9999px, 74px, 0);
+        transform: skew(0.6deg);
+    }
+
+    10% {
+        clip: rect(79px, 9999px, 85px, 0);
+        transform: skew(0.1deg);
+    }
+
+    15% {
+        clip: rect(75px, 9999px, 102px, 0);
+        transform: skew(0.4deg);
+    }
+
+    20% {
+        clip: rect(67px, 9999px, 73px, 0);
+        transform: skew(0.7deg);
+    }
+
+    25% {
+        clip: rect(14px, 9999px, 21px, 0);
+        transform: skew(0.2deg);
+    }
+
+    30% {
+        clip: rect(1px, 9999px, 51px, 0);
+        transform: skew(0.5deg);
+    }
+
+    35% {
+        clip: rect(85px, 9999px, 61px, 0);
+        transform: skew(0.3deg);
+    }
+
+    40% {
+        clip: rect(96px, 9999px, 30px, 0);
+        transform: skew(0.8deg);
+    }
+
+    45% {
+        clip: rect(15px, 9999px, 55px, 0);
+        transform: skew(0.1deg);
+    }
+
+    50% {
+        clip: rect(26px, 9999px, 15px, 0);
+        transform: skew(0.4deg);
+    }
+
+    55% {
+        clip: rect(64px, 9999px, 85px, 0);
+        transform: skew(0.6deg);
+    }
+
+    60% {
+        clip: rect(91px, 9999px, 55px, 0);
+        transform: skew(0.2deg);
+    }
+
+    65% {
+        clip: rect(5px, 9999px, 93px, 0);
+        transform: skew(0.5deg);
+    }
+
+    70% {
+        clip: rect(71px, 9999px, 12px, 0);
+        transform: skew(0.3deg);
+    }
+
+    75% {
+        clip: rect(39px, 9999px, 60px, 0);
+        transform: skew(0.7deg);
+    }
+
+    80% {
+        clip: rect(22px, 9999px, 51px, 0);
+        transform: skew(0.1deg);
+    }
+
+    85% {
+        clip: rect(56px, 9999px, 25px, 0);
+        transform: skew(0.4deg);
+    }
+
+    90% {
+        clip: rect(12px, 9999px, 68px, 0);
+        transform: skew(0.6deg);
+    }
+
+    95% {
+        clip: rect(42px, 9999px, 37px, 0);
+        transform: skew(0.2deg);
+    }
+
+    100% {
+        clip: rect(87px, 9999px, 29px, 0);
+        transform: skew(0.5deg);
+    }
+}
+
+@keyframes glitch-skew {
+    0% {
+        transform: skew(0deg);
+    }
+
+    20% {
+        transform: skew(0deg);
+    }
+
+    21% {
+        transform: skew(1deg);
+    }
+
+    22% {
+        transform: skew(-0.5deg);
+    }
+
+    23% {
+        transform: skew(0deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+/* ============================================
+   INPUT FIELDS (Matching CheckOut Form Elements)
+============================================ */
+.Login_Page .login .inputBx {
+    position: relative;
+    width: 100%;
+}
+
+.Login_Page .login .inputBx input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+.Login_Page .login .inputBx input:focus {
+    border-color: var(--c-neon-cyan);
+    background: rgba(0, 243, 255, 0.05);
+    box-shadow:
+        0 0 15px rgba(0, 243, 255, 0.2),
+        inset 0 0 20px rgba(0, 243, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.Login_Page .login .inputBx input::placeholder {
+    color: var(--c-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85em;
+}
+
+/* Animated Border Effect */
+.Login_Page .login .inputBx::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.Login_Page .login .inputBx:hover::before {
+    left: 100%;
+}
+
+/* ============================================
+   SUBMIT BUTTON (Matching CheckOut CTA Button)
+============================================ */
+.Login_Page .login .inputBx input[type="submit"] {
+    background: linear-gradient(135deg, var(--c-purple-deep) 0%, #000 50%, var(--c-purple-mid) 100%);
+    border: 2px solid var(--c-neon-pink);
+    color: var(--c-neon-pink);
+    cursor: pointer;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-family: "Orbitron", sans-serif;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.Login_Page .login .inputBx input[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.Login_Page .login .inputBx input[type="submit"]:hover {
+    background: var(--c-neon-pink);
+    color: #000;
+    box-shadow:
+        0 0 30px var(--c-neon-pink),
+        0 0 60px rgba(255, 0, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.Login_Page .login .inputBx input[type="submit"]:hover::before {
+    left: 100%;
+}
+
+.Login_Page .login .inputBx input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   LINKS
+============================================ */
+.Login_Page .login .links {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.Login_Page .login .links a {
+    color: var(--c-text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.Login_Page .login .links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-neon-cyan), var(--c-neon-pink));
+    transition: width 0.3s ease;
+}
+
+.Login_Page .login .links a:hover {
+    color: var(--c-neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+.Login_Page .login .links a:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   DIVIDER - ALTER LOGIN
+============================================ */
+.Login_Page .Alter_Login_Title {
+    color: var(--c-text-muted);
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Login_Page .Alter_Login_Text {
+    padding: 0 15px;
+    background: transparent;
+    position: relative;
+    color: var(--c-text-secondary);
+}
+
+.Login_Page .Alter_Login_Line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--c-neon-purple), transparent);
+    position: relative;
+    overflow: hidden;
+}
+
+.Login_Page .Alter_Login_Line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--c-neon-cyan), transparent);
+    animation: lineGlow 2s linear infinite;
+}
+
+@keyframes lineGlow {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.Login_Page .Alter_Login_Text_2 {
+    text-align: center;
+    color: var(--c-text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+}
+
+/* ============================================
+   SOCIAL ICONS (Matching CheckOut Radio Cards Style)
+============================================ */
+.Login_Page .social-list {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 0;
+    list-style: none;
+}
+
+.Login_Page .social_icon {
+    width: 55px;
+    height: 55px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--c-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.Login_Page .social_icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--social-color), transparent);
+    opacity: 0.3;
+    transition: left 0.5s ease;
+}
+
+.Login_Page .social_icon:hover::before {
+    left: 100%;
+}
+
+.Login_Page .social_icon_Link {
+    color: var(--c-text-secondary);
+    font-size: 24px;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.Login_Page .social_icon:hover {
+    transform: translateY(-5px);
+    border-color: var(--social-color);
+    background: linear-gradient(135deg, rgba(var(--social-color-rgb), 0.1) 0%, rgba(188, 19, 254, 0.05) 100%);
+    box-shadow:
+        0 0 20px rgba(var(--social-color-rgb), 0.3),
+        inset 0 0 30px rgba(var(--social-color-rgb), 0.05);
+}
+
+.Login_Page .social_icon:hover .social_icon_Link {
+    color: var(--social-color);
+    filter: drop-shadow(0 0 10px var(--social-color));
+    transform: scale(1.1);
+}
+
+/* Social Color Variables */
+.Login_Page .social_link:nth-child(1) {
+    --social-color: #EA4335;
+    --social-color-rgb: 234, 67, 53;
+}
+
+.Login_Page .social_link:nth-child(2) {
+    --social-color: #ffffff;
+    --social-color-rgb: 255, 255, 255;
+}
+
+.Login_Page .social_link:nth-child(3) {
+    --social-color: #1877f2;
+    --social-color-rgb: 24, 119, 242;
+}
+
+.Login_Page .social_link:nth-child(4) {
+    --social-color: #1DA1F2;
+    --social-color-rgb: 29, 161, 242;
+}
+
+/* ============================================
+   DESCRIPTIONS - SIDE PANELS
+============================================ */
+.Login_Page_Description_1,
+.Login_Page_Description_2 {
+    flex: 1;
+    max-width: 450px;
+    padding: 2rem;
+    color: var(--c-text-primary);
+    position: relative;
+    z-index: 2;
+}
+
+.Login_Page .description_content {
+    position: relative;
+    z-index: 1;
+}
+
+.Login_Page .description_icon_box {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.Login_Page .animated_icon {
+    font-size: 5rem;
+    filter: drop-shadow(0 0 30px var(--c-neon-purple));
+    animation: iconFloat 3s ease-in-out infinite, iconGlow 2s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes iconGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 30px var(--c-neon-purple));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 50px var(--c-neon-pink));
+    }
+}
+
+.Login_Page .description_title {
+    font-size: 2.2rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--c-text-primary);
+    text-shadow:
+        0 0 10px var(--c-neon-cyan),
+        0 0 20px var(--c-neon-purple);
+}
+
+.Login_Page .description_text {
+    font-size: 1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   FEATURES LIST (Matching CheckOut Block Style)
+============================================ */
+.Login_Page .features_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.Login_Page .feature_item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: var(--c-bg-panel);
+    border: 1px solid var(--c-border);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+.Login_Page .feature_item::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.Login_Page .feature_item:hover {
+    border-color: var(--c-border-hover);
+    transform: translateX(10px);
+    box-shadow: var(--shadow-neon-cyan);
+}
+
+.Login_Page .feature_item:hover::before {
+    left: 100%;
+}
+
+.Login_Page .feature_icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--c-neon-purple), var(--c-neon-pink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    flex-shrink: 0;
+    font-family: "Orbitron", sans-serif;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    box-shadow: 0 0 15px var(--c-neon-purple);
+}
+
+.Login_Page .feature_Text {
+    color: var(--c-text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   FLOATING CARDS
+============================================ */
+.Login_Page .illustration_container {
+    position: relative;
+    height: 350px;
+    margin-bottom: 2rem;
+}
+
+.Login_Page .floating_card {
+    position: absolute;
+    background: var(--c-bg-panel);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: var(--shadow-glow);
+    transition: all 0.4s ease;
+    clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.Login_Page .floating_card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, var(--c-neon-cyan) 0%, transparent 50%);
+    opacity: 0.6;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.Login_Page .floating_card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(315deg, var(--c-neon-pink) 0%, transparent 50%);
+    opacity: 0.6;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.Login_Page .floating_card:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    border-color: var(--c-border-hover);
+    box-shadow:
+        var(--shadow-neon-cyan),
+        var(--shadow-neon-pink);
+    z-index: 5;
+}
+
+.Login_Page .floating_card .card_icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 0 20px var(--c-neon-purple));
+}
+
+.Login_Page .floating_card .card_label {
+    font-weight: 700;
+    font-family: "Orbitron", sans-serif;
+    color: var(--c-text-primary);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--c-neon-cyan);
+}
+
+/* Card Positions */
+.Login_Page .card_1 {
+    top: 5%;
+    left: 5%;
+    z-index: 3;
+    animation: cyberFloat1 6s ease-in-out infinite;
+}
+
+.Login_Page .card_2 {
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: cyberFloat2 7s ease-in-out infinite;
+}
+
+.Login_Page .card_3 {
+    top: 15%;
+    right: 5%;
+    z-index: 1;
+    animation: cyberFloat3 6.5s ease-in-out infinite;
+}
+
+@keyframes cyberFloat1 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-30px) rotate(2deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translateY(-25px) rotate(1deg);
+    }
+}
+
+@keyframes cyberFloat2 {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(-50%, calc(-50% - 25px)) rotate(-2deg);
+    }
+
+    66% {
+        transform: translate(-50%, calc(-50% - 10px)) rotate(2deg);
+    }
+}
+
+@keyframes cyberFloat3 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    33% {
+        transform: translateY(-20px) rotate(-2deg);
+    }
+
+    66% {
+        transform: translateY(-35px) rotate(1deg);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+@media (max-width: 1200px) {
+    .Login_Page {
+        gap: 2rem;
+    }
+
+    .Login_Page .ring {
+        width: 550px;
+        height: 550px;
+    }
+
+    .Login_Page_Description_1,
+    .Login_Page_Description_2 {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .Login_Page {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .Login_Page .ring {
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        min-height: 550px;
+    }
+
+    .Login_Page .ring i {
+        display: none !important;
+    }
+
+    .Login_Page .login {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .Login_Page .ring {
+        max-width: 380px;
+        min-height: 520px;
+    }
+
+    .Login_Page .login {
+        padding: 1.8rem 1.2rem;
+    }
+
+    .Login_Page .login h2 {
+        font-size: 1.8em;
+        letter-spacing: 4px;
+    }
+
+    .Login_Page .login h2::before,
+    .Login_Page .login h2::after {
+        display: none;
+    }
+
+    .Login_Page .social_icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .Login_Page .login .inputBx input {
+        padding: 12px 15px;
+    }
+}

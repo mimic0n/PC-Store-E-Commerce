@@ -1,12 +1,18 @@
 Download for Server : 
 cd .\my-fullstack-app\server\
 npm install mongoose express-validator bcryptjs jsonwebtoken
+For MySQL : npm install bcryptjs cloudinary cookie-parser cors dotenv express helmet jsonwebtoken mysql2 sequelize morgan multer nodemon
+For Mongoose : npm install bcryptjs cloudinary cookie-parser cors dotenv express helmet jsonwebtoken mongoose morgan multer nodemon
+npm install nodemon --save-dev
+npm install nodemailer
 
 Download For Client : 
 cd client
 npm run : Tải Vite
 npm install @mui/material @emotion/react @emotion/styled react-router-dom axios : Tải React  
-
+npm install @studio-freight/lenis
+npm install @mui/material @emotion/react @emotion/styled : download MUI
+npm install react-icons --save
 
 Download For Fullstack : 
 npm install concurrently
@@ -15,3 +21,13 @@ npm init -y
 Download Material UI :
 npm install @mui/material @emotion/react @emotion/styled
 npm i react-icons
+
+
+
+Để kết nối backend với frontend, bạn cần thực hiện các bước sau:
+
+Đầu tiên, cài đặt cors package:
+npm install cors
+
+Download MySQL cho project : 
+npm install sequelize mysql2 bcrypt jsonwebtoken dotenv

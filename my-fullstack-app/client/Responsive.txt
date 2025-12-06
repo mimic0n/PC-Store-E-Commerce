@@ -1,0 +1,7 @@
+1400px: Large Desktop
+1200px: Desktop
+1024px: Tablet
+768px: Mobile Large
+640px: Mobile Medium
+480px: Mobile Small
+360px: Very Small Mobil

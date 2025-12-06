@@ -9,3 +9,49 @@
 .swiper-pagination-horizontal.swiper-pagination-bullets {
     visibility: hidden;
 }
+
+/*////////////////////////////// Product Details Model//////////////////////////// */
+
+.Product_Details_Model_Container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+.Product_Details_Model_Col1 {
+    width: 40% !important;
+    overflow: hidden;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem; 
+}
+
+.Product_Details_Model_Container_CloseButton{
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    border-radius: 50% !important;
+    font-size: 14px !important;
+    color: black !important;
+    position: absolute !important;
+    top: 0px !important;
+    right: 0px !important;
+    z-index: 1000 !important;
+}
+
+.Product_Details_Model_Col2 {
+    width: 60% !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem; 
+    padding-left: 2rem;
+    padding-right: 2rem; 
+}
+
+.Navigation_Container .submenu_dropdown {
+    z-index: 999999 !important;
+}
+
+.ProductDetailsModel_Root {
+    z-index: 1300 !important;
+}

@@ -1,0 +1,146 @@
+{
+    "info": {
+        "name": "Wishlist API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5000/api/wishlist"
+        },
+        {
+            "key": "token",
+            "value": "your_access_token_here"
+        }
+    ],
+    "item": [
+        {
+            "name": "Get Wishlist",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/"
+            }
+        },
+        {
+            "name": "Get Wishlist Count",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/count"
+            }
+        },
+        {
+            "name": "Check Product In Wishlist",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/check/5"
+            }
+        },
+        {
+            "name": "Add To Wishlist",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"productId\": 5\n}"
+                },
+                "url": "{{baseUrl}}/add"
+            }
+        },
+        {
+            "name": "Toggle Wishlist",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"productId\": 5\n}"
+                },
+                "url": "{{baseUrl}}/toggle"
+            }
+        },
+        {
+            "name": "Check Multiple Products",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"productIds\": [1, 2, 3, 4, 5]\n}"
+                },
+                "url": "{{baseUrl}}/check-multiple"
+            }
+        },
+        {
+            "name": "Remove From Wishlist",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/remove/5"
+            }
+        },
+        {
+            "name": "Clear Wishlist",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/clear"
+            }
+        }
+    ]
+}

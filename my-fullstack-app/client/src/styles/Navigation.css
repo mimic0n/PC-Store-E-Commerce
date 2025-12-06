@@ -1,196 +1,911 @@
+:root {
+    /* Cyberpunk Purple & Black Theme - Enhanced */
+    --nav-bg-primary: #000000;
+    --nav-bg-secondary: #0a0a12;
+    --nav-purple-deep: #1a0b2e;
+    --nav-purple-dark: #12001a;
+    --nav-purple-mid: #2d1b4e;
 
-.nav_3{
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    display: flex;
-    align-items: center;
-    width: 95%;
+    --nav-text: #FFFFFF;
+    --nav-text-secondary: #a0a0b0;
+
+    /* Neon Colors */
+    --nav-neon-cyan: #00f3ff;
+    --nav-neon-pink: #ff00ff;
+    --nav-neon-purple: #bc13fe;
+    --nav-neon-blue: #0080ff;
+    --nav-neon-green: #00ff88;
+
+    --nav-hover: rgba(138, 43, 226, 0.3);
+    --dropdown-bg: rgba(5, 5, 15, 0.98);
+    --dropdown-item-hover: rgba(138, 43, 226, 0.3);
+
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --glow-color: rgba(157, 78, 221, 0.9);
+    --glow-pink: rgba(255, 0, 180, 0.7);
+    --glow-cyan: rgba(0, 243, 255, 0.7);
+    --neon-purple: rgba(138, 43, 226, 0.8);
+    --metal-shine: rgba(200, 200, 220, 0.4);
+
+    /* Shadows */
+    --shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.4);
+    --shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.4);
+    --shadow-neon-purple: 0 0 20px rgba(188, 19, 254, 0.4);
 }
 
-.space{
-    width: 20%;
-}
-
-.space_1 {
-    width: 20%;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 2rem;
-    width: 95%;
-    margin: auto;
-    box-sizing: content-box;
-   
-}
-
-.nav_3 .col_1 {
-    width: 35%;
-}
-
-.Shop_By_Categories_Button {
-    color: azure !important;
-    gap: 0.25rem;
-    width: 95%;
-    transition: all 0.3s ease;
-   
-}
-
-.Shop_By_Categories_Button:hover {
-    background-color: rgba(248, 246, 246, 0.2) !important;
-    filter: brightness(1.2);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-}
-
-.Shop_By_Categories_Icon_1{
-    font-size: 18px;
-}
-.Shop_By_Categories_Icon_2{
-    font-size: 14px;
-    margin-left: auto;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.nav_3 .col_2 {
-    width: 50%;
-}
-
-.col2_page {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.col2_page_item {
-    list-style: none;
+.Navigation_Container {
+    width: 100%;
     position: relative;
+    z-index: 10000; 
+    isolation: isolate; 
 }
 
-.Page_link {
-    color: azure;
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-    font-size: 14px;
-    font-weight: 500;
+.Navigation_Container .nav_3 {
+    background:
+        /* Circuit pattern overlay */
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v15M30 45v15M0 30h15M45 30h15M30 30m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0' stroke='%23bc13fe' stroke-width='0.3' fill='none' opacity='0.15'/%3E%3C/svg%3E"),
+        /* Main gradient */
+        linear-gradient(135deg,
+            #000000 0%,
+            #0a0015 15%,
+            #1a0b2e 30%,
+            #240046 50%,
+            #1a0b2e 70%,
+            #0a0015 85%,
+            #000000 100%) !important;
+    background-size: 60px 60px, 100% 100%;
+    padding: 1rem 0;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+    border-top: 2px solid var(--nav-neon-cyan);
+    box-shadow:
+        0 4px 30px rgba(188, 19, 254, 0.3),
+        0 0 60px rgba(0, 243, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        0 8px 40px rgba(138, 43, 226, 0.2) !important;
+    position: relative;
+    z-index: inherit ;
+    overflow: visible !important;
 }
 
-.Item_Button {
-    text-transform: capitalize !important;
-    color: rgb(229, 225, 231) !important;
-    transition: all 0.3s ease;
-}
-
-.Item_Button:hover {
-    text-transform: capitalize !important;
-    font-weight: bold !important;
-    display: inline-flex;
-    align-items: center;
-    border-radius: 6px;
-    background-color: rgb(241, 237, 242);
-    padding: 6px 12px;
-    font-size: 14px;
-    font-weight: 500;
-    /* box-shadow: inset 0 0 0 1px rgb(95, 9, 176); */ /*Chỉnh màu border*/
-    color: rgb(95, 9, 176) !important;
-    filter: brightness(1.2);
-    transition: all 0.3s ease;
-    /* Thêm hiệu ứng glow cho text */
-}
-
-.submenu_dropdown {
-    position: absolute;/* Giúp submenu nổi lên trên các thành phần khác */
-    top: 100%;/* Đặt submenu ngay dưới thẻ li cha */
+/* Animated top border - Neon line */
+.Navigation_Container .nav_3::before {
+    content: '';
+    position: absolute;
+    top: 0;
     left: 0;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    list-style: none;
-    padding: 0.5rem 0;
-    /* margin-top: 0.5rem; */ /* Tạo khoảng cách nhỏ với mục cha */
-    width: 200px;
-    z-index: 1000;
-    font-weight: 500;
-    color: aliceblue !important;
-
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--nav-neon-cyan) 10%,
+            var(--nav-neon-pink) 30%,
+            var(--nav-neon-cyan) 50%,
+            var(--nav-neon-pink) 70%,
+            var(--nav-neon-cyan) 90%,
+            transparent 100%);
+    box-shadow:
+        0 0 20px var(--nav-neon-cyan),
+        0 0 40px var(--nav-neon-pink),
+        0 0 60px var(--nav-neon-cyan);
+    animation: nav-neon-flow 3s linear infinite;
+    z-index: 10;
 }
 
-/* Kiểu cho từng mục trong submenu */
-.submenu_item .submenu_link {
-    display: block; /* Giúp toàn bộ khu vực có thể click được */
-    padding: 0.75rem 1rem;
-    color: #eee;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    box-sizing: border-box;
-        /* Đảm bảo padding không làm vỡ layout */
-} 
+/* Bottom glowing line */
+.Navigation_Container .nav_3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
 
-/* Hiệu ứng khi di chuột qua các mục con */
-.submenu_item .submenu_link:hover {
-    background: linear-gradient(to right,
-                #757F9A ,
-                #D7DDE8 ,
-                #757F9A );
-        background-size: 400% 400%;
-        animation: gradient 5s ease infinite;
-    color: #673ab7;
-    font-weight: bold;
-    transform: translateX(5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 15px var(--nav-neon-purple);
+    animation: nav-neon-flow-reverse 4s linear infinite;
 }
 
-@keyframes gradient {
+@keyframes nav-neon-flow {
     0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
+        background-position: -200% 0;
     }
 
     100% {
-        background-position: 0% 50%;
+        background-position: 200% 0;
     }
 }
 
+@keyframes nav-neon-flow-reverse {
+    0% {
+        background-position: 200% 0;
+    }
 
-.nav_3.col_3 {
-    width: 50%;
+    100% {
+        background-position: -200% 0;
+    }
 }
 
-.nav_3 .col_4 {
-    width: 30%;
+/* Scanline effect overlay */
+.Navigation_Container .nav_3 .nav-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.03) 2px,
+            rgba(0, 0, 0, 0.03) 4px);
+    pointer-events: none;
+    z-index: 1;
 }
 
-.col4_text {
+/* ============================================
+   CONTAINER LAYOUT
+============================================ */
+.Navigation_Container .container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 2rem;
+    position: relative;
+    z-index: 0;
+}
+
+.Navigation_Container .nav_3 .col_1 {
+    flex: 0 0 auto;
+}
+
+/* ============================================
+   SHOP BY CATEGORIES BUTTON - Cyber Style
+============================================ */
+.Navigation_Container .Shop_By_Categories_Button {
+    color: var(--nav-text) !important;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem !important;
+    background:
+        linear-gradient(135deg,
+            rgba(0, 243, 255, 0.1) 0%,
+            rgba(188, 19, 254, 0.15) 50%,
+            rgba(0, 0, 0, 0.4) 100%) !important;
+    border: 1px solid rgba(0, 243, 255, 0.4) !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: var(--transition) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 0 20px rgba(0, 243, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    will-change: transform, box-shadow;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+/* Metallic shine sweep */
+.Navigation_Container .Shop_By_Categories_Button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(0, 243, 255, 0.3),
+            rgba(255, 0, 255, 0.2),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+.Navigation_Container .Shop_By_Categories_Button:hover::before {
+    left: 100%;
+}
+
+/* Corner accent */
+.Navigation_Container .Shop_By_Categories_Button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, transparent 50%, var(--nav-neon-cyan) 50%);
+    opacity: 0.6;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    transition: all 0.3s ease;
+}
+
+.Navigation_Container .Shop_By_Categories_Button:hover {
+    background:
+        linear-gradient(135deg,
+            rgba(0, 243, 255, 0.25) 0%,
+            rgba(255, 0, 255, 0.2) 50%,
+            rgba(0, 0, 0, 0.5) 100%) !important;
+    border-color: var(--nav-neon-cyan) !important;
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 30px rgba(0, 243, 255, 0.5),
+        0 0 60px rgba(255, 0, 255, 0.3),
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    animation: nav-glitch-button 0.3s ease;
+}
+
+.Navigation_Container .Shop_By_Categories_Button:hover::after {
+    background: linear-gradient(135deg, transparent 50%, var(--nav-neon-pink) 50%);
+    opacity: 1;
+}
+
+@keyframes nav-glitch-button {
+
+    0%,
+    100% {
+        transform: translateY(-3px) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-3px) translateX(-2px);
+    }
+
+    50% {
+        transform: translateY(-3px) translateX(2px);
+    }
+
+    75% {
+        transform: translateY(-3px) translateX(-1px);
+    }
+}
+
+.Navigation_Container .Shop_By_Categories_Button:active {
+    transform: translateY(-1px);
+}
+
+.Navigation_Container .Shop_By_Categories_Icon_1 {
+    font-size: 20px;
+    color: var(--nav-neon-cyan);
+    text-shadow: 0 0 10px var(--nav-neon-cyan);
+    animation: nav-icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes nav-icon-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+.Navigation_Container .Shop_By_Categories_Text {
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.Navigation_Container .Shop_By_Categories_Icon_2 {
     font-size: 14px;
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    color: var(--nav-neon-pink);
+}
+
+.Navigation_Container .Shop_By_Categories_Button:hover .Shop_By_Categories_Icon_2 {
+    transform: rotate(180deg);
+    text-shadow: 0 0 10px var(--nav-neon-pink);
+}
+
+/* ============================================
+   NAVIGATION MENU ITEMS
+============================================ */
+.Navigation_Container .nav_3 .col_2 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.Navigation_Container .col2_page {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Navigation_Container .col2_page_item {
+    list-style: none;
+    position: relative;
+    z-index: auto !important;
+}
+
+.Navigation_Container .Page_link {
+    text-decoration: none;
+}
+
+.Navigation_Container .Item_Button {
+    text-transform: uppercase !important;
+    color: var(--nav-text) !important;
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 1.5px !important;
+    padding: 0.7rem 1.25rem !important;
+    border-radius: 0 !important;
+    transition: var(--transition) !important;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent !important;
+    will-change: transform, box-shadow;
+    background: transparent !important;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+/* Hover background effect */
+.Navigation_Container .Item_Button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+            rgba(0, 243, 255, 0.15) 0%,
+            rgba(188, 19, 254, 0.1) 50%,
+            rgba(255, 0, 255, 0.15) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+/* Bottom neon line indicator */
+.Navigation_Container .Item_Button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--nav-neon-cyan), var(--nav-neon-pink));
+    box-shadow: 0 0 10px var(--nav-neon-cyan);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.Navigation_Container .Item_Button:hover::before {
+    opacity: 1;
+}
+
+.Navigation_Container .Item_Button:hover::after {
+    width: 80%;
+}
+
+.Navigation_Container .Item_Button:hover {
+    color: var(--nav-neon-cyan) !important;
+    font-weight: 600 !important;
+    transform: translateY(-2px);
+    border: 1px solid rgba(0, 243, 255, 0.3) !important;
+    box-shadow:
+        0 5px 25px rgba(0, 243, 255, 0.3),
+        inset 0 0 20px rgba(0, 243, 255, 0.05);
+    text-shadow:
+        0 0 10px var(--nav-neon-cyan),
+        0 0 20px var(--nav-neon-cyan);
+}
+
+.Navigation_Container .Item_Button.active {
+    color: var(--nav-neon-cyan) !important;
+    font-weight: 600 !important;
+    border: 1px solid rgba(0, 243, 255, 0.5) !important;
+    background: linear-gradient(135deg,
+            rgba(0, 243, 255, 0.1) 0%,
+            rgba(188, 19, 254, 0.1) 100%) !important;
+    box-shadow:
+        0 0 25px rgba(0, 243, 255, 0.3),
+        inset 0 0 15px rgba(0, 243, 255, 0.05);
+    text-shadow: 0 0 15px var(--nav-neon-cyan);
+}
+
+.Navigation_Container .Item_Button.active::after {
+    width: 80%;
+}
+
+/* ============================================
+   DROPDOWN MENU - Cyber Panel Style
+============================================ */
+.Navigation_Container .submenu_dropdown {
+    position: absolute !important;
+    /* top: calc(100% + 10px); */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background:
+        /* Circuit pattern */
+        url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0v10M20 30v10M0 20h10M30 20h10' stroke='%2300f3ff' stroke-width='0.3' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(180deg,
+            rgba(10, 0, 25, 0.98) 0%,
+            rgba(26, 11, 46, 0.95) 50%,
+            rgba(5, 5, 15, 0.98) 100%);
+    background-size: 40px 40px, 100% 100%;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 0;
+    list-style: none;
+    padding: 0.5rem;
+    min-width: 240px;
+    z-index: 10001 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease,
+        transform 0.5s ease,
+        visibility 0.5s;
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(0, 243, 255, 0.2),
+        0 0 60px rgba(188, 19, 254, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px,
+            100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+    isolation: isolate;
+}
+
+/* Corner decorations */
+.Navigation_Container .submenu_dropdown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--nav-neon-cyan) 0%, transparent 60%);
+    opacity: 0.5;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.Navigation_Container .submenu_dropdown::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(315deg, var(--nav-neon-pink) 0%, transparent 60%);
+    opacity: 0.5;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.Navigation_Container .col2_page_item:hover .submenu_dropdown,
+.Navigation_Container .submenu_dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    z-index: 10001 !important;
+    pointer-events: auto;
+}
+
+.Navigation_Container .submenu_dropdown>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    z-index: 999999 !important;
+}
+
+.Navigation_Container .submenu_item {
+    list-style: none;
+}
+
+.Navigation_Container .submenu_item .submenu_link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.85rem 1.25rem;
+    color: var(--nav-text-secondary) !important;
+    text-decoration: none;
+    font-size: 0.9rem;
     font-weight: 500;
-    gap: 0.5rem !important;
-    margin-top: 0;
-    margin-bottom: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+    background: transparent;
 }
 
-.col4_text-icon{
-    font-size: 20px !important;
+/* Left accent line */
+.Navigation_Container .submenu_item .submenu_link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(180deg, var(--nav-neon-cyan), var(--nav-neon-pink));
+    box-shadow: 0 0 10px var(--nav-neon-cyan);
+    transition: height 0.3s ease;
 }
 
-a:link {
-    text-decoration: solid;
-    color: #333;
-    transition: color 0.3s ease;
+/* Hover glow background */
+.Navigation_Container .submenu_item .submenu_link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(0, 243, 255, 0.1) 0%,
+            rgba(188, 19, 254, 0.05) 50%,
+            transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
-a:hover {
-    color: blueviolet ;
+.Navigation_Container .submenu_item .submenu_link:hover::before {
+    height: 60%;
 }
-a:active {
-    color: #673ab7 !important;
+
+.Navigation_Container .submenu_item .submenu_link:hover::after {
+    opacity: 1;
+}
+
+.Navigation_Container .submenu_item .submenu_link:hover {
+    color: var(--nav-neon-cyan) !important;
+    font-weight: 600;
+    padding-left: 1.75rem;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    text-shadow: 0 0 10px var(--nav-neon-cyan);
+    box-shadow:
+        0 4px 20px rgba(0, 243, 255, 0.2),
+        inset 0 0 20px rgba(0, 243, 255, 0.03);
+}
+
+/* ============================================
+   RIGHT COLUMN - DELIVERY INFO
+============================================ */
+.Navigation_Container .nav_3 .col_4 {
+    flex: 0 0 auto;
+}
+
+.Navigation_Container .col4_text {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    gap: 0.75rem;
+    margin: 0;
+    color: var(--nav-text);
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(135deg,
+            rgba(0, 243, 255, 0.05) 0%,
+            rgba(0, 0, 0, 0.3) 100%);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+.Navigation_Container .col4_text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(0, 243, 255, 0.2),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+.Navigation_Container .col4_text:hover::before {
+    left: 100%;
+}
+
+.Navigation_Container .col4_text:hover {
+    background: linear-gradient(135deg,
+            rgba(0, 243, 255, 0.15) 0%,
+            rgba(188, 19, 254, 0.1) 100%);
+    border-color: var(--nav-neon-cyan);
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 20px rgba(0, 243, 255, 0.3),
+        0 0 30px rgba(0, 243, 255, 0.1);
+}
+
+.Navigation_Container .col4_text-icon {
+    font-size: 22px;
+    color: var(--nav-neon-cyan);
+    text-shadow: 0 0 15px var(--nav-neon-cyan);
+    animation: nav-delivery-pulse 2s ease-in-out infinite;
+}
+
+@keyframes nav-delivery-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px var(--nav-neon-cyan));
+    }
+
+    50% {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 15px var(--nav-neon-cyan));
+    }
+}
+
+/* ============================================
+   GLITCH EFFECT ANIMATION
+============================================ */
+@keyframes nav-glitch {
+
+    0%,
+    100% {
+        transform: translate(0);
+        filter: none;
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+        filter: hue-rotate(90deg);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+        filter: hue-rotate(180deg);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+        filter: hue-rotate(270deg);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Apply glitch on hover for special elements */
+.Navigation_Container .Shop_By_Categories_Button:hover .Shop_By_Categories_Icon_1 {
+    animation: nav-glitch 0.3s ease;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+@media (max-width: 1200px) {
+    .Navigation_Container .container {
+        gap: 1rem;
+        width: 98%;
+    }
+
+    .Navigation_Container .col2_page {
+        gap: 0.35rem;
+    }
+
+    .Navigation_Container .Item_Button {
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Button {
+        padding: 0.65rem 1.2rem !important;
+        font-size: 0.88rem !important;
+    }
+
+    .Navigation_Container .col4_text {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .Navigation_Container .nav_3 {
+        padding: 0.75rem 0;
+    }
+
+    .Navigation_Container .container {
+        width: 96%;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .Navigation_Container .nav_3 .col_4 {
+        display: none;
+    }
+
+    .Navigation_Container .col_1 {
+        flex: 0 0 auto;
+    }
+
+    .Navigation_Container .col_2 {
+        flex: 1 1 100%;
+        order: 3;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Button {
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .Navigation_Container .col2_page {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .Navigation_Container .Item_Button {
+        padding: 0.55rem 0.9rem !important;
+        font-size: 0.82rem !important;
+    }
+
+    .Navigation_Container .submenu_dropdown {
+        min-width: 200px;
+        left: 0;
+        transform: translateX(0) translateY(10px);
+    }
+
+    .Navigation_Container .col2_page_item:hover .submenu_dropdown,
+    .Navigation_Container .submenu_dropdown.open {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .Navigation_Container .nav_3 {
+        padding: 0.65rem 0;
+    }
+
+    .Navigation_Container .container {
+        width: 96%;
+        gap: 0.6rem;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Text {
+        display: none;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Button {
+        padding: 0.6rem 0.85rem !important;
+        gap: 0.4rem;
+        min-width: auto;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Icon_1 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Icon_2 {
+        font-size: 12px;
+    }
+
+    .Navigation_Container .col2_page {
+        gap: 0.3rem;
+    }
+
+    .Navigation_Container .Item_Button {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .Navigation_Container .submenu_dropdown {
+        min-width: 180px;
+    }
+
+    .Navigation_Container .submenu_item .submenu_link {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .Navigation_Container .nav_3 {
+        padding: 0.5rem 0;
+    }
+
+    .Navigation_Container .container {
+        width: 98%;
+        gap: 0.5rem;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Button {
+        padding: 0.5rem 0.7rem !important;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Icon_1 {
+        font-size: 18px;
+    }
+
+    .Navigation_Container .Shop_By_Categories_Icon_2 {
+        font-size: 11px;
+    }
+
+    .Navigation_Container .col2_page {
+        gap: 0.2rem;
+    }
+
+    .Navigation_Container .Item_Button {
+        padding: 0.45rem 0.6rem !important;
+        font-size: 0.72rem !important;
+    }
+
+    .Navigation_Container .submenu_dropdown {
+        min-width: 160px;
+        clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
+                100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+    .Navigation_Container .submenu_item .submenu_link {
+        padding: 0.6rem 0.85rem;
+        font-size: 0.8rem;
+    }
+
+    /* Disable complex effects on mobile for performance */
+    .Navigation_Container .nav_3::before,
+    .Navigation_Container .nav_3::after {
+        animation: none;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY & INTERACTIONS
+============================================ */
+.Navigation_Container a:active,
+.Navigation_Container button:active {
+    color: var(--nav-neon-cyan) !important;
+}
+
+.Navigation_Container .Item_Button:focus-visible,
+.Navigation_Container .Shop_By_Categories_Button:focus-visible {
+    outline: 2px solid var(--nav-neon-cyan);
+    outline-offset: 3px;
+    box-shadow: 0 0 20px var(--nav-neon-cyan);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.Navigation_Container * {
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .Navigation_Container * {
+        animation: none !important;
+        transition: none !important;
+    }
 }

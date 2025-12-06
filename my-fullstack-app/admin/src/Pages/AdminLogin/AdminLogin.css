@@ -1,0 +1,813 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap");
+
+/* ============================================
+   ROOT VARIABLES - ADMIN CYBERPUNK THEME
+============================================ */
+.AdminLogin_Page {
+    --c-bg-primary: #0f172a;
+    --c-bg-secondary: #1e293b;
+    --c-bg-panel: rgba(30, 41, 59, 0.9);
+    --c-admin-deep: #1e1b4b;
+    --c-admin-dark: #0f172a;
+    --c-admin-mid: #312e81;
+    --c-neon-primary: #6366f1;
+    --c-neon-secondary: #8b5cf6;
+    --c-neon-accent: #06b6d4;
+    --c-neon-success: #22c55e;
+    --c-neon-warning: #f59e0b;
+    --c-text-primary: #f8fafc;
+    --c-text-secondary: #94a3b8;
+    --c-text-muted: #64748b;
+    --c-border: rgba(99, 102, 241, 0.2);
+    --c-border-hover: rgba(99, 102, 241, 0.5);
+    --c-error: #ef4444;
+    --c-success: #22c55e;
+
+    --shadow-neon-primary: 0 0 20px rgba(99, 102, 241, 0.4);
+    --shadow-neon-secondary: 0 0 20px rgba(139, 92, 246, 0.3);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.2);
+}
+
+/* ============================================
+   BASE STYLES
+============================================ */
+.AdminLogin_Page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rajdhani", sans-serif;
+    gap : 10px;
+}
+
+.AdminLogin_Page {
+    min-height: 100vh;
+    background: var(--c-bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================
+   BACKGROUND EFFECTS
+============================================ */
+.AdminLogin_Page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        /* Hexagon pattern */
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 20v20L30 55L5 40V20z' stroke='%236366f1' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        /* Grid */
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        /* Radial glow */
+        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        /* Base */
+        linear-gradient(180deg, var(--c-admin-deep) 0%, var(--c-bg-primary) 30%, var(--c-bg-primary) 100%);
+    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+    animation: adminGridScroll 25s linear infinite;
+}
+
+@keyframes adminGridScroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(60px);
+    }
+}
+
+.AdminLogin_Page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.05) 2px,
+            rgba(0, 0, 0, 0.05) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   RING CONTAINER
+============================================ */
+.AdminLogin_Page .admin_ring {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 50px rgba(99, 102, 241, 0.4));
+    z-index: 2;
+}
+
+.AdminLogin_Page .admin_ring i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 15px currentColor);
+}
+
+.AdminLogin_Page .admin_ring i:nth-child(1) {
+    border-color: var(--c-neon-primary);
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: adminRotate 10s linear infinite;
+}
+
+.AdminLogin_Page .admin_ring i:nth-child(2) {
+    border-color: var(--c-neon-secondary);
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: adminRotate 8s linear infinite reverse;
+}
+
+.AdminLogin_Page .admin_ring i:nth-child(3) {
+    border-color: var(--c-neon-accent);
+    border-radius: 50%;
+    animation: adminRotate 12s linear infinite, adminPulse 4s ease-in-out infinite;
+}
+
+@keyframes adminRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes adminPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.02);
+        opacity: 0.8;
+    }
+}
+
+/* ============================================
+   LOGIN CARD
+============================================ */
+.AdminLogin_Page .admin_login {
+    position: absolute;
+    width: 400px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--c-bg-panel);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px,
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+    transition: all 0.4s ease;
+}
+
+.AdminLogin_Page .admin_login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, transparent 50%);
+    opacity: 0.5;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.AdminLogin_Page .admin_login::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(315deg, var(--c-neon-secondary) 0%, transparent 50%);
+    opacity: 0.5;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.AdminLogin_Page .admin_login:hover {
+    border-color: var(--c-border-hover);
+    box-shadow: var(--shadow-neon-primary);
+}
+
+/* Admin Logo */
+.AdminLogin_Page .admin_logo {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Title */
+.AdminLogin_Page .admin_login h2 {
+    font-size: 2rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--c-text-primary);
+    text-shadow: 0 0 10px var(--c-neon-primary), 0 0 20px var(--c-neon-primary);
+    margin: 0;
+}
+
+.AdminLogin_Page .login_subtitle {
+    text-align: center;
+    color: var(--c-text-secondary);
+    font-size: 0.95rem;
+    margin-top: -10px;
+}
+
+.Admin_login_form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+/* ============================================
+   INPUT FIELDS
+============================================ */
+.AdminLogin_Page .inputBx {
+    position: relative;
+    width: 100%;
+}
+
+.AdminLogin_Page .inputBx .input_icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--c-text-muted);
+    font-size: 1.2rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.AdminLogin_Page .inputBx input:not([type="submit"]):not([type="checkbox"]) {
+    width: 100%;
+    padding: 14px 45px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.AdminLogin_Page .inputBx input:focus {
+    border-color: var(--c-neon-primary);
+    background: rgba(99, 102, 241, 0.05);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2), inset 0 0 20px rgba(99, 102, 241, 0.05);
+}
+
+.AdminLogin_Page .inputBx input:focus+.input_icon,
+.AdminLogin_Page .inputBx input:focus~.input_icon {
+    color: var(--c-neon-primary);
+}
+
+.AdminLogin_Page .inputBx input::placeholder {
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85em;
+}
+
+.AdminLogin_Page .input_highlight {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-neon-primary), var(--c-neon-secondary));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.AdminLogin_Page .inputBx input:focus~.input_highlight {
+    width: 100%;
+}
+
+/* Password Toggle */
+.AdminLogin_Page .password_toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--c-text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.AdminLogin_Page .password_toggle:hover {
+    color: var(--c-neon-primary);
+}
+
+/* ============================================
+   OPTIONS ROW
+============================================ */
+.AdminLogin_Page .options_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.AdminLogin_Page .remember_me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.AdminLogin_Page .remember_me input[type="checkbox"] {
+    display: none;
+}
+
+.AdminLogin_Page .remember_me .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--c-border);
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 4px, 4px 0, calc(100% - 4px) 0, 100% 4px,
+            100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px));
+}
+
+.AdminLogin_Page .remember_me .checkmark::after {
+    content: '✓';
+    font-size: 12px;
+    color: var(--c-neon-primary);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s ease;
+}
+
+.AdminLogin_Page .remember_me input:checked+.checkmark {
+    border-color: var(--c-neon-primary);
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.AdminLogin_Page .remember_me input:checked+.checkmark::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.AdminLogin_Page .remember_me .label_text {
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+}
+
+.AdminLogin_Page .forgot_link {
+    color: var(--c-neon-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.AdminLogin_Page .forgot_link:hover {
+    color: var(--c-neon-secondary);
+    text-shadow: 0 0 10px var(--c-neon-primary);
+}
+
+/* ============================================
+   SUBMIT BUTTON
+============================================ */
+.AdminLogin_Page .submit_btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.4s ease;
+    clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+}
+
+.AdminLogin_Page .submit_btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+}
+
+.AdminLogin_Page .submit_btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.AdminLogin_Page .submit_btn.loading {
+    background: var(--c-bg-secondary);
+    border: 2px solid var(--c-neon-primary);
+}
+
+.AdminLogin_Page .submit_btn .loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.AdminLogin_Page .submit_btn svg {
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   SECURITY NOTICE
+============================================ */
+.AdminLogin_Page .security_notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 8px;
+    color: var(--c-neon-success);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.AdminLogin_Page .security_notice svg {
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   DESCRIPTION PANELS
+============================================ */
+.AdminLogin_Description_1,
+.AdminLogin_Description_2 {
+    flex: 1;
+    max-width: 400px;
+    padding: 2rem;
+    color: var(--c-text-primary);
+    position: relative;
+    z-index: 2;
+}
+
+.AdminLogin_Page .description_content {
+    position: relative;
+    z-index: 1;
+}
+
+.AdminLogin_Page .admin_badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border-radius: 30px;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+}
+
+.AdminLogin_Page .badge_icon {
+    font-size: 1.5rem;
+}
+
+.AdminLogin_Page .description_title {
+    font-size: 2.5rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px var(--c-neon-primary);
+}
+
+.AdminLogin_Page .description_text {
+    font-size: 1.1rem;
+    color: var(--c-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* Security Features */
+.AdminLogin_Page .security_features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.AdminLogin_Page .security_item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: var(--c-bg-panel);
+    border: 1px solid var(--c-border);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.AdminLogin_Page .security_item:hover {
+    border-color: var(--c-border-hover);
+    transform: translateX(10px);
+    box-shadow: var(--shadow-neon-primary);
+}
+
+.AdminLogin_Page .security_icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--c-neon-primary), var(--c-neon-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    box-shadow: 0 0 15px var(--c-neon-primary);
+}
+
+.AdminLogin_Page .security_info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.AdminLogin_Page .security_label {
+    color: var(--c-text-primary);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.AdminLogin_Page .security_desc {
+    color: var(--c-text-muted);
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   DASHBOARD PREVIEW
+============================================ */
+.AdminLogin_Page .dashboard_preview {
+    position: relative;
+    height: 350px;
+    margin-bottom: 2rem;
+}
+
+.AdminLogin_Page .preview_card {
+    position: absolute;
+    background: var(--c-bg-panel);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: var(--shadow-glow);
+    transition: all 0.4s ease;
+    clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.AdminLogin_Page .preview_card:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    border-color: var(--c-border-hover);
+    box-shadow: var(--shadow-neon-primary), var(--shadow-neon-secondary);
+    z-index: 5;
+}
+
+.AdminLogin_Page .preview_card .card_icon {
+    font-size: 2.5rem;
+    color: var(--c-neon-primary);
+    filter: drop-shadow(0 0 15px var(--c-neon-primary));
+}
+
+.AdminLogin_Page .preview_card .card_label {
+    font-weight: 600;
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.AdminLogin_Page .preview_card .card_value {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--c-neon-success);
+    text-shadow: 0 0 10px var(--c-neon-success);
+}
+
+.AdminLogin_Page .card_1 {
+    top: 5%;
+    left: 10%;
+    animation: previewFloat1 6s ease-in-out infinite;
+}
+
+.AdminLogin_Page .card_2 {
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: previewFloat2 7s ease-in-out infinite;
+}
+
+.AdminLogin_Page .card_3 {
+    top: 10%;
+    right: 10%;
+    animation: previewFloat3 6.5s ease-in-out infinite;
+}
+
+@keyframes previewFloat1 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+@keyframes previewFloat2 {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+@keyframes previewFloat3 {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.AdminLogin_Page .preview_text {
+    text-align: center;
+}
+
+.AdminLogin_Page .illustration_title {
+    font-size: 2rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--c-text-primary);
+    text-shadow: 0 0 15px var(--c-neon-primary);
+    margin-bottom: 0.5rem;
+}
+
+.AdminLogin_Page .illustration_text {
+    color: var(--c-text-secondary);
+    font-size: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 1200px) {
+    .AdminLogin_Page {
+        gap: 2rem;
+    }
+
+    .AdminLogin_Page .admin_ring {
+        width: 500px;
+        height: 500px;
+    }
+
+    .AdminLogin_Description_1,
+    .AdminLogin_Description_2 {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .AdminLogin_Page {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .AdminLogin_Page .admin_ring {
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        min-height: 550px;
+    }
+
+    .AdminLogin_Page .admin_ring i {
+        display: none !important;
+    }
+
+    .AdminLogin_Page .admin_login {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .AdminLogin_Page .admin_login {
+        padding: 1.5rem 1rem;
+    }
+
+    .AdminLogin_Page .admin_login h2 {
+        font-size: 1.6rem;
+        letter-spacing: 3px;
+    }
+
+    .AdminLogin_Page .options_row {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+}

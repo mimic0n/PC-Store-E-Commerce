@@ -1,0 +1,47 @@
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+.dashboard__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.dashboard__empty-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--dashboard-bg) 100%);
+    border: 2px dashed var(--card-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    transition: var(--transition-normal);
+}
+
+.dashboard__empty-state:hover .dashboard__empty-icon {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+.dashboard__empty-state h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+}
+
+.dashboard__empty-state p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 28px 0;
+    max-width: 360px;
+    line-height: 1.6;
+}

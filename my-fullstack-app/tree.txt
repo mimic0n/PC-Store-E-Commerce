@@ -91,3 +91,7 @@ mkdir -p client/src/{pages,context,services,utils}
 
 # Create server folders
 mkdir -p server/{config,controllers,middleware,models,routes,utils}
+
+
+
+

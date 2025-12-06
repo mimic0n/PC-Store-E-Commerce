@@ -1,0 +1,139 @@
+/* =====================================================
+   STATS CARD
+   ===================================================== */
+.dashboard__stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard__stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, transparent);
+    transition: var(--transition-normal);
+}
+
+.dashboard__stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Color Variants */
+.dashboard__stat-card--success::before {
+    background: linear-gradient(90deg, var(--success), rgba(34, 197, 94, 0.3));
+}
+
+.dashboard__stat-card--info::before {
+    background: linear-gradient(90deg, var(--info), rgba(59, 130, 246, 0.3));
+}
+
+.dashboard__stat-card--warning::before {
+    background: linear-gradient(90deg, var(--warning), rgba(245, 158, 11, 0.3));
+}
+
+.dashboard__stat-card--danger::before {
+    background: linear-gradient(90deg, var(--danger), rgba(239, 68, 68, 0.3));
+}
+
+/* Header */
+.dashboard__stat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Icon */
+.dashboard__stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.dashboard__stat-icon--success {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.dashboard__stat-icon--info {
+    background: var(--info-light);
+    color: var(--info);
+}
+
+.dashboard__stat-icon--warning {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.dashboard__stat-icon--danger {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+/* Trend Badge */
+.dashboard__stat-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.dashboard__stat-trend--up {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.dashboard__stat-trend--down {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+.dashboard__stat-trend svg {
+    font-size: 14px;
+}
+
+/* Body */
+.dashboard__stat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dashboard__stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.dashboard__stat-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.dashboard__stat-description {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}

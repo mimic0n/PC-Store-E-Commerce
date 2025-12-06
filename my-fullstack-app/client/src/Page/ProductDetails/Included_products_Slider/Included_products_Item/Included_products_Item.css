@@ -1,0 +1,238 @@
+.Included_products_Item {
+    width: 100%;
+    max-width: 280px;
+    min-height: 350px;
+    background: white;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #333 !important;
+    padding: 0rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.Included_products_Item .imgWrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    border-radius: 8px;
+    flex: 0 0 auto;
+}
+
+.Included_products_Item .imgWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.Included_products_Item .imgWrapper:hover img {
+    transform: scale(1.05);
+}
+
+.Included_products_Item .image_1 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.Included_products_Item .image_2 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+    visibility: hidden;
+
+}
+
+.Included_products_Item .image_1 {
+    opacity: 1;
+    visibility: visible;
+}
+
+.Included_products_Item .image_2 {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Hiệu ứng khi hover vào toàn bộ thẻ sản phẩm */
+.Included_products_Item .imgWrapper:hover .image_1 {
+    opacity: 0;
+    /* Khi hover, làm mờ và ẩn ảnh 1 */
+    visibility: hidden;
+}
+
+.Included_products_Item .imgWrapper:hover .image_2 {
+    opacity: 1;
+    /* Đồng thời, làm rõ và hiện ảnh 2 */
+    visibility: visible;
+}
+
+.Included_products_Item .Product_Box_Button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: column !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.Included_products_Item:hover .Product_Box_Button {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Included_products_Item .Complex_Button {
+    width: 45px;
+    height: 45px;
+    min-width: 45px !important;
+    border-radius: 9999px !important;
+    background-color: #fff !important;
+    color: #E94057 !important;
+    font-size: 20px !important;
+    opacity: 0.9;
+    transition: all 0.3s ease !important;
+
+}
+
+.Included_products_Item .Complex_Button:hover {
+    color: #fff !important;
+    background-color: #E94057 !important;
+    opacity: 1;
+    /* transform: translateX(-5px);
+    top : 10px */
+    /*Di chuyển nhẹ khi hover*/
+}
+
+.Included_products_Item .Product_Info {
+    width: 100%;
+    padding: 0.75rem;
+    background: white;
+    margin-top: auto;
+    /* Pushes info to bottom */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* Optional: adds separation line */
+}
+
+
+
+
+.Included_products_Item .addcart-area {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding-top: 0.5rem;
+}
+
+.Included_products_Item .addcart-area button {
+    width: 91%;
+    border-radius: 99999px;
+    padding: 6px 10px;
+    outline: none;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.Included_products_Item .addcart-area .btn-addtocart {
+    background: #fff !important;
+    border: 1px solid rgb(21, 97, 87) !important;
+    color: rgb(21, 97, 87) !important;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.Included_products_Item .addcart-area .btn-addtocart:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -10%;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: rgb(21, 97, 87) !important;
+    z-index: -1;
+    transform: skewX(-15deg);
+    transition: width 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.Included_products_Item .addcart-area .btn-addtocart:hover {
+    color: #fff !important;
+    border-color: rgb(21, 97, 87) !important;
+}
+
+.Included_products_Item .addcart-area .btn-addtocart:hover:before {
+    width: 120%;
+}
+
+.Included_products_Item .addcart-area .btn-addtocart:focus {
+    color: #fff !important;
+    border-color: rgb(21, 97, 87) !important;
+}
+
+.Included_products_Item .addcart-area .btn-addtocart-icon {
+    margin-right: 8px;
+    font-size: 20px !important;
+    vertical-align: middle;
+    color: white !important;
+    background-color: rgb(21, 97, 87) !important;
+    border-radius: 100%;
+    padding: 0.25rem;
+}
+
+.Included_products_Item .addcart-area .btn-addtocart-text {
+    flex-grow: 0.75;
+    text-align: center;
+}
+
+
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+.Included_products_Item .custom-class {
+    text-align: left !important;
+}
+
+.Included_products_Item a {
+    color: black !important
+}
+
+.Included_products_Item a:link {
+    text-decoration: solid;
+    color: #333 !important;
+    transition: color 0.3s ease;
+}
+
+.Included_products_Item a:hover {
+    color: blueviolet !important;
+}
+
+.Included_products_Item a:active {
+    color: #673ab7 !important;
+}

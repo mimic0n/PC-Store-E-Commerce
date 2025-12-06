@@ -1,0 +1,133 @@
+{
+    "info": {
+        "name": "Cart API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5000/api/cart"
+        },
+        {
+            "key": "token",
+            "value": "your_access_token_here"
+        }
+    ],
+    "item": [
+        {
+            "name": "Get Cart",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/"
+            }
+        },
+        {
+            "name": "Get Cart Items Count",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/count"
+            }
+        },
+        {
+            "name": "Add To Cart",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"productId\": 1,\n    \"quantity\": 2\n}"
+                },
+                "url": "{{baseUrl}}/add"
+            }
+        },
+        {
+            "name": "Update Cart Item",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"quantity\": 3\n}"
+                },
+                "url": "{{baseUrl}}/update/1"
+            }
+        },
+        {
+            "name": "Remove From Cart",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/remove/1"
+            }
+        },
+        {
+            "name": "Clear Cart",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "url": "{{baseUrl}}/clear"
+            }
+        },
+        {
+            "name": "Sync Cart",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"items\": [\n        {\n            \"productId\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"productId\": 3,\n            \"quantity\": 1\n        }\n    ]\n}"
+                },
+                "url": "{{baseUrl}}/sync"
+            }
+        }
+    ]
+}

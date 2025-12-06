@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import '/src/styles/Animation/GooeyNav/GooeyNav.css';
 import '/src/styles/Category.css';
 
-const GooeyNav = ({
+export const GooeyNav = ({
   items,
   animationTime = 600,
   particleCount = 15,
@@ -110,35 +110,50 @@ const GooeyNav = ({
   };
 
   const handleClick = (e, index) => {
-   const liEl = e.currentTarget;
-    if (activeIndex !== index) {
-      setActiveIndex(index);
-      updateEffectPosition(liEl);
-
-      if (filterRef.current) {
-        const particles = filterRef.current.querySelectorAll('.particle');
-        particles.forEach(p => filterRef.current.removeChild(p));
+     const liEl = e.currentTarget;
+     
+     // Remove active class from all li elements
+     if (navRef.current) {
+         navRef.current.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+     }
+     
+     // Add active class to clicked li
+     liEl.classList.add('active');
+     
+     if (activeIndex !== index) {
+        setActiveIndex(index);
+        updateEffectPosition(liEl);
+  
+        if (filterRef.current) {
+          // Remove existing particles
+          const particles = filterRef.current.querySelectorAll('.particle');
+          particles.forEach(p => filterRef.current.removeChild(p));
+          
+          // Remove then add active class to trigger animation
+          filterRef.current.classList.remove('active');
+          void filterRef.current.offsetWidth; // Force reflow
+          filterRef.current.classList.add('active');
+        }
+  
+        if (textRef.current) {
+          textRef.current.classList.remove('active');
+          void textRef.current.offsetWidth;
+          textRef.current.classList.add('active');
+        }
+  
+        if (filterRef.current) {
+          makeParticles(filterRef.current);
+        }
       }
-
-      if (textRef.current) {
-        textRef.current.classList.remove('active');
-        void textRef.current.offsetWidth;
-        textRef.current.classList.add('active');
+      
+      // Nếu mục có submenu, ngăn chặn hành vi mặc định của thẻ <a>
+      if (items[index].submenu) {
+          e.preventDefault();
       }
-
-      if (filterRef.current) {
-        makeParticles(filterRef.current);
-      }
-    }
-    
-    // Nếu mục có submenu, ngăn chặn hành vi mặc định của thẻ <a>
-    if (items[index].submenu) {
-        e.preventDefault();
-    }
-    
-    toggleSubmenu(index);
-  };
-
+      
+      toggleSubmenu(index);
+    };
+  
   const handleKeyDown = (e, index) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -153,8 +168,18 @@ const GooeyNav = ({
     if (!navRef.current || !containerRef.current) return;
     const activeLi = navRef.current.querySelectorAll('li')[activeIndex];
     if (activeLi) {
+      // Remove active from all, add to current
+      navRef.current.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+      activeLi.classList.add('active');
+      
       updateEffectPosition(activeLi);
-      textRef.current?.classList.add('active');
+      
+      if (textRef.current) {
+          textRef.current.classList.add('active');
+      }
+      if (filterRef.current) {
+          filterRef.current.classList.add('active');
+      }
     }
 
     const resizeObserver = new ResizeObserver(() => {

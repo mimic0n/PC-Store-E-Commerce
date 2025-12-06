@@ -1,0 +1,114 @@
+/* ===== ORDERS SECTION ===== */
+.myaccount-orders-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.myaccount-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.myaccount-order-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.myaccount-order-card:hover {
+    border-color: var(--c-neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.myaccount-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.myaccount-order-id {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--c-neon-cyan);
+}
+
+.myaccount-order-status {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.myaccount-status-delivered {
+    background: rgba(0, 255, 159, 0.2);
+    color: var(--ma-neon-green);
+    border: 1px solid var(--ma-neon-green);
+}
+
+.myaccount-status-shipping {
+    background: rgba(0, 240, 255, 0.2);
+    color: var(--c-neon-cyan);
+    border: 1px solid var(--c-neon-cyan);
+}
+
+.myaccount-status-processing {
+    background: rgba(255, 0, 255, 0.2);
+    color: var(--c-neon-pink);
+    border: 1px solid var(--c-neon-pink);
+}
+
+.myaccount-order-details {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.myaccount-order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.myaccount-info-label {
+    font-size: 0.8rem;
+    color: var(--ma-text-secondary);
+    letter-spacing: 1px;
+}
+
+.myaccount-info-value {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.myaccount-neon-text {
+    color: var(--c-neon-cyan);
+    text-shadow: 0 0 10px var(--c-neon-cyan);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .myaccount-order-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

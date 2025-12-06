@@ -1,0 +1,1163 @@
+
+.checkout-root {
+    --c-bg-primary: #050508;
+    --c-bg-secondary: #0a0a12;
+    --c-bg-panel: rgba(15, 10, 25, 0.85);
+    --c-purple-deep: #1a0b2e;
+    --c-purple-dark: #12001a;
+    --c-purple-mid: #2d1b4e;
+    --c-neon-cyan: #00f3ff;
+    --c-neon-pink: #ff00ff;
+    --c-neon-purple: #bc13fe;
+    --c-neon-blue: #0080ff;
+    --c-text-primary: #e8e8f0;
+    --c-text-secondary: #9090a8;
+    --c-text-muted: #606080;
+    --c-border: rgba(188, 19, 254, 0.2);
+    --c-border-hover: rgba(0, 243, 255, 0.5);
+    --c-error: #ff3366;
+    --c-success: #00ff88;
+    --c-metallic: linear-gradient(135deg, #667 0%, #222 50%, #555 100%);
+
+    --shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.3);
+    --shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.3);
+    --shadow-glow: 0 0 40px rgba(188, 19, 254, 0.2);
+
+    font-family: 'Orbitron', 'Rajdhani', 'Segoe UI', sans-serif;
+    background: var(--c-bg-primary);
+    color: var(--c-text-primary);
+    min-height: 100vh;
+    padding: 30px 20px 60px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND EFFECTS - CYBER GRID & CIRCUIT */
+.checkout-root::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        /* Circuit pattern */
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v20M30 40v20M0 30h20M40 30h20M30 30m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0' stroke='%23bc13fe' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        /* Grid */
+        linear-gradient(rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+        /* Radial glow */
+        radial-gradient(ellipse at 20% 20%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.08) 0%, transparent 50%),
+        /* Base gradient */
+        linear-gradient(180deg, var(--c-purple-dark) 0%, var(--c-bg-primary) 30%, var(--c-bg-primary) 100%);
+    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.checkout-root .checkout-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        /* Scanlines effect */
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px);
+    pointer-events: none;
+    z-index: 1;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100vh;
+    }
+}
+
+/* ============================================
+   MAIN LAYOUT - 2 COLUMN
+============================================ */
+.checkout-root .checkout-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.checkout-root .checkout-left {
+    flex: 1 1 60%;
+    min-width: 320px;
+}
+
+.checkout-root .checkout-right {
+    flex: 1 1 35%;
+    min-width: 320px;
+    max-width: 450px;
+}
+
+/* TYPOGRAPHY - GLITCH TITLE */
+.checkout-root .checkout-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 40px;
+    color: var(--c-text-primary);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    font-weight: 900;
+    position: relative;
+    z-index: 2;
+    text-shadow:
+        0 0 10px var(--c-neon-cyan),
+        0 0 20px var(--c-neon-cyan),
+        0 0 40px var(--c-neon-purple);
+}
+
+/* Glitch Effect */
+.checkout-root .glitch {
+    position: relative;
+    animation: glitch-skew 4s infinite linear alternate-reverse;
+}
+
+.checkout-root .glitch::before,
+.checkout-root .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.checkout-root .glitch::before {
+    left: 3px;
+    text-shadow: -2px 0 var(--c-neon-pink);
+    clip: rect(24px, 9999px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.checkout-root .glitch::after {
+    left: -3px;
+    text-shadow: 2px 0 var(--c-neon-cyan);
+    clip: rect(85px, 9999px, 140px, 0);
+    animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(42px, 9999px, 44px, 0);
+        transform: skew(0.5deg);
+    }
+
+    5% {
+        clip: rect(12px, 9999px, 59px, 0);
+        transform: skew(0.3deg);
+    }
+
+    10% {
+        clip: rect(48px, 9999px, 29px, 0);
+        transform: skew(0.6deg);
+    }
+
+    15% {
+        clip: rect(42px, 9999px, 73px, 0);
+        transform: skew(0.1deg);
+    }
+
+    20% {
+        clip: rect(63px, 9999px, 27px, 0);
+        transform: skew(0.4deg);
+    }
+
+    25% {
+        clip: rect(34px, 9999px, 55px, 0);
+        transform: skew(0.7deg);
+    }
+
+    30% {
+        clip: rect(86px, 9999px, 73px, 0);
+        transform: skew(0.2deg);
+    }
+
+    35% {
+        clip: rect(20px, 9999px, 20px, 0);
+        transform: skew(0.5deg);
+    }
+
+    40% {
+        clip: rect(26px, 9999px, 60px, 0);
+        transform: skew(0.3deg);
+    }
+
+    45% {
+        clip: rect(25px, 9999px, 66px, 0);
+        transform: skew(0.8deg);
+    }
+
+    50% {
+        clip: rect(57px, 9999px, 98px, 0);
+        transform: skew(0.1deg);
+    }
+
+    55% {
+        clip: rect(5px, 9999px, 46px, 0);
+        transform: skew(0.4deg);
+    }
+
+    60% {
+        clip: rect(82px, 9999px, 31px, 0);
+        transform: skew(0.6deg);
+    }
+
+    65% {
+        clip: rect(54px, 9999px, 27px, 0);
+        transform: skew(0.2deg);
+    }
+
+    70% {
+        clip: rect(28px, 9999px, 99px, 0);
+        transform: skew(0.5deg);
+    }
+
+    75% {
+        clip: rect(45px, 9999px, 69px, 0);
+        transform: skew(0.3deg);
+    }
+
+    80% {
+        clip: rect(23px, 9999px, 85px, 0);
+        transform: skew(0.7deg);
+    }
+
+    85% {
+        clip: rect(54px, 9999px, 84px, 0);
+        transform: skew(0.1deg);
+    }
+
+    90% {
+        clip: rect(45px, 9999px, 47px, 0);
+        transform: skew(0.4deg);
+    }
+
+    95% {
+        clip: rect(37px, 9999px, 20px, 0);
+        transform: skew(0.6deg);
+    }
+
+    100% {
+        clip: rect(4px, 9999px, 91px, 0);
+        transform: skew(0.2deg);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(65px, 9999px, 100px, 0);
+        transform: skew(0.3deg);
+    }
+
+    5% {
+        clip: rect(52px, 9999px, 74px, 0);
+        transform: skew(0.6deg);
+    }
+
+    10% {
+        clip: rect(79px, 9999px, 85px, 0);
+        transform: skew(0.1deg);
+    }
+
+    15% {
+        clip: rect(75px, 9999px, 102px, 0);
+        transform: skew(0.4deg);
+    }
+
+    20% {
+        clip: rect(67px, 9999px, 73px, 0);
+        transform: skew(0.7deg);
+    }
+
+    25% {
+        clip: rect(14px, 9999px, 21px, 0);
+        transform: skew(0.2deg);
+    }
+
+    30% {
+        clip: rect(1px, 9999px, 51px, 0);
+        transform: skew(0.5deg);
+    }
+
+    35% {
+        clip: rect(85px, 9999px, 61px, 0);
+        transform: skew(0.3deg);
+    }
+
+    40% {
+        clip: rect(96px, 9999px, 30px, 0);
+        transform: skew(0.8deg);
+    }
+
+    45% {
+        clip: rect(15px, 9999px, 55px, 0);
+        transform: skew(0.1deg);
+    }
+
+    50% {
+        clip: rect(26px, 9999px, 15px, 0);
+        transform: skew(0.4deg);
+    }
+
+    55% {
+        clip: rect(64px, 9999px, 85px, 0);
+        transform: skew(0.6deg);
+    }
+
+    60% {
+        clip: rect(91px, 9999px, 55px, 0);
+        transform: skew(0.2deg);
+    }
+
+    65% {
+        clip: rect(5px, 9999px, 93px, 0);
+        transform: skew(0.5deg);
+    }
+
+    70% {
+        clip: rect(71px, 9999px, 12px, 0);
+        transform: skew(0.3deg);
+    }
+
+    75% {
+        clip: rect(39px, 9999px, 60px, 0);
+        transform: skew(0.7deg);
+    }
+
+    80% {
+        clip: rect(22px, 9999px, 51px, 0);
+        transform: skew(0.1deg);
+    }
+
+    85% {
+        clip: rect(56px, 9999px, 25px, 0);
+        transform: skew(0.4deg);
+    }
+
+    90% {
+        clip: rect(12px, 9999px, 68px, 0);
+        transform: skew(0.6deg);
+    }
+
+    95% {
+        clip: rect(42px, 9999px, 37px, 0);
+        transform: skew(0.2deg);
+    }
+
+    100% {
+        clip: rect(87px, 9999px, 29px, 0);
+        transform: skew(0.5deg);
+    }
+}
+
+@keyframes glitch-skew {
+    0% {
+        transform: skew(0deg);
+    }
+
+    20% {
+        transform: skew(0deg);
+    }
+
+    21% {
+        transform: skew(1deg);
+    }
+
+    22% {
+        transform: skew(-0.5deg);
+    }
+
+    23% {
+        transform: skew(0deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+/* BREADCRUMBS - NAVIGATION STEPS*/
+.checkout-root .checkout-breadcrumbs {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 15px 25px;
+    background: linear-gradient(90deg, transparent, rgba(188, 19, 254, 0.1), transparent);
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+.checkout-root .checkout-breadcrumbs span {
+    color: var(--c-text-muted);
+    transition: all 0.3s ease;
+}
+
+.checkout-root .checkout-breadcrumbs .active {
+    color: var(--c-neon-cyan);
+    text-shadow:
+        0 0 5px var(--c-neon-cyan),
+        0 0 10px var(--c-neon-cyan);
+    font-weight: 600;
+}
+
+.checkout-root .checkout-breadcrumbs .separator {
+    margin: 0 15px;
+    color: var(--c-neon-pink);
+    text-shadow: 0 0 5px var(--c-neon-pink);
+}
+
+/* CARDS & BLOCKS - METALLIC PANELS= */
+.checkout-root .checkout-block,
+.checkout-root .order-summary-card {
+    background: var(--c-bg-panel);
+    border: 1px solid var(--c-border);
+    padding: 30px;
+    margin-bottom: 25px;
+    position: relative;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow:
+        var(--shadow-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    clip-path: polygon(0 10px,
+            10px 0,
+            calc(100% - 10px) 0,
+            100% 10px,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            10px 100%,
+            0 calc(100% - 10px));
+    transition: all 0.4s ease;
+}
+
+.checkout-root .checkout-block:hover,
+.checkout-root .order-summary-card:hover {
+    border-color: var(--c-border-hover);
+    box-shadow:
+        var(--shadow-neon-cyan),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Corner decorations - Tech corners */
+.checkout-root .checkout-block::before,
+.checkout-root .order-summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background:
+        linear-gradient(135deg, var(--c-neon-cyan) 0%, transparent 50%);
+    opacity: 0.6;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.checkout-root .checkout-block::after,
+.checkout-root .order-summary-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background:
+        linear-gradient(315deg, var(--c-neon-pink) 0%, transparent 50%);
+    opacity: 0.6;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+/* Block Title */
+.checkout-root .block-title {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: var(--c-text-primary);
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.checkout-root .block-title::before {
+    content: '//';
+    color: var(--c-neon-cyan);
+    font-family: monospace;
+    text-shadow: 0 0 10px var(--c-neon-cyan);
+}
+
+.checkout-root .block-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--c-neon-purple) 0%, transparent 100%);
+}
+
+/* ============================================
+   FORM ELEMENTS
+============================================ */
+.checkout-root .form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.checkout-root label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    color: var(--c-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.checkout-root input[type="text"],
+.checkout-root textarea,
+.checkout-root select {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    outline: none;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+.checkout-root input::placeholder,
+.checkout-root textarea::placeholder {
+    color: var(--c-text-muted);
+    font-style: italic;
+}
+
+.checkout-root input:focus,
+.checkout-root textarea:focus,
+.checkout-root select:focus {
+    border-color: var(--c-neon-cyan);
+    background: rgba(0, 243, 255, 0.05);
+    box-shadow:
+        0 0 15px rgba(0, 243, 255, 0.2),
+        inset 0 0 20px rgba(0, 243, 255, 0.05);
+}
+
+.checkout-root select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f3ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.checkout-root select option {
+    background: var(--c-bg-secondary);
+    color: var(--c-text-primary);
+    padding: 10px;
+}
+
+.checkout-root textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Input Error State */
+.checkout-root .input-error {
+    border-color: var(--c-error) !important;
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.3) !important;
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.checkout-root .error-msg {
+    color: var(--c-error);
+    font-size: 0.75rem;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.checkout-root .error-msg::before {
+    content: '⚠';
+    font-size: 0.9rem;
+}
+
+/* Address Grid */
+.checkout-root .address-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* ============================================
+   RADIO BUTTONS - SHIPPING & PAYMENT
+============================================ */
+.checkout-root .radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.checkout-root .radio-group.vertical {
+    flex-direction: column;
+}
+
+.checkout-root .radio-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    border: 1px solid var(--c-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.checkout-root .radio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.checkout-root .radio-card:hover::before {
+    left: 100%;
+}
+
+.checkout-root .radio-card:hover {
+    border-color: var(--c-text-muted);
+    transform: translateY(-2px);
+}
+
+.checkout-root .radio-card.selected {
+    border-color: var(--c-neon-pink);
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.1) 0%, rgba(188, 19, 254, 0.05) 100%);
+    box-shadow:
+        0 0 20px rgba(255, 0, 255, 0.2),
+        inset 0 0 30px rgba(255, 0, 255, 0.05);
+}
+
+.checkout-root .radio-card.selected::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--c-neon-pink);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.checkout-root .radio-card input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--c-text-muted);
+    border-radius: 50%;
+    margin-right: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkout-root .radio-card input[type="radio"]:checked {
+    border-color: var(--c-neon-pink);
+    box-shadow: 0 0 10px var(--c-neon-pink);
+}
+
+.checkout-root .radio-card input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: var(--c-neon-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--c-neon-pink);
+}
+
+.checkout-root .radio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.checkout-root .radio-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--c-text-primary);
+}
+
+.checkout-root .radio-price {
+    font-size: 0.85rem;
+    color: var(--c-neon-cyan);
+    font-family: "Rajdhani", sans-serif;
+    text-shadow: 0 0 5px var(--c-neon-cyan);
+}
+
+/* Banking Info Panel */
+.checkout-root .banking-info {
+    margin-top: 15px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 243, 255, 0.05) 100%);
+    border: 1px dashed var(--c-neon-cyan);
+    font-family: "Rajdhani", sans-serif;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkout-root .banking-info::before {
+    content: 'BANK DETAILS';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--c-bg-secondary);
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    color: var(--c-neon-cyan);
+    letter-spacing: 2px;
+}
+
+.checkout-root .banking-info p {
+    margin: 8px 0;
+    color: var(--c-neon-cyan);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   ORDER SUMMARY - RIGHT COLUMN
+============================================ */
+.checkout-root .order-summary-card {
+    position: sticky;
+    top: 20px;
+    background: linear-gradient(180deg, var(--c-bg-panel) 0%, rgba(26, 11, 46, 0.9) 100%);
+}
+
+/* Product List */
+.checkout-root .product-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px;
+}
+
+.checkout-root .product-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.checkout-root .product-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.checkout-root .product-list::-webkit-scrollbar-thumb {
+    background: var(--c-neon-purple);
+    border-radius: 2px;
+}
+
+.checkout-root .product-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.checkout-root .product-item:hover {
+    border-color: var(--c-border-hover);
+    transform: translateX(5px);
+}
+
+.checkout-root .product-img-wrapper {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+    border: 1px solid var(--c-border);
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.checkout-root .product-img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+.checkout-root .product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.checkout-root .product-qty {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, var(--c-neon-purple), var(--c-neon-pink));
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.checkout-root .product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.checkout-root .product-name {
+    font-size: 0.9rem;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    color: var(--c-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.checkout-root .product-price {
+    font-size: 0.85rem;
+    color: var(--c-neon-cyan);
+    font-family: "Rajdhani", sans-serif;
+}
+
+/* Coupon Section */
+.checkout-root .coupon-section {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--c-border);
+}
+
+.checkout-root .coupon-section input {
+    flex: 1;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-primary);
+    font-family: inherit;
+    clip-path: none;
+}
+
+.checkout-root .btn-apply {
+    background: transparent;
+    border: 1px solid var(--c-neon-cyan);
+    color: var(--c-neon-cyan);
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.checkout-root .btn-apply::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--c-neon-cyan);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.checkout-root .btn-apply:hover::before {
+    left: 0;
+}
+
+.checkout-root .btn-apply:hover {
+    color: var(--c-bg-primary);
+    box-shadow: var(--shadow-neon-cyan);
+}
+
+/* Price Breakdown */
+.checkout-root .price-breakdown {
+    border-top: 1px solid var(--c-border);
+    padding-top: 20px;
+}
+
+.checkout-root .price-breakdown .price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: var(--c-text-secondary);
+}
+
+.checkout-root .price-breakdown .price-row span:last-child {
+    font-family: "Rajdhani", sans-serif;
+}
+
+.checkout-root .price-breakdown .price-row.total {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--c-neon-purple);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--c-text-primary);
+}
+
+.checkout-root .neon-text {
+    color: var(--c-neon-cyan) !important;
+    text-shadow:
+        0 0 5px var (--c-neon-cyan),
+        0 0 10px var(--c-neon-cyan),
+        0 0 20px var(--c-neon-cyan);
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 5px  var(--c-neon-cyan),
+            0 0 10px var(--c-neon-cyan),
+            0 0 20px var(--c-neon-cyan);
+    }
+
+    50% {
+        text-shadow:
+            0 0 10px var(--c-neon-cyan),
+            0 0 20px var(--c-neon-cyan),
+            0 0 40px var(--c-neon-cyan),
+            0 0 60px var(--c-neon-cyan);
+    }
+}
+
+/* ============================================
+   CTA BUTTON - PLACE ORDER
+============================================ */
+.checkout-root .btn-place-order {
+    width: 100%;
+    margin-top: 25px;
+    padding: 18px 30px;
+    background: linear-gradient(135deg, var(--c-purple-deep) 0%, #000 50%, var(--c-purple-mid) 100%);
+    border: 2px solid var(--c-neon-pink);
+    color: var(--c-neon-pink);
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px,
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.checkout-root .btn-place-order::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.checkout-root .btn-place-order::after {
+    content: '>>> CONFIRM <<<';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.checkout-root .btn-place-order:hover {
+    background: var(--c-neon-pink);
+    color: #000;
+    box-shadow:
+        0 0 30px var(--c-neon-pink),
+        0 0 60px rgba(255, 0, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.checkout-root .btn-place-order:hover::before {
+    left: 100%;
+}
+
+.checkout-root .btn-place-order:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+@media (max-width: 992px) {
+    .checkout-root .checkout-layout {
+        flex-direction: column;
+    }
+
+    .checkout-root .checkout-right {
+        max-width: 100%;
+    }
+
+    .checkout-root .order-summary-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-root {
+        padding: 15px 10px 40px;
+    }
+
+    .checkout-root .checkout-title {
+        letter-spacing: 4px;
+        margin-bottom: 25px;
+    }
+
+    .checkout-root .address-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-root .radio-group {
+        flex-direction: column;
+    }
+
+    .checkout-root .checkout-block,
+    .checkout-root .order-summary-card {
+        padding: 20px 15px;
+    }
+
+    .checkout-root .checkout-breadcrumbs {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        padding: 12px 10px;
+    }
+
+    .checkout-root .checkout-breadcrumbs .separator {
+        margin: 0 8px;
+    }
+
+    .checkout-root .coupon-section {
+        flex-direction: column;
+    }
+
+    .checkout-root .btn-apply {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .checkout-root .glitch::before,
+    .checkout-root .glitch::after {
+        display: none;
+    }
+
+    .checkout-root .block-title {
+        font-size: 0.95rem;
+        letter-spacing: 2px;
+    }
+
+    .checkout-root .price-breakdown .price-row.total {
+        font-size: 1.2rem;
+    }
+}

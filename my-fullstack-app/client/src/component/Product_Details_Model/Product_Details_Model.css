@@ -1,0 +1,12 @@
+.Product_Details_Model_Container {
+    display: flex;
+    align-items: center;
+}
+
+.Product_Details_Model_Col1 {
+    width: 40% !important;
+}
+
+.Product_Details_Model_Col2 {
+    width: 60% !important;
+}

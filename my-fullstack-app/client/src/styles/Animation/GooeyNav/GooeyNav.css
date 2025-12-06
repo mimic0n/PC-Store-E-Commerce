@@ -1,4 +1,4 @@
-:root {
+.gooey-nav-container :root {
     --linear-ease: linear(0,
             0.068,
             0.19 2.7%,
@@ -35,14 +35,12 @@
 
 .gooey-nav-container {
     position: relative;
-    
 }
 
 .gooey-nav-container nav {
     display: flex;
     position: relative;
     transform: translate3d(0, 0, 0.01px);
-    
 }
 
 .gooey-nav-container nav ul {
@@ -52,11 +50,12 @@
     padding: 0 1em;
     margin: 0;
     position: relative;
-    z-index: 9;
-    color: white t;
+    z-index: -1;
+    color: white;
     text-shadow: 0 1px 1px hsl(205deg 30% 10% / 0.2);
 }
 
+/* Default state - chỉ có border, không có background */
 .gooey-nav-container nav ul li {
     border-radius: 100vw;
     position: relative;
@@ -64,31 +63,40 @@
     transition:
         background-color 0.3s ease,
         color 0.3s ease,
-        box-shadow 0.3s ease;
+        box-shadow 0.3s ease,
+        border 0.3s ease;
     box-shadow: 0 0 0.5px 1.5px transparent;
-    color: white ;
+    color: white;
+    background: transparent !important; /* Thêm: Background trong suốt mặc định */
+    border: 2px solid rgba(255, 255, 255, 0.5) !important; /* Thêm: Border mặc định */
 }
 
 .gooey-nav-container nav ul li a {
     display: inline-block;
     padding: 0.6em 1em;
+    width: 100%;
     min-width: 40px;
-        /* ADDED: Sets a minimum width for all buttons */
     text-align: center;
-        /* ADDED: Centers the text inside the button */
     color: white;
-        /* ADDED: Ensures the default text color is white */
 }
 
 .gooey-nav-container nav ul li:focus-within:has(:focus-visible) {
     box-shadow: 0 0 0.5px 1.5px rgb(118, 7, 203);
 }
 
+/* Hover state - chưa active */
+.gooey-nav-container nav ul li:not(.active):hover {
+    border-color: rgba(138, 43, 226, 0.8) !important; /* Border sáng lên khi hover */
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4) !important; /* Glow effect nhẹ */
+    transform: scale(1.02);
+}
+
+/* Ẩn background pseudo-element mặc định */
 .gooey-nav-container nav ul li::after {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 10px;
+    border-radius: 100vw; /* Thay đổi từ 10px thành 100vw để match với border-radius */
     background: white;
     opacity: 0;
     transform: scale(0);
@@ -96,11 +104,15 @@
     z-index: -1;
 }
 
+/* Active state - sau khi click */
 .gooey-nav-container nav ul li.active {
     color: black;
     text-shadow: none;
+    border: none; /* Ẩn border khi active */
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.6) !; /* Shadow mạnh hơn */
 }
 
+/* Hiện background khi active */
 .gooey-nav-container nav ul li.active::after {
     opacity: 1;
     transform: scale(1);
@@ -110,9 +122,9 @@
     position: absolute;
     top: 125%;
     left: 50%;
-    transform: translateX(-50%);/* Căn submenu theo mục cha */
+    transform: translateX(-50%);
     width: 200px;
-    background-color: #333; /* Chỉnh màu nền của CATEGORY tối hơn một chút */
+    background-color: #333;
     border-radius: 8px;
     padding: 0.5rem;
     list-style: none;
@@ -121,15 +133,15 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 0.25rem; /* Khoảng cách giữa các mục con */
+    gap: 0.25rem;
 }
 
 .gooey-nav-container nav ul li .subMenu_Item {
-    width: 100%; /* Đảm bảo mục li chiếm toàn bộ chiều rộng */
+    width: 100%;
 }
 
 .gooey-nav-container nav ul li .subMenu_Item a.subMenu_Item_Button {
-    display: block; /*  Chuyển thẻ a thành block */
+    display: block;
     width: 100%;
     padding: 0.75rem 1rem;
     color: #f0f0f0 !important;
@@ -138,25 +150,34 @@
     text-align: left !important;
     border-radius: 6px;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    box-sizing: border-box;/* Đảm bảo padding không làm vỡ layout */
+    box-sizing: border-box;
 }
 
 .gooey-nav-container nav ul li .subMenu_Item a.subMenu_Item_Button:hover {
     background-color: #8A2BE2;
     color: white !important;
     transform: translateX(5px);
+    z-index: 1;
 }
+
+/* Effect container - ẩn khi chưa active */
 .gooey-nav-container .effect {
     position: absolute;
     left: 0;
     top: 0;
     width: 0;
     height: 0;
-    opacity: 1;
+    opacity: 0; /* Thay đổi: Ẩn mặc định */
     pointer-events: none;
     display: grid;
     place-items: center;
-    z-index: 1;
+    z-index: 10;
+    transition: opacity 0.3s ease; /* Thêm: Transition mượt */
+}
+
+/* Hiện effect khi active */
+.gooey-nav-container .effect.active {
+    opacity: 1; /* Hiện effect khi active */
 }
 
 .gooey-nav-container .effect.text {
@@ -168,10 +189,17 @@
     color: rgb(118, 7, 203);
 }
 
+/* Filter effect - ẩn khi chưa active */
 .gooey-nav-container .effect.filter {
     filter: blur(7px) contrast(100) blur(0);
     mix-blend-mode: lighten;
-    z-index: -1;
+    z-index: 1;
+    opacity: 0; /* Thêm: Ẩn mặc định */
+}
+
+/* Hiện filter effect khi active */
+.gooey-nav-container .effect.filter.active {
+    opacity: 1;
 }
 
 .gooey-nav-container .effect.filter::before {
@@ -204,6 +232,7 @@
     }
 }
 
+/* Particles - ẩn mặc định */
 .particle,
 .point {
     display: block;
@@ -219,12 +248,22 @@
     position: absolute;
     top: calc(50% - 8px);
     left: calc(50% - 8px);
+    animation: none; /* Thay đổi: Tắt animation mặc định */
+}
+
+/* Chỉ chạy animation khi parent có class active */
+.gooey-nav-container .effect.active .particle {
     animation: particle calc(var(--time)) ease 1 -350ms;
 }
 
 .point {
     background: var(--color);
     opacity: 1;
+    animation: none; /* Thay đổi: Tắt animation mặc định */
+}
+
+/* Chỉ chạy animation khi parent có class active */
+.gooey-nav-container .effect.active .point {
     animation: point calc(var(--time)) ease 1 -350ms;
 }
 

@@ -1,0 +1,210 @@
+
+:root {
+  --admin-bg-primary: #050508;
+  --admin-bg-secondary: #0a0a12;
+  --admin-bg-panel: rgba(15, 10, 25, 0.85);
+  --admin-purple-deep: #1a0b2e;
+  --admin-purple-dark: #12001a;
+  --admin-purple-mid: #2d1b4e;
+  --admin-neon-cyan: #00f3ff;
+  --admin-neon-pink: #ff00ff;
+  --admin-neon-purple: #bc13fe;
+  --admin-neon-blue: #0080ff;
+  --admin-text-primary: #e8e8f0;
+  --admin-text-secondary: #9090a8;
+  --admin-text-muted: #606080;
+  --admin-border: rgba(188, 19, 254, 0.2);
+  --admin-border-hover: rgba(0, 243, 255, 0.5);
+  --admin-error: #ff3366;
+  --admin-success: #00ff88;
+
+  --admin-shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.3);
+  --admin-shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.3);
+  --admin-shadow-glow: 0 0 40px rgba(188, 19, 254, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Orbitron', 'Rajdhani', 'Segoe UI', sans-serif;
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========== LAYOUT ========== */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Background Effects - Cyber Grid */
+.admin-layout::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    /* Circuit pattern */
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v20M30 40v20M0 30h20M40 30h20M30 30m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0' stroke='%23bc13fe' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+    /* Grid */
+    linear-gradient(rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+    /* Radial glow */
+    radial-gradient(ellipse at 20% 20%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.08) 0%, transparent 50%),
+    /* Base gradient */
+    linear-gradient(180deg, var(--admin-purple-dark) 0%, var(--admin-bg-primary) 30%, var(--admin-bg-primary) 100%);
+  background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scanlines Effect */
+.admin-layout::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px);
+  pointer-events: none;
+  z-index: 1;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: 280px;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  min-width: 0;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.admin-main.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+.admin-content {
+  padding: 24px;
+  min-height: calc(100vh - 70px);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== SIDEBAR OVERLAY ========== */
+.admin-sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    z-index: 250;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .admin-sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (min-width: 1440px) {
+  .admin-main {
+    margin-left: 300px;
+  }
+
+  .admin-main.sidebar-collapsed {
+    margin-left: 90px;
+  }
+
+  .admin-content {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin-main {
+    margin-left: 80px;
+  }
+
+  .admin-main.sidebar-collapsed {
+    margin-left: 80px;
+  }
+
+  .admin-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .admin-main.sidebar-collapsed {
+    margin-left: 0;
+  }
+
+  .admin-content {
+    padding: 16px;
+    min-height: calc(100vh - 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 12px;
+    min-height: calc(100vh - 56px);
+  }
+}

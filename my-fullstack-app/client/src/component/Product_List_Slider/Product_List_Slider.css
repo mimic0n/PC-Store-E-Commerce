@@ -5,11 +5,11 @@
     margin: 0 auto;
 } 
 
-.mySwiper {
+.Products_Slide .mySwiper {
     padding: 1rem 0;
 }
 
-.swiper-slide {
+.Products_Slide .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;

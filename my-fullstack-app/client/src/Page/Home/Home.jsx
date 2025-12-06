@@ -1,11 +1,7 @@
 import React from 'react'
 
-import { FaShippingFast } from "react-icons/fa";
-
 import { HomeSlider } from '../../component/HomeSlider/HomeSlider'
-import { HomeSliderV2 } from '../../component/HomeSliderV2/HomeSliderV2'
 import { HomeCatSlider } from '../../component/HomeCatSlider/HomeCatSlider'
-import { AdsBannerSlide } from '../../component/AdsBannerSlide/AdBannerSlide';
 import { Category_Slider } from '../../component/Category_Slider/Category_Slider';
 import { Product_List_Slider } from '../../component/Product_List_Slider/Product_List_Slider';
 import { BrandBar } from '../../component/BrandBar/BrandBar.jsx';
@@ -24,7 +20,7 @@ export const Home = () => {
   };
   
   return (
-      <>
+      <div className='Home_Container'>
       <HomeSlider />
 
       {/* <section>
@@ -98,6 +94,6 @@ export const Home = () => {
        <section  style={{ marginBottom: '30px' }}>
         <BrandBar />
       </section>
-      </>
+      </div>
   )
 }

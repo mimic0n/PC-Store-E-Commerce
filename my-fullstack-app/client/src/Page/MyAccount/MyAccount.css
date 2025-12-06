@@ -1,0 +1,1367 @@
+/* ===== ROOT VARIABLES ===== */
+.myaccount-root {
+    --ma-primary-dark: #0a0a0f;
+    --ma-primary-purple: #1a0a2e;
+    --ma-deep-purple: #2d1b4e;
+    --ma-neon-blue: #00f0ff;
+    --ma-neon-pink: #ff00ff;
+    --ma-neon-purple: #bf00ff;
+    --ma-neon-green: #00ff9f;
+    --ma-text-primary: #ffffff;
+    --ma-text-secondary: #a0a0b0;
+    --ma-glass-bg: rgba(26, 10, 46, 0.7);
+    --ma-border-glow: rgba(0, 240, 255, 0.3);
+
+    --c-purple-deep: #1a0b2e;
+    --c-purple-dark: #12001a;
+    --c-purple-mid: #2d1b4e;
+    --c-neon-cyan: #00f3ff;
+    --c-neon-pink: #ff00ff;
+    --c-neon-purple: #bc13fe;
+    --c-neon-blue: #0080ff;
+
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--ma-primary-dark) 0%, var(--ma-primary-purple) 50%, var(--ma-deep-purple) 100%);
+    color: var(--ma-text-primary);
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ===== SHARED ELEMENTS ===== */
+.myaccount-section-header {
+    margin-bottom: 30px;
+}
+
+.myaccount-neon-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-neon-cyan), transparent);
+    margin-top: 15px;
+    animation: neon-pulse 2s infinite;
+}
+
+@keyframes neon-pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ===== BUTTONS ===== */
+.myaccount-neon-button {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, var(--c-neon-cyan), var(--c-neon-purple));
+    border: none;
+    border-radius: 10px;
+    color: var(--ma-primary-dark);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.myaccount-neon-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+}
+
+.myaccount-neon-button.myaccount-secondary {
+    background: transparent;
+    border: 2px solid var(--c-neon-cyan);
+    color: var(--c-neon-cyan);
+}
+
+.myaccount-neon-button.myaccount-full-width {
+    width: 100%;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.myaccount-root .myaccount-bg-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.myaccount-root .myaccount-bg-scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px);
+    pointer-events: none;
+    z-index: 1;
+    animation: myaccount-scanline 8s linear infinite;
+}
+
+@keyframes myaccount-scanline {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+/* ===== CONTAINER ===== */
+.myaccount-root .myaccount-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ===== HEADER ===== */
+.myaccount-root .myaccount-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.myaccount-root .myaccount-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--ma-text-primary);
+    text-shadow:
+        0 0 10px var(--c-neon-cyan),
+        0 0 20px var(--c-neon-cyan),
+        0 0 40px var(--c-neon-purple);
+}
+
+/* Glitch Effect - Matching Checkout Style */
+.myaccount-root .myaccount-glitch {
+    position: relative;
+    display: inline-block;
+    animation: myaccount-glitch-skew 4s infinite linear alternate-reverse;
+}
+
+.myaccount-root .myaccount-glitch::before,
+.myaccount-root .myaccount-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.myaccount-root .myaccount-glitch::before {
+    left: 3px;
+    text-shadow: -2px 0 var(--c-neon-pink);
+    clip: rect(24px, 9999px, 90px, 0);
+    animation: myaccount-glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.myaccount-root .myaccount-glitch::after {
+    left: -3px;
+    text-shadow: 2px 0 var(--c-neon-cyan);
+    clip: rect(85px, 9999px, 140px, 0);
+    animation: myaccount-glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes myaccount-glitch-anim {
+    0% {
+        clip: rect(42px, 9999px, 44px, 0);
+        transform: skew(0.5deg);
+    }
+
+    5% {
+        clip: rect(12px, 9999px, 59px, 0);
+        transform: skew(0.3deg);
+    }
+
+    10% {
+        clip: rect(48px, 9999px, 29px, 0);
+        transform: skew(0.6deg);
+    }
+
+    15% {
+        clip: rect(42px, 9999px, 73px, 0);
+        transform: skew(0.1deg);
+    }
+
+    20% {
+        clip: rect(63px, 9999px, 27px, 0);
+        transform: skew(0.4deg);
+    }
+
+    25% {
+        clip: rect(34px, 9999px, 55px, 0);
+        transform: skew(0.7deg);
+    }
+
+    30% {
+        clip: rect(86px, 9999px, 73px, 0);
+        transform: skew(0.2deg);
+    }
+
+    35% {
+        clip: rect(20px, 9999px, 20px, 0);
+        transform: skew(0.5deg);
+    }
+
+    40% {
+        clip: rect(26px, 9999px, 60px, 0);
+        transform: skew(0.3deg);
+    }
+
+    45% {
+        clip: rect(25px, 9999px, 66px, 0);
+        transform: skew(0.8deg);
+    }
+
+    50% {
+        clip: rect(57px, 9999px, 98px, 0);
+        transform: skew(0.1deg);
+    }
+
+    55% {
+        clip: rect(5px, 9999px, 46px, 0);
+        transform: skew(0.4deg);
+    }
+
+    60% {
+        clip: rect(82px, 9999px, 31px, 0);
+        transform: skew(0.6deg);
+    }
+
+    65% {
+        clip: rect(54px, 9999px, 27px, 0);
+        transform: skew(0.2deg);
+    }
+
+    70% {
+        clip: rect(28px, 9999px, 99px, 0);
+        transform: skew(0.5deg);
+    }
+
+    75% {
+        clip: rect(45px, 9999px, 69px, 0);
+        transform: skew(0.3deg);
+    }
+
+    80% {
+        clip: rect(23px, 9999px, 85px, 0);
+        transform: skew(0.7deg);
+    }
+
+    85% {
+        clip: rect(54px, 9999px, 84px, 0);
+        transform: skew(0.1deg);
+    }
+
+    90% {
+        clip: rect(45px, 9999px, 47px, 0);
+        transform: skew(0.4deg);
+    }
+
+    95% {
+        clip: rect(37px, 9999px, 20px, 0);
+        transform: skew(0.6deg);
+    }
+
+    100% {
+        clip: rect(4px, 9999px, 91px, 0);
+        transform: skew(0.2deg);
+    }
+}
+
+@keyframes myaccount-glitch-anim-2 {
+    0% {
+        clip: rect(65px, 9999px, 100px, 0);
+        transform: skew(0.3deg);
+    }
+
+    5% {
+        clip: rect(52px, 9999px, 74px, 0);
+        transform: skew(0.6deg);
+    }
+
+    10% {
+        clip: rect(79px, 9999px, 85px, 0);
+        transform: skew(0.1deg);
+    }
+
+    15% {
+        clip: rect(75px, 9999px, 102px, 0);
+        transform: skew(0.4deg);
+    }
+
+    20% {
+        clip: rect(67px, 9999px, 73px, 0);
+        transform: skew(0.7deg);
+    }
+
+    25% {
+        clip: rect(14px, 9999px, 21px, 0);
+        transform: skew(0.2deg);
+    }
+
+    30% {
+        clip: rect(1px, 9999px, 51px, 0);
+        transform: skew(0.5deg);
+    }
+
+    35% {
+        clip: rect(85px, 9999px, 61px, 0);
+        transform: skew(0.3deg);
+    }
+
+    40% {
+        clip: rect(96px, 9999px, 30px, 0);
+        transform: skew(0.8deg);
+    }
+
+    45% {
+        clip: rect(15px, 9999px, 55px, 0);
+        transform: skew(0.1deg);
+    }
+
+    50% {
+        clip: rect(26px, 9999px, 15px, 0);
+        transform: skew(0.4deg);
+    }
+
+    55% {
+        clip: rect(64px, 9999px, 85px, 0);
+        transform: skew(0.6deg);
+    }
+
+    60% {
+        clip: rect(91px, 9999px, 55px, 0);
+        transform: skew(0.2deg);
+    }
+
+    65% {
+        clip: rect(5px, 9999px, 93px, 0);
+        transform: skew(0.5deg);
+    }
+
+    70% {
+        clip: rect(71px, 9999px, 12px, 0);
+        transform: skew(0.3deg);
+    }
+
+    75% {
+        clip: rect(39px, 9999px, 60px, 0);
+        transform: skew(0.7deg);
+    }
+
+    80% {
+        clip: rect(22px, 9999px, 51px, 0);
+        transform: skew(0.1deg);
+    }
+
+    85% {
+        clip: rect(56px, 9999px, 25px, 0);
+        transform: skew(0.4deg);
+    }
+
+    90% {
+        clip: rect(12px, 9999px, 68px, 0);
+        transform: skew(0.6deg);
+    }
+
+    95% {
+        clip: rect(42px, 9999px, 37px, 0);
+        transform: skew(0.2deg);
+    }
+
+    100% {
+        clip: rect(87px, 9999px, 29px, 0);
+        transform: skew(0.5deg);
+    }
+}
+
+@keyframes myaccount-glitch-skew {
+    0% {
+        transform: skew(0deg);
+    }
+
+    20% {
+        transform: skew(0deg);
+    }
+
+    21% {
+        transform: skew(1deg);
+    }
+
+    22% {
+        transform: skew(-0.5deg);
+    }
+
+    23% {
+        transform: skew(0deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+.myaccount-root .myaccount-cyber-border {
+    width: 200px;
+    height: 3px;
+    margin: 20px auto;
+    background: linear-gradient(90deg, transparent, var(--c-neon-cyan), var(--c-neon-pink), var(--c-neon-cyan), transparent);
+    box-shadow: 0 0 20px var(--c-neon-cyan);
+}
+
+/* ===== SECTION HEADER GLITCH ===== */
+.myaccount-root .myaccount-glitch-text {
+    position: relative;
+    display: inline-block;
+    color: var(--ma-text-primary);
+    text-shadow:
+        0 0 10px var(--ma-neon-blue),
+        0 0 20px var(--ma-neon-blue),
+        0 0 40px var(--ma-neon-purple);
+}
+
+/* ===== CONTENT LAYOUT ===== */
+.myaccount-root .myaccount-content {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+}
+
+/* ===== SIDEBAR ===== */
+.myaccount-root .myaccount-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== USER CARD ===== */
+.myaccount-root .myaccount-user-card {
+    background: var(--ma-glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.myaccount-root .myaccount-user-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+    animation: myaccount-shimmer 3s infinite;
+}
+
+@keyframes myaccount-shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.myaccount-root .myaccount-avatar-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+}
+
+.myaccount-root .myaccount-avatar-ring {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 130px;
+    height: 130px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ma-neon-blue), var(--ma-neon-pink), var(--ma-neon-purple)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: myaccount-rotate-ring 4s linear infinite;
+}
+
+@keyframes myaccount-rotate-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.myaccount-root .myaccount-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--ma-primary-dark);
+}
+
+.myaccount-root .myaccount-avatar-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(0, 240, 255, 0.1), rgba(255, 0, 255, 0.1));
+    animation: myaccount-avatar-pulse 2s ease-in-out infinite;
+}
+
+@keyframes myaccount-avatar-pulse {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.myaccount-root .myaccount-user-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-user-email {
+    font-size: 0.9rem;
+    color: var(--ma-text-secondary);
+}
+
+.myaccount-root .myaccount-tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--ma-neon-purple), var(--ma-neon-pink));
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin: 15px 0;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    box-shadow: 0 0 20px rgba(191, 0, 255, 0.5);
+}
+
+.myaccount-root .myaccount-tier-icon {
+    animation: myaccount-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes myaccount-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.myaccount-root .myaccount-points-display {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--ma-neon-blue);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.myaccount-root .myaccount-points-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ma-text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.myaccount-root .myaccount-points-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ma-neon-blue);
+    text-shadow: 0 0 20px var(--ma-neon-blue);
+}
+
+/* ===== NAVIGATION ===== */
+.myaccount-root .myaccount-nav {
+    background: var(--ma-glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.myaccount-root .myaccount-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: var(--ma-text-secondary);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.myaccount-root .myaccount-nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.2), transparent);
+    transition: width 0.3s ease;
+}
+
+.myaccount-root .myaccount-nav-item:hover::before {
+    width: 100%;
+}
+
+.myaccount-root .myaccount-nav-item:hover {
+    color: var(--ma-text-primary);
+    border-color: var(--ma-border-glow);
+}
+
+.myaccount-root .myaccount-nav-item.myaccount-active {
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.2), rgba(191, 0, 255, 0.1));
+    border-color: var(--ma-neon-blue);
+    color: var(--ma-neon-blue);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.myaccount-root .myaccount-nav-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.myaccount-root .myaccount-nav-item:hover .myaccount-nav-icon {
+    transform: rotate(45deg);
+    color: var(--ma-neon-pink);
+}
+
+.myaccount-root .myaccount-nav-text {
+    flex: 1;
+}
+
+.myaccount-root .myaccount-nav-arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-nav-item:hover .myaccount-nav-arrow,
+.myaccount-root .myaccount-nav-item.myaccount-active .myaccount-nav-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.myaccount-root .myaccount-nav-item.myaccount-logout {
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 0, 255, 0.2);
+    padding-top: 20px;
+}
+
+.myaccount-root .myaccount-nav-item.myaccount-logout:hover {
+    color: var(--ma-neon-pink);
+    border-color: var(--ma-neon-pink);
+}
+
+/* ===== MAIN CONTENT ===== */
+.myaccount-root .myaccount-main {
+    background: var(--ma-glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.myaccount-root .myaccount-main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(191, 0, 255, 0.1), transparent);
+    pointer-events: none;
+}
+
+/* ===== SECTION HEADER ===== */
+.myaccount-root .myaccount-section-header {
+    margin-bottom: 30px;
+}
+
+.myaccount-root .myaccount-section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin: 0 0 15px 0;
+}
+
+.myaccount-root .myaccount-neon-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--ma-neon-blue), var(--ma-neon-purple), transparent);
+    box-shadow: 0 0 10px var(--ma-neon-blue);
+}
+
+/* ===== PROFILE SECTION ===== */
+.myaccount-root .myaccount-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.myaccount-root .myaccount-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.myaccount-root .myaccount-cyber-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-cyber-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--ma-text-primary);
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-cyber-input:focus {
+    outline: none;
+    border-color: var(--ma-neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.myaccount-root .myaccount-cyber-input::placeholder {
+    color: var(--ma-text-secondary);
+}
+
+/* ===== BUTTONS ===== */
+.myaccount-root .myaccount-neon-button {
+    position: relative;
+    padding: 15px 40px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-neon-button.myaccount-primary {
+    background: linear-gradient(135deg, var(--ma-neon-blue), var(--ma-neon-purple));
+    color: var(--ma-primary-dark);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+.myaccount-root .myaccount-neon-button.myaccount-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(0, 240, 255, 0.6);
+}
+
+.myaccount-root .myaccount-neon-button.myaccount-secondary {
+    background: transparent;
+    border: 1px solid var(--ma-neon-pink);
+    color: var(--ma-neon-pink);
+}
+
+.myaccount-root .myaccount-neon-button.myaccount-secondary:hover {
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+}
+
+.myaccount-root .myaccount-neon-button.myaccount-full-width {
+    width: 100%;
+}
+
+.myaccount-root .myaccount-btn-glitch {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: myaccount-btn-shimmer 2s infinite;
+}
+
+@keyframes myaccount-btn-shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* ===== ORDERS SECTION ===== */
+.myaccount-root .myaccount-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.myaccount-root .myaccount-order-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-order-card:hover {
+    border-color: var(--ma-neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.myaccount-root .myaccount-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.myaccount-root .myaccount-order-id {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-order-status {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.myaccount-root .myaccount-status-delivered {
+    background: rgba(0, 255, 159, 0.2);
+    color: var(--ma-neon-green);
+    border: 1px solid var(--ma-neon-green);
+}
+
+.myaccount-root .myaccount-status-shipping {
+    background: rgba(0, 240, 255, 0.2);
+    color: var(--ma-neon-blue);
+    border: 1px solid var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-status-processing {
+    background: rgba(255, 0, 255, 0.2);
+    color: var(--ma-neon-pink);
+    border: 1px solid var(--ma-neon-pink);
+}
+
+.myaccount-root .myaccount-order-details {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.myaccount-root .myaccount-order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.myaccount-root .myaccount-info-label {
+    font-size: 0.8rem;
+    color: var(--ma-text-secondary);
+    letter-spacing: 1px;
+}
+
+.myaccount-root .myaccount-info-value {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.myaccount-root .myaccount-neon-text {
+    color: var(--ma-neon-blue);
+    text-shadow: 0 0 10px var(--ma-neon-blue);
+}
+
+/* ===== ADDRESSES SECTION ===== */
+.myaccount-root .myaccount-addresses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.myaccount-root .myaccount-address-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 15px;
+    padding: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-address-card:hover {
+    border-color: var(--ma-neon-purple);
+    box-shadow: 0 0 20px rgba(191, 0, 255, 0.3);
+}
+
+.myaccount-root .myaccount-address-card.myaccount-default {
+    border-color: var(--ma-neon-blue);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.myaccount-root .myaccount-default-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, var(--ma-neon-blue), var(--ma-neon-purple));
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--ma-primary-dark);
+}
+
+.myaccount-root .myaccount-address-type {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: var(--ma-neon-pink);
+}
+
+.myaccount-root .myaccount-type-icon {
+    animation: myaccount-pulse 2s infinite;
+}
+
+.myaccount-root .myaccount-address-text {
+    color: var(--ma-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.myaccount-root .myaccount-address-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.myaccount-root .myaccount-action-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-action-btn.myaccount-edit {
+    border-color: var(--ma-neon-blue);
+    color: var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-action-btn.myaccount-edit:hover {
+    background: rgba(0, 240, 255, 0.2);
+}
+
+.myaccount-root .myaccount-action-btn.myaccount-delete {
+    border-color: var(--ma-neon-pink);
+    color: var(--ma-neon-pink);
+}
+
+.myaccount-root .myaccount-action-btn.myaccount-delete:hover {
+    background: rgba(255, 0, 255, 0.2);
+}
+
+.myaccount-root .myaccount-address-card.myaccount-add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    border-style: dashed;
+    cursor: pointer;
+    color: var(--ma-text-secondary);
+}
+
+.myaccount-root .myaccount-address-card.myaccount-add-new:hover {
+    color: var(--ma-neon-blue);
+    border-color: var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-add-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.myaccount-root .myaccount-address-card.myaccount-add-new:hover .myaccount-add-icon {
+    transform: rotate(90deg);
+}
+
+/* ===== WISHLIST SECTION ===== */
+.myaccount-root .myaccount-wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.myaccount-root .myaccount-wishlist-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-wishlist-card:hover {
+    border-color: var(--ma-neon-pink);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.myaccount-root .myaccount-wishlist-image {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, var(--ma-deep-purple), var(--ma-primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myaccount-root .myaccount-image-placeholder {
+    font-size: 2rem;
+    color: var(--ma-neon-purple);
+    opacity: 0.5;
+}
+
+.myaccount-root .myaccount-circuit-pattern {
+    animation: myaccount-circuit-blink 1.5s infinite;
+}
+
+@keyframes myaccount-circuit-blink {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.myaccount-root .myaccount-remove-wishlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--ma-neon-pink);
+    color: var(--ma-neon-pink);
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.myaccount-root .myaccount-wishlist-card:hover .myaccount-remove-wishlist {
+    opacity: 1;
+}
+
+.myaccount-root .myaccount-remove-wishlist:hover {
+    background: var(--ma-neon-pink);
+    color: var(--ma-primary-dark);
+}
+
+.myaccount-root .myaccount-wishlist-info {
+    padding: 20px;
+}
+
+.myaccount-root .myaccount-wishlist-info h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.myaccount-root .myaccount-wishlist-price {
+    color: var(--ma-neon-blue);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-wishlist-card .myaccount-neon-button {
+    margin: 0 20px 20px;
+    width: calc(100% - 40px);
+    padding: 12px;
+    font-size: 0.85rem;
+}
+
+/* ===== CORNER DECORATIONS ===== */
+.myaccount-root .myaccount-corner-decor {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.myaccount-root .myaccount-corner-decor::before,
+.myaccount-root .myaccount-corner-decor::after {
+    content: '';
+    position: absolute;
+    background: var(--ma-neon-blue);
+    box-shadow: 0 0 10px var(--ma-neon-blue);
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-top-left::before {
+    width: 40px;
+    height: 2px;
+    top: 0;
+    left: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-top-left::after {
+    width: 2px;
+    height: 40px;
+    top: 0;
+    left: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-top-right::before {
+    width: 40px;
+    height: 2px;
+    top: 0;
+    right: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-top-right::after {
+    width: 2px;
+    height: 40px;
+    top: 0;
+    right: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-bottom-left::before {
+    width: 40px;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-bottom-left::after {
+    width: 2px;
+    height: 40px;
+    bottom: 0;
+    left: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-bottom-right::before {
+    width: 40px;
+    height: 2px;
+    bottom: 0;
+    right: 0;
+}
+
+.myaccount-root .myaccount-corner-decor.myaccount-bottom-right::after {
+    width: 2px;
+    height: 40px;
+    bottom: 0;
+    right: 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .myaccount-root .myaccount-content {
+        grid-template-columns: 1fr;
+    }
+
+    .myaccount-root .myaccount-sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .myaccount-root .myaccount-user-card {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .myaccount-root .myaccount-nav {
+        flex: 1;
+        min-width: 300px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .myaccount-root .myaccount-nav-item {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+    }
+
+    .myaccount-root .myaccount-nav-arrow {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .myaccount-root .myaccount-title {
+        font-size: 2rem;
+        letter-spacing: 5px;
+    }
+
+    .myaccount-root .myaccount-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .myaccount-root .myaccount-main {
+        padding: 25px;
+    }
+
+    .myaccount-root .myaccount-order-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .myaccount-root .myaccount-nav {
+        flex-direction: column;
+    }
+
+    .myaccount-root .myaccount-nav-item {
+        justify-content: flex-start;
+    }
+
+    .myaccount-root .myaccount-corner-decor {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .myaccount-root .myaccount-container {
+        padding: 20px 15px;
+    }
+
+    .myaccount-root .myaccount-title {
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+    }
+
+    .myaccount-root .myaccount-section-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .myaccount-root .myaccount-user-card {
+        padding: 20px;
+    }
+
+    .myaccount-root .myaccount-avatar-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .myaccount-root .myaccount-avatar-ring {
+        width: 90px;
+        height: 90px;
+    }
+}

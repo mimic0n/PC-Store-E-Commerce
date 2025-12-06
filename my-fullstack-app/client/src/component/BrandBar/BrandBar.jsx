@@ -15,12 +15,13 @@ const logos = [
 ];
 
 export const BrandBar = () => {
-  // Nhân đôi logo để hiệu ứng cuộn không đứt đoạn
   const extendedLogos = [...logos, ...logos];
 
   return (
     <div className="infobar-container">
-      <p className="infobar-title">TRUSTED BY TECHNOLOGY COMPANIES</p>
+      <p className="infobar-title" data-text="TRUSTED BY TECHNOLOGY COMPANIES">
+        TRUSTED BY TECHNOLOGY COMPANIES
+      </p>
       <div className="infobar-scroller">
         <div className="infobar-track">
           {extendedLogos.map((logo, index) => (

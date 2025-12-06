@@ -17,7 +17,7 @@ import './Footer.css'
 
 export const Footer = () => {
   return (
-      <footer className='Box'>
+      <footer className='Footer_Box'>
           <div className='contanier'>
             <div className='Value_Property'>
                   <div className='Value_Column'>
@@ -55,7 +55,7 @@ export const Footer = () => {
           <div className='col1'>
              <h2 className='Footer_Font_1'>Contact US</h2>
             <p className='Footer_Font_2'>HKT STORE - Super PC Store 369 <br/> Union Trade Center Vietnam</p>
-            <Link className='link' to='/contact'>HKT_Store@gmail.com</Link>
+            <Link className='Email_link' to='/contact'>HKT_Store@gmail.com</Link>
               <span className='Phone'>+84 123 456 789</span>
               <div className='Description'><IoChatboxEllipses className='footer_ICON' />
                 <span className='Footer_Font_3'> Online Chat <br/> Get Expert Help </span>
@@ -66,12 +66,12 @@ export const Footer = () => {
             <div className='col2_part1'>
               <h2 className='Footer_Font_1'>Products</h2>
               <ul>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Price Drop</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>New Product</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Best Sale</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Contact Us</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Site Map</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Stores</Link></li>
+                <li className='col2_link'><Link to='/products/laptops'>Price Drop</Link></li>
+                <li className='col2_link'><Link to='/products/laptops'>New Product</Link></li>
+                <li className='col2_link'><Link to='/products/laptops'>Best Sale</Link></li>
+                <li className='col2_link'><Link to='/products/laptops'>Contact Us</Link></li>
+                <li className='col2_link'><Link to='/products/laptops'>Site Map</Link></li>
+                <li className='col2_link'><Link to='/products/laptops'>Stores</Link></li>
               </ul>
 
             </div>
@@ -79,12 +79,12 @@ export const Footer = () => {
             <div className='col2_part2'>
               <h2 className='Footer_Font_1'>Our Store</h2>
               <ul>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Delivery</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Legal Notice</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Terms And Conditions of use</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>About Us</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Secure Payment</Link></li>
-                <li className='col2_link'><Link to='/products/laptops' className='link'>Login</Link></li>
+                <li className='col2_link'><Link to='/products/laptops' >Delivery</Link></li>
+                <li className='col2_link'><Link to='/products/laptops' >Legal Notice</Link></li>
+                <li className='col2_link'><Link to='/products/laptops' >Terms And Conditions of use</Link></li>
+                <li className='col2_link'><Link to='/products/laptops' >About Us</Link></li>
+                <li className='col2_link'><Link to='/products/laptops' >Secure Payment</Link></li>
+                <li className='col2_link'><Link to='/products/laptops' >Login</Link></li>
               </ul>
 
             </div>
@@ -131,7 +131,6 @@ export const Footer = () => {
                     <BsDiscord className='footer-social_icon_Link' />
                   </Link>
               </li>
-              
             </ul>
 
             <p className='footerBottom_Font'> HKTshop © 2025 - Eccomerce PC Store!</p>

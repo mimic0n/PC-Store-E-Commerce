@@ -1,78 +1,239 @@
-.searchBox{
+:root {
+    --search-height: 40px;
+    --search-height-mobile: 44px;
+    --search-border-radius: 9999px;
+
+    --search-gradient-primary: #7209B7;
+    --search-gradient-secondary: #9D4EDD;
+    --search-gradient-dark: #3C096C;
+    --search-accent: #C77DFF;
+    --search-neon: #00F5FF;
+
+    --accent-purple: #9d4edd;
+    --accent-pink: #ff006e;
+
+    --glow-color: rgba(157, 78, 221, 0.8);
+    --glow-pink: rgba(255, 0, 110, 0.6);
+
+    --search-transition: all 0.3s ease;
+    --search-shadow-glow:
+        0 0 15px rgba(157, 78, 221, 0.6),
+        0 0 30px rgba(114, 9, 183, 0.4),
+        0 0 45px rgba(60, 9, 108, 0.2);
+}
+.searchBox {
     width: 100%;
-    height: 35px;
-    border-radius: 5px;
+    max-width: 100%;
+    height: var(--search-height);
+    border-radius: var(--search-border-radius);
     position: relative;
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    
 }
 
-.input1{
+.searchBox .input1 {
     width: 100%;
-    height: 35px;
+    height: var(--search-height);
     border: 2px solid transparent;
     outline: none;
-    padding: 0 10px;
-    border-radius: 9999px;
-    color: black !important;
+    padding: 0 3rem 0 1rem;
+    border-radius: var(--search-border-radius);
+    color: rgb(5, 5, 6) !important;
+    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
     background:
-        linear-gradient(white, white) padding-box,
-        linear-gradient(90deg, #008B8B, #00CED1) border-box;
-    transition: all 0.3s ease;
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)) padding-box,
+        linear-gradient(90deg, var(--accent-purple), var(--accent-pink)) border-box;
+    transition: var(--search-transition);
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+    touch-action: manipulation;
 }
 
-.input1:focus {
+.searchBox .input1::placeholder {
+    color: rgb(255, 255, 255) !important;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+}
+
+.searchBox .input1[type="text"] {
+    color: rgb(255, 255, 255) !important;
+}
+
+.searchBox .input1:focus {
     background:
-        linear-gradient(white, white) padding-box,
-        linear-gradient(90deg, #00CED1, #008B8B) border-box;
+            linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)) padding-box,
+            linear-gradient(90deg, var(--accent-pink), var(--accent-purple)) border-box;
+    box-shadow:
+        0 0 0 3px rgba(157, 78, 221, 0.2),
+        0 0 20px rgba(157, 78, 221, 0.3);
 }
 
 .searchBox .searchButton {
     position: absolute;
-    right: 7px;
+    right: 0.5rem;
     z-index: 50;
-    width: 35px;
-    min-width: 35px;
-    height: 35px;
-    min-height: 35px;
-    border-radius: 9999px;
-    color: rgb(229, 225, 231);
-    background: linear-gradient(90deg, #008B8B, #006666);
-    border: none;
+    width: var(--search-height);
+    min-width: var(--search-height);
+    height: var(--search-height);
+    min-height: var(--search-height);
+    border-radius: var(--search-border-radius);
+    padding: 0 !important;
+    color: rgb(255, 255, 255) !important;
+    background: linear-gradient(135deg,
+            var(--search-gradient-primary),
+            var(--search-gradient-dark)) !important;
+    border: 1px solid rgba(157, 78, 221, 0.5) !important;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--search-transition) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    box-shadow:
+        inset 0 0 10px rgba(199, 125, 255, 0.3),
+        0 4px 15px rgba(114, 9, 183, 0.4);
 }
 
 .searchBox .searchButton:hover {
-    background: linear-gradient(90deg, #00CED1, #008B8B);
-    box-shadow: 0 0 10px rgba(0, 139, 139, 0.5),
-        0 0 20px rgba(0, 139, 139, 0.3),
-        0 0 30px rgba(0, 139, 139, 0.1);
-    transform: scale(1.1);
-    animation: pulse 1.5s infinite;
+    background: linear-gradient(135deg,
+            var(--search-gradient-secondary),
+            var(--search-accent)) !important;
+    box-shadow: var(--search-shadow-glow);
+    transform: scale(1.05);
+    border-color: var(--search-gradient-dark) !important;
 }
 
 @keyframes pulse {
 
     0%,
     100% {
-        box-shadow: 0 0 10px rgba(0, 139, 139, 0.5),
-            0 0 20px rgba(0, 139, 139, 0.3);
+        box-shadow:
+            0 0 15px rgba(157, 78, 221, 0.6),
+            0 0 30px rgba(114, 9, 183, 0.4);
     }
 
     50% {
-        box-shadow: 0 0 15px rgba(0, 139, 139, 0.7),
-            0 0 30px rgba(0, 139, 139, 0.5);
+        box-shadow:
+            0 0 25px rgba(157, 78, 221, 0.8),
+            0 0 50px rgba(114, 9, 183, 0.6);
     }
 }
 
+.searchBox .searchButton:active {
+    transform: scale(0.95);
+}
+
+.searchBox .searchButton:focus-visible {
+    outline: 2px solid var(--search-gradient-secondary);
+    outline-offset: 2px;
+}
 
 .searchBox .searchIcon {
     color: rgb(229, 225, 231);
-   
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
+    transition: transform 0.3s ease;
 }
 
-.input1::placeholder { color: rgb(141, 141, 142) !important;}
-.input1[type="text"] {   color: rgb(5, 5, 6);}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .searchBox {
+        padding: 0.4rem;
+    }
+
+    .searchBox .input1 {
+        padding: 0 2.8rem 0 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    .searchBox .input1::placeholder {
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .searchBox {
+        height: var(--search-height-mobile);
+        padding: 0.3rem;
+    }
+
+    .searchBox .input1 {
+        height: var(--search-height-mobile);
+        padding: 0 3.2rem 0 0.85rem;
+        font-size: 0.9rem;
+    }
+
+    .searchBox .input1::placeholder {
+        font-size: 0.85rem;
+    }
+
+    .searchBox .searchButton {
+        width: var(--search-height-mobile);
+        min-width: var(--search-height-mobile);
+        height: var(--search-height-mobile);
+        min-height: var(--search-height-mobile);
+        right: 0.3rem;
+    }
+
+    .searchBox .searchIcon {
+        font-size: 1.15rem;
+    }
+
+    /* Disable hover animations on mobile */
+    .searchBox .searchButton:hover {
+        transform: scale(1);
+    }
+
+    .searchBox .searchButton:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .searchBox {
+        padding: 0.25rem;
+    }
+
+    .searchBox .input1 {
+        padding: 0 3rem 0 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .searchBox .input1::placeholder {
+        font-size: 0.8rem;
+    }
+
+    .searchBox .searchIcon {
+        font-size: 1.1rem;
+    }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+    .searchBox .searchButton:hover {
+        transform: none;
+    }
+
+    .searchBox .searchButton:hover .searchIcon {
+        transform: none;
+    }
+
+    .searchBox .searchButton:active {
+        transform: scale(0.95);
+        background: linear-gradient(90deg, var(--search-gradient-dark), var(--search-gradient-primary)) !important;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .searchBox *,
+    .searchBox .searchButton:hover {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .searchBox .searchButton:hover .searchIcon {
+        transform: none !important;
+    }
+}

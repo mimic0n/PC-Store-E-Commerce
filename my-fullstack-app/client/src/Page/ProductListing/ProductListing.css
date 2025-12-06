@@ -1,0 +1,477 @@
+:root {
+    --listing-gradient-start: #000000;
+    --listing-gradient-mid: #1a0033;
+    --listing-gradient-end: #4a0080;
+
+    --accent-purple: #9d4edd;
+    --accent-pink: #ff006e;
+    --neon-purple: #c77dff;
+    --neon-cyan: #00f5ff;
+
+    --glow-color: rgba(157, 78, 221, 0.9);
+    --glow-pink: rgba(255, 0, 180, 0.7);
+    --metal-shine: rgba(200, 200, 220, 0.4);
+}
+
+.ProductListingSection {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow:
+        0 10px 40px rgba(157, 78, 221, 0.4),
+        inset 0 1px 0 rgba(157, 78, 221, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.ProductListingSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--glow-pink) 20%,
+            var(--glow-color) 50%,
+            var(--glow-pink) 80%,
+            transparent 100%);
+    box-shadow: 0 0 20px var(--glow-color);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translateX(-10%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(10%);
+    }
+}
+
+.ProductListingSection .css-1uwp4ue-MuiBreadcrumbs-ol {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.ProductListingSection .ProductListingContainer {
+    padding: 0.5rem;
+}
+
+.ProductListingSection .css-jhr02i-MuiBreadcrumbs-separator {
+    color: var(--neon-purple) !important;
+    font-size: 20px;
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.ProductListingSection .container {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.ProductListingSection .SideBarWrapper-col1 {
+    width: 20%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
+}
+
+.ProductListingSection .SideBarWrapper-col2 {
+    width: 80%;
+    flex: 1;
+}
+
+.ProductListingSection .ProductListingSection-Header {
+    background: linear-gradient(135deg,
+                #000000,
+                #1a0033,
+                #4a0080)!important;
+    padding: 0.5rem;
+    width: 97.3%;
+    margin-bottom: 0.75rem;
+    border-radius: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid rgba(157, 78, 221, 0.5);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    box-shadow:
+        0 8px 32px rgba(157, 78, 221, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.ProductListingSection .ProductListingSection-Header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent,
+            transparent);
+    transform: rotate(45deg);
+    animation: metalShine 1s linear infinite;
+}
+
+@keyframes metalShine {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+    }
+
+    100% {
+        transform: rotate(45deg) translateY(100%);
+    }
+}
+
+.ProductListingSection .ProductListingSection-Header-Col1 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap : 0.5rem;
+    z-index: 2;
+    margin-left: 1rem;
+}
+
+.ProductListingSection .Grid-Button {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    border-radius: 100%;
+    color: var(--neon-purple) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(157, 78, 221, 0.5) !important;
+    transition: all 0.3s ease !important;
+    
+}
+
+.ProductListingSection .Grid-Button:hover {
+    color: #fff !important;
+    background: rgba(157, 78, 221, 0.4) !important;
+    border-color: var(--accent-purple) !important;
+    box-shadow: 0 0 20px var(--glow-pink) !important;
+    transform: scale(1.1);
+}
+
+.ProductListingSection .Grid-Button:active {
+    transform: scale(0.95);
+}
+
+.ProductListingSection .Product-Count {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin-left: 0.75rem;
+    text-shadow: 0 0 5px rgba(157, 78, 221, 0.5);
+}
+
+.ProductListingSection .ProductListingSection-Header-Col2 {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-right: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.ProductListingSection .Sort-By {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 0 5px rgba(157, 78, 221, 0.5);
+}
+
+.ProductListingSection .SortByButton {
+    color: var(--neon-purple) !important;
+    gap: 0.75rem;
+    background: rgba(157, 78, 221, 0.2) !important;
+    border: 1px solid rgba(157, 78, 221, 0.5) !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    text-transform: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 2px 10px rgba(157, 78, 221, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    will-change: transform, box-shadow;
+    text-transform: capitalize;
+}
+
+.ProductListingSection .SortByButton:hover {
+    color: #fff !important;
+    background: rgba(157, 78, 221, 0.4) !important;
+    border-color: var(--accent-purple) !important;
+    box-shadow:
+        0 8px 25px var(--glow-color),
+        0 0 35px var(--glow-pink),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.ProductListingSection .SortByButton:active {
+    transform: translateY(-1px);
+}
+
+.ProductListingSection .ProductListingSection-Content-Grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(250px, 1fr));
+    gap: 1rem;
+    padding-top: 0rem;
+    padding-right: 1rem;
+}
+
+.ProductListingSection .ProductListing-Pagination {
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProductListingSection .MuiPagination-ul {
+    gap: 0.5rem;
+}
+
+.css-1xra8g6-MuiPagination-root {
+    background: linear-gradient(135deg,
+            rgba(0, 0, 0, 0.8),
+            rgba(26, 0, 51, 0.9)) !important;
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(157, 78, 221, 0.4);
+    box-shadow: 0 4px 20px rgba(157, 78, 221, 0.3);
+}
+
+.ProductListingSection .MuiPaginationItem-root {
+    color: var(--neon-purple) !important;
+    border-color: rgba(157, 78, 221, 0.5) !important;
+    transition: all 0.3s ease !important;
+}
+
+.ProductListingSection .MuiPaginationItem-root:hover {
+    background-color: rgba(157, 78, 221, 0.2) !important;
+    border-color: var(--accent-purple) !important;
+    box-shadow: 0 0 15px var(--glow-color);
+    transform: scale(1.05);
+}
+
+.ProductListingSection .MuiPaginationItem-root.Mui-selected {
+    background: linear-gradient(135deg,
+            var(--accent-purple),
+            #7209b7) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-purple) !important;
+    box-shadow: 0 0 20px var(--glow-pink) !important;
+}
+
+.ProductListingSection .MuiPaginationItem-root.Mui-selected:hover {
+    background: linear-gradient(135deg,
+            #7209b7,
+            var(--accent-purple)) !important;
+    box-shadow: 0 0 25px var(--glow-pink) !important;
+}
+
+@media (min-width: 768px) {
+    .ProductListingSection .ProductListingSection-Content-Grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.ProductListingSection .ProductListingSection-Content-List {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 0rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .ProductListingSection .ProductListingSection-Content-List {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+/* Breadcrumb Styling */
+.ProductListingSection .MuiChip-root {
+    background: linear-gradient(135deg,
+            rgba(157, 78, 221 , 0.7),
+            rgba(114, 9, 183 , 0.8)) !important;
+    color: #000000 !important;
+    border: 1px solid rgba(157, 78, 221, 0.5) !important;
+    font-weight: 600 !important;
+}
+
+.ProductListingSection .MuiChip-root:hover {
+    background: linear-gradient(135deg,
+            rgba(157, 78, 221),
+            rgba(114, 9, 183)) !important;
+    box-shadow: 0 0 15px var(--glow-pink) !important;
+}
+
+.ProductListingSection .MuiChip-icon {
+    color: #000000 !important;
+}
+
+/* Menu Styling */
+.ProductListingSection .MuiMenu-paper {
+    background: linear-gradient(135deg,
+            rgba(0, 0, 0, 0.95),
+            rgba(26, 0, 51, 0.95)) !important;
+    border: 1px solid rgba(157, 78, 221, 0.5) !important;
+    box-shadow:
+        0 8px 32px rgba(157, 78, 221, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    color: #000000 !important;
+}
+
+.ProductListingSection .MuiMenuItem-root {
+    color: rgba(0, 0, 0, 0.9) !important;
+    transition: all 0.3s ease !important;
+}
+
+.ProductListingSection .MuiMenuItem-root:hover {
+    background: rgba(157, 78, 221, 0.3) !important;
+    color:  #000000 !important; 
+    box-shadow: inset 0 0 20px rgba(157, 78, 221, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .ProductListingSection .ProductListingSection-Content-Grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .ProductListingSection .container {
+        flex-direction: column;
+    }
+
+    .ProductListingSection .SideBarWrapper-col1 {
+        width: 100%;
+        position: static;
+        margin-bottom: 1rem;
+    }
+
+    .ProductListingSection .SideBarWrapper-col2 {
+        width: 100%;
+    }
+
+    .ProductListingSection .ProductListingSection-Content-Grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ProductListingSection .ProductListingSection-Header {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .ProductListingSection .ProductListingSection-Content-Grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .ProductListingSection .ProductListingSection-Header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .ProductListingSection .ProductListingSection-Header-Col1,
+    .ProductListingSection .ProductListingSection-Header-Col2 {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        padding-right: 0;
+    }
+
+    .ProductListingSection .Product-Count {
+        margin-left: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ProductListingSection {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .ProductListingSection .ProductListingContainer {
+        padding: 0.25rem;
+    }
+
+    .ProductListingSection .SideBarWrapper-col1 {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .ProductListingSection .Grid-Button {
+        width: 35px !important;
+        min-width: 35px !important;
+        height: 35px !important;
+    }
+
+    .ProductListingSection .Product-Count,
+    .ProductListingSection .Sort-By {
+        font-size: 12px;
+    }
+
+    .ProductListingSection .SortByButton {
+        font-size: 12px !important;
+    }
+}
+
+/* Glitch Effect for Loading States */
+@keyframes glitch {
+
+    0%,
+    90%,
+    100% {
+        transform: translate(0);
+    }
+
+    92% {
+        transform: translate(-2px, 1px);
+    }
+
+    94% {
+        transform: translate(2px, -1px);
+    }
+
+    96% {
+        transform: translate(-1px, 2px);
+    }
+}
+
+.ProductListingSection.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(157, 78, 221, 0.1),
+            transparent);
+    animation: glitch 0.3s infinite;
+    pointer-events: none;
+}

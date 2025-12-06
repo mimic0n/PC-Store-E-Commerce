@@ -1,0 +1,1061 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap");
+
+/* ============================================
+   ROOT VARIABLES - ADMIN CYBERPUNK THEME
+============================================ */
+.AdminRegister_Page {
+    --c-bg-primary: #0f172a;
+    --c-bg-secondary: #1e293b;
+    --c-bg-panel: rgba(30, 41, 59, 0.9);
+    --c-admin-deep: #1e1b4b;
+    --c-admin-dark: #0f172a;
+    --c-admin-mid: #312e81;
+    --c-neon-primary: #6366f1;
+    --c-neon-secondary: #8b5cf6;
+    --c-neon-accent: #06b6d4;
+    --c-neon-success: #22c55e;
+    --c-neon-warning: #f59e0b;
+    --c-text-primary: #f8fafc;
+    --c-text-secondary: #94a3b8;
+    --c-text-muted: #64748b;
+    --c-border: rgba(99, 102, 241, 0.2);
+    --c-border-hover: rgba(99, 102, 241, 0.5);
+    --c-error: #ef4444;
+    --c-success: #22c55e;
+
+    --shadow-neon-primary: 0 0 20px rgba(99, 102, 241, 0.4);
+    --shadow-neon-secondary: 0 0 20px rgba(139, 92, 246, 0.3);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.2);
+}
+
+/* ============================================
+   BASE STYLES
+============================================ */
+.AdminRegister_Page * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rajdhani", sans-serif;
+}
+
+.AdminRegister_Page {
+    min-height: 100vh;
+    background: var(--c-bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+/* Background Effects */
+.AdminRegister_Page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 20v20L30 55L5 40V20z' stroke='%236366f1' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, var(--c-admin-deep) 0%, var(--c-bg-primary) 30%, var(--c-bg-primary) 100%);
+    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+    animation: adminGridScroll 25s linear infinite;
+}
+
+@keyframes adminGridScroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(60px);
+    }
+}
+
+.AdminRegister_Page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.05) 2px,
+            rgba(0, 0, 0, 0.05) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   RING CONTAINER
+============================================ */
+.AdminRegister_Page .admin_ring {
+    position: relative;
+    width: 650px;
+    height: 750px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 50px rgba(99, 102, 241, 0.4));
+    z-index: 2;
+}
+
+.AdminRegister_Page .admin_ring i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 15px currentColor);
+}
+
+.AdminRegister_Page .admin_ring i:nth-child(1) {
+    border-color: var(--c-neon-primary);
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: adminRotate 10s linear infinite;
+}
+
+.AdminRegister_Page .admin_ring i:nth-child(2) {
+    border-color: var(--c-neon-secondary);
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: adminRotate 8s linear infinite reverse;
+}
+
+.AdminRegister_Page .admin_ring i:nth-child(3) {
+    border-color: var(--c-neon-accent);
+    border-radius: 50%;
+    animation: adminRotate 12s linear infinite, adminPulse 4s ease-in-out infinite;
+}
+
+@keyframes adminRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes adminPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.02);
+        opacity: 0.8;
+    }
+}
+
+.AdminRegister_Page .admin_ring:hover i {
+    border-width: 3px;
+    filter: drop-shadow(0 0 30px currentColor) brightness(1.3);
+}
+
+/* ============================================
+   REGISTER CARD
+============================================ */
+.AdminRegister_Page .admin_register {
+    position: absolute;
+    width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--c-bg-panel);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--c-border);
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px,
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+    transition: all 0.4s ease;
+}
+
+/* Scrollbar styling */
+.AdminRegister_Page .admin_register::-webkit-scrollbar {
+    width: 6px;
+}
+
+.AdminRegister_Page .admin_register::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.AdminRegister_Page .admin_register::-webkit-scrollbar-thumb {
+    background: var(--c-border);
+    border-radius: 3px;
+}
+
+.AdminRegister_Page .admin_register::-webkit-scrollbar-thumb:hover {
+    background: var(--c-border-hover);
+}
+
+.AdminRegister_Page .admin_register::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, transparent 50%);
+    opacity: 0.5;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.AdminRegister_Page .admin_register::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(315deg, var(--c-neon-secondary) 0%, transparent 50%);
+    opacity: 0.5;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.AdminRegister_Page .admin_register:hover {
+    border-color: var(--c-border-hover);
+    box-shadow: var(--shadow-neon-primary), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Admin Logo */
+.AdminRegister_Page .admin_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Title */
+.AdminRegister_Page .admin_register h2 {
+    font-size: 1.8rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--c-text-primary);
+    text-shadow: 0 0 10px var(--c-neon-primary), 0 0 20px var(--c-neon-primary);
+    margin: 0;
+}
+
+.AdminRegister_Page .register_subtitle {
+    text-align: center;
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+    margin-top: -8px;
+}
+
+/* ============================================
+   FORM ROWS
+============================================ */
+.AdminRegister_Page .form_row {
+    display: flex;
+    gap: 12px;
+}
+
+.AdminRegister_Page .form_row.two_col .inputBx {
+    flex: 1;
+}
+
+/* ============================================
+   INPUT FIELDS
+============================================ */
+.AdminRegister_Page .inputBx {
+    position: relative;
+    width: 100%;
+}
+
+.AdminRegister_Page .inputBx .input_icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--c-text-muted);
+    font-size: 1.1rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .inputBx input:not([type="submit"]):not([type="checkbox"]),
+.AdminRegister_Page .inputBx select {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 6px, 6px 0, calc(100% - 6px) 0, 100% 6px,
+            100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+.AdminRegister_Page .inputBx select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.AdminRegister_Page .inputBx select option {
+    background: var(--c-bg-secondary);
+    color: var(--c-text-primary);
+    padding: 10px;
+}
+
+.AdminRegister_Page .inputBx input:focus,
+.AdminRegister_Page .inputBx select:focus {
+    border-color: var(--c-neon-primary);
+    background: rgba(99, 102, 241, 0.05);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2), inset 0 0 20px rgba(99, 102, 241, 0.05);
+}
+
+.AdminRegister_Page .inputBx input:focus+.input_icon,
+.AdminRegister_Page .inputBx select:focus+.input_icon {
+    color: var(--c-neon-primary);
+}
+
+.AdminRegister_Page .inputBx input::placeholder {
+    color: var(--c-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+/* Input animation effect */
+.AdminRegister_Page .inputBx::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.15), transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.AdminRegister_Page .inputBx:hover::before {
+    left: 100%;
+}
+
+/* ============================================
+   PASSWORD STRENGTH INDICATOR
+============================================ */
+.AdminRegister_Page .password_strength {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.AdminRegister_Page .strength_bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .strength_bar.weak {
+    background: var(--c-error);
+}
+
+.AdminRegister_Page .strength_bar.medium {
+    background: var(--c-neon-warning);
+}
+
+.AdminRegister_Page .strength_bar.strong {
+    background: var(--c-neon-success);
+}
+
+.AdminRegister_Page .strength_text {
+    font-size: 0.75rem;
+    color: var(--c-text-muted);
+    margin-top: 4px;
+    text-align: right;
+}
+
+.AdminRegister_Page .strength_text.weak {
+    color: var(--c-error);
+}
+
+.AdminRegister_Page .strength_text.medium {
+    color: var(--c-neon-warning);
+}
+
+.AdminRegister_Page .strength_text.strong {
+    color: var(--c-neon-success);
+}
+
+/* ============================================
+   CHECKBOX - TERMS
+============================================ */
+.AdminRegister_Page .terms_checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .terms_checkbox:hover {
+    border-color: var(--c-border-hover);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.AdminRegister_Page .terms_checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.AdminRegister_Page .custom_checkbox {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border: 2px solid var(--c-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.AdminRegister_Page .custom_checkbox svg {
+    width: 14px;
+    height: 14px;
+    color: white;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s ease;
+}
+
+.AdminRegister_Page .terms_checkbox input[type="checkbox"]:checked+.custom_checkbox {
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border-color: var(--c-neon-primary);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+.AdminRegister_Page .terms_checkbox input[type="checkbox"]:checked+.custom_checkbox svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.AdminRegister_Page .terms_text {
+    font-size: 0.85rem;
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+}
+
+.AdminRegister_Page .terms_text a {
+    color: var(--c-neon-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .terms_text a:hover {
+    color: var(--c-neon-accent);
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+/* ============================================
+   SUBMIT BUTTON
+============================================ */
+.AdminRegister_Page .inputBx input[type="submit"] {
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+
+.AdminRegister_Page .inputBx input[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.AdminRegister_Page .inputBx input[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+}
+
+.AdminRegister_Page .inputBx input[type="submit"]:hover::before {
+    left: 100%;
+}
+
+.AdminRegister_Page .inputBx input[type="submit"]:active {
+    transform: translateY(-1px);
+}
+
+.AdminRegister_Page .inputBx input[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   LINKS
+============================================ */
+.AdminRegister_Page .admin_register .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.AdminRegister_Page .admin_register .links span {
+    color: var(--c-text-secondary);
+    font-size: 0.9rem;
+}
+
+.AdminRegister_Page .admin_register .links a {
+    color: var(--c-neon-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .admin_register .links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-neon-primary), var(--c-neon-secondary));
+    transition: width 0.3s ease;
+}
+
+.AdminRegister_Page .admin_register .links a:hover {
+    color: var(--c-neon-accent);
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.AdminRegister_Page .admin_register .links a:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   DIVIDER
+============================================ */
+.AdminRegister_Page .divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 8px 0;
+}
+
+.AdminRegister_Page .divider_line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--c-border), transparent);
+}
+
+.AdminRegister_Page .divider_text {
+    color: var(--c-text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* ============================================
+   SOCIAL LOGIN
+============================================ */
+.AdminRegister_Page .social_register {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.AdminRegister_Page .social_btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-text-secondary);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+
+.AdminRegister_Page .social_btn:hover {
+    transform: translateY(-4px);
+    border-color: var(--social-color, var(--c-neon-primary));
+    color: var(--social-color, var(--c-neon-primary));
+    background: rgba(99, 102, 241, 0.1);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+}
+
+.AdminRegister_Page .social_btn.google {
+    --social-color: #ea4335;
+}
+
+.AdminRegister_Page .social_btn.microsoft {
+    --social-color: #00a4ef;
+}
+
+.AdminRegister_Page .social_btn.github {
+    --social-color: #ffffff;
+}
+
+/* ============================================
+   SECURITY BADGE
+============================================ */
+.AdminRegister_Page .security_badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.AdminRegister_Page .security_badge svg {
+    color: var(--c-neon-success);
+    font-size: 1.1rem;
+}
+
+.AdminRegister_Page .security_badge span {
+    color: var(--c-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   LEFT SIDE PANEL
+============================================ */
+.AdminRegister_Page .register_description_left {
+    flex: 1;
+    max-width: 350px;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.AdminRegister_Page .description_content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.AdminRegister_Page .description_icon_box {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+    animation: iconPulse 3s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 15px 50px rgba(99, 102, 241, 0.6);
+    }
+}
+
+.AdminRegister_Page .description_title {
+    font-size: 2rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    color: var(--c-text-primary);
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.AdminRegister_Page .description_text {
+    color: var(--c-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Features List */
+.AdminRegister_Page .features_list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.AdminRegister_Page .feature_item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .feature_item:hover {
+    border-color: var(--c-border-hover);
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateX(8px);
+}
+
+.AdminRegister_Page .feature_icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: linear-gradient(135deg, var(--c-neon-primary) 0%, var(--c-neon-secondary) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+}
+
+.AdminRegister_Page .feature_text {
+    color: var(--c-text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   RIGHT SIDE PANEL
+============================================ */
+.AdminRegister_Page .register_description_right {
+    flex: 1;
+    max-width: 350px;
+    padding: 2rem;
+    z-index: 2;
+}
+
+/* Stats Grid */
+.AdminRegister_Page .stats_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.AdminRegister_Page .stat_card {
+    padding: 20px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--c-border);
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .stat_card:hover {
+    border-color: var(--c-border-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+.AdminRegister_Page .stat_number {
+    font-size: 2rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--c-neon-primary), var(--c-neon-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.AdminRegister_Page .stat_label {
+    color: var(--c-text-secondary);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Floating Cards */
+.AdminRegister_Page .floating_cards {
+    position: relative;
+    height: 200px;
+    margin-top: 24px;
+}
+
+.AdminRegister_Page .floating_card {
+    position: absolute;
+    padding: 16px 24px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.AdminRegister_Page .floating_card:hover {
+    border-color: var(--c-neon-primary);
+    transform: scale(1.05);
+}
+
+.AdminRegister_Page .floating_card .card_icon {
+    font-size: 1.5rem;
+    color: var(--c-neon-primary);
+}
+
+.AdminRegister_Page .floating_card .card_label {
+    color: var(--c-text-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.AdminRegister_Page .card_1 {
+    top: 0;
+    left: 20px;
+    animation: float1 4s ease-in-out infinite;
+}
+
+.AdminRegister_Page .card_2 {
+    top: 50px;
+    right: 10px;
+    animation: float2 5s ease-in-out infinite;
+}
+
+.AdminRegister_Page .card_3 {
+    bottom: 20px;
+    left: 50px;
+    animation: float3 4.5s ease-in-out infinite;
+}
+
+@keyframes float1 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+@keyframes float2 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(-2deg);
+    }
+}
+
+@keyframes float3 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(1deg);
+    }
+}
+
+/* ============================================
+   ERROR MESSAGE
+============================================ */
+.AdminRegister_Page .error_message {
+    color: var(--c-error);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.AdminRegister_Page .error_message svg {
+    font-size: 0.9rem;
+}
+
+.AdminRegister_Page .inputBx.error input,
+.AdminRegister_Page .inputBx.error select {
+    border-color: var(--c-error);
+}
+
+.AdminRegister_Page .inputBx.error .input_icon {
+    color: var(--c-error);
+}
+
+/* ============================================
+   LOADING STATE
+============================================ */
+.AdminRegister_Page .loading_overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: inherit;
+}
+
+.AdminRegister_Page .loading_spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--c-border);
+    border-top-color: var(--c-neon-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 1400px) {
+    .AdminRegister_Page {
+        gap: 2rem;
+    }
+
+    .AdminRegister_Page .register_description_left,
+    .AdminRegister_Page .register_description_right {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .AdminRegister_Page .register_description_left,
+    .AdminRegister_Page .register_description_right {
+        display: none;
+    }
+
+    .AdminRegister_Page {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .AdminRegister_Page .admin_ring {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .AdminRegister_Page .admin_ring i {
+        display: none;
+    }
+
+    .AdminRegister_Page .admin_register {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        margin: 2rem;
+        max-height: none;
+    }
+
+    .AdminRegister_Page .form_row.two_col {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .AdminRegister_Page .admin_register {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .AdminRegister_Page .admin_register h2 {
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+    }
+
+    .AdminRegister_Page .admin_logo {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}

@@ -6,11 +6,17 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
+    react({ babel: { plugins: [['babel-plugin-react-compiler']], }, }),
   ],
+  server: {
+    port: 5173,  // Thay port thành 5174
+    host: 'localhost'
+  },
+  optimizeDeps: {
+    include: ['react-inner-image-zoom']
+  },
+  server: {
+    force: true
+  }
 })
 

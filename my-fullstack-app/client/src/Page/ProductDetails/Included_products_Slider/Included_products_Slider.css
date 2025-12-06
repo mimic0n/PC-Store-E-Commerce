@@ -1,0 +1,15 @@
+.Included_products_Slider {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.Included_products_Slider .mySwiper {
+    padding-top: 1rem;
+}
+
+.Included_products_Slider .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}

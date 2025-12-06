@@ -1,0 +1,52 @@
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           HKTSTORE DATABASE SCHEMA                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    ┌───────────────┐                              ┌───────────────┐
+    │    USERS      │                              │  CATEGORIES   │
+    ├───────────────┤                              ├───────────────┤
+    │ PK id         │                              │ PK id         │
+    │    fullName   │                              │    name       │
+    │ UK email      │                              │ UK slug       │
+    │    password   │                              │    description│
+    │    phone      │                              │    image      │
+    │    address    │                              │ FK parentId ──┼──┐
+    │    avatar     │                              │    isActive   │  │
+    │    role       │                              └───────┬───────┘  │
+    │    isActive   │                                      │ 1:N      │
+    └───────┬───────┘                                      ▼          │
+            │                                      ┌───────────────┐  │
+            │ 1:1                                  │   PRODUCTS    │  │
+            ▼                                      ├───────────────┤  │
+    ┌───────────────┐                              │ PK id         │  │
+    │    CARTS      │                              │    name       │  │
+    ├───────────────┤                              │ UK slug       │  │
+    │ PK id         │                              │    price      │◄─┘
+    │ FK userId     │                              │    salePrice  │
+    │    totalAmount│                              │    quantity   │
+    └───────┬───────┘                              │ FK categoryId │
+            │ 1:N                                  │    rating     │
+            ▼                                      │    isFeatured │
+    ┌───────────────┐                              └───────┬───────┘
+    │  CART_ITEMS   │                                      │
+    ├───────────────┤         ┌────────────────────────────┤
+    │ PK id         │         │                            │
+    │ FK cartId     │         │ 1:N                   1:N  │
+    │ FK productId ─┼─────────┼────────────────────────────┘
+    │    quantity   │         │
+    │    price      │         ▼
+    └───────────────┘  ┌───────────────┐      ┌───────────────┐
+                       │   REVIEWS     │      │ ORDER_ITEMS   │
+    ┌───────────────┐  ├───────────────┤      ├───────────────┤
+    │    ORDERS     │  │ PK id         │      │ PK id         │
+    ├───────────────┤  │ FK userId     │      │ FK orderId    │
+    │ PK id         │  │ FK productId  │      │ FK productId  │
+    │ UK orderCode  │  │    rating     │      │    productName│
+    │ FK userId     │  │    comment    │      │    quantity   │
+    │    fullName   │  │    images     │      │    price      │
+    │    phone      │  │    isApproved │      │    totalPrice │
+    │    address    │  └───────────────┘      └───────────────┘
+    │    totalAmount│                                 ▲
+    │    orderStatus│                                 │ 1:N
+    │    paymentStatus                                │
+    └───────────────┼─────────────────────────────────┘

@@ -1,0 +1,8 @@
+Hãy giúp tôi Thiết kế trang CheckOut trên với các tiêu chí như sau : "
+Kết hợp màu sắc: sử dụng sắc tím đậm, tím than kết hợp với các màu neon rực rỡ như xanh dương, hồng , neon để tạo điểm nhấn tương phản mạnh mẽ và màu đen tuyền huyèn bí bí ẩn.
+Yếu tố hình ảnh: Xuất hiện trong các hình ảnh phản chiếu kim loại, kiến trúc đô thị về đêm, các mạch điện tử, hiệu ứng glitch (như nhiễu kỹ thuật số) hoặc các khối hình học sắc nét." 
+Các title trong page phải là tiếng anh.
+Các Thuộc tính class trong file css phải có 1 class root phía trước để phân vùng ảnh hưởng cho style page.
+Giao diện trang Verify cần cực kỳ tối giản. Người dùng không nên bị phân tâm bởi các yếu tố khác.
+
+Claude Opus 4.5

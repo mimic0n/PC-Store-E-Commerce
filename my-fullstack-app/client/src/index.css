@@ -1,16 +1,17 @@
+@font-face {
+  font-family: 'TT_Mussels_Trial_Regular';
+  src: url("/src/assets/Font/tt_mussels/TT Mussels Trial Regular.otf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(to right,
-            #008B8B 0%,
-            #005154 25%,
-            #008B8B 50%,
-            #005154 75%,
-            #008B8B 100%);
-    
+
 
 
   font-synthesis: none;
@@ -20,8 +21,40 @@
   
 }
 
+:root {
+  /* Cyberpunk Purple Palette */
+  --primary-purple: #9D4EDD;
+  --deep-purple: #7209B7;
+  --dark-purple: #3C096C;
+  --electric-purple: #C77DFF;
+
+  /* Metallic & Neon Accents */
+  --neon-pink: #FF006E;
+  --cyber-blue: #00F5FF;
+  --metal-silver: #C0C0C0;
+  --gold-accent: #FFD60A;
+
+  /* Dark Backgrounds */
+  --void-black: #0A0A0A;
+  --deep-black: #121212;
+  --carbon-black: #1A1A1A;
+  --shadow-black: #0D0D0D;
+
+  /* Glitch Colors */
+  --glitch-red: #FF0055;
+  --glitch-cyan: #00FFFF;
+  --glitch-green: #00FF41;
+
+  --gradient-start: #0A0A0A;
+  --gradient-mid: #3C096C;
+  --gradient-end: #7209B7;
+}
+
 body {
-  background-image: linear-gradient(to right, #008B8B 0%, #003133 51%, #008B8B 100%);
+  background-image: linear-gradient(to right, #0A0A0A 0%, #121212 51%, #0A0A0A 100%);
+  overflow-x: hidden;
+  padding : 0rem;
+  margin: 0rem;
 }
 
 
@@ -32,12 +65,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb{
-  background: linear-gradient(180deg, #ff00cc, #333399) !important;
+  background: linear-gradient(180deg, #3C096C, #FF0055) !important;
   border-radius: 10px !important;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   background-size: 100% 200%;
   animation: gradient-vertical 15s ease infinite;
+
 }
 
 ::-webkit-scrollbar-track{
@@ -61,14 +95,30 @@ body {
   }
 }
 
-
-.mySwiper {
-  overflow: inherit !important;
-  z-index: 5;
+.Product_Details_Model_Container .MuiDialogContent-root {
+    padding: 0px 0px;
 }
 
-.Swiper_Banner {
-  overflow-x: hidden;
-  z-index: 1 !important;
+
+.css-cyqh1t-MuiPaper-root-MuiDrawer-paper {
+  background: linear-gradient(135deg,
+            var(--gradient-start) 0%,
+            var(--gradient-mid) 50%,
+            var(--gradient-end) 100%) !important;
+  box-shadow:
+        4px 0 40px rgba(157, 78, 221, 0.4),
+        0 0 80px rgba(114, 9, 183, 0.3) !important;
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+.Navigation_Container {
   position: relative;
+  z-index: 10000;
+  isolation: isolate;
+}
+
+.Navigation_Container .submenu_dropdown {
+  z-index: 100001 !important;
+  position: absolute !important;
 }

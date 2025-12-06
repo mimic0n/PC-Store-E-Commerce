@@ -1,0 +1,376 @@
+{
+    "info": {
+        "_postman_id": "product-api-collection",
+        "name": "Product API Collection",
+        "description": "Collection để test các Product API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5000/api/products"
+        },
+        {
+            "key": "accessToken",
+            "value": "your_access_token_here"
+        }
+    ],
+    "item": [
+        {
+            "name": "PUBLIC ROUTES",
+            "item": [
+                {
+                    "name": "Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProducts?page=1&limit=10&search=&sortBy=createdAt&order=DESC&isActive=true",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProducts"],
+                            "query": [
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "search", "value": ""},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"},
+                                {"key": "isActive", "value": "true"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By Category ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsByCatId/1?page=1&limit=10&sortBy=createdAt&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsByCatId", "1"],
+                            "query": [
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By Category Name",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsByCatName?name=Laptop&page=1&limit=10&sortBy=createdAt&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsByCatName"],
+                            "query": [
+                                {"key": "name", "value": "Laptop"},
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By SubCategory ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsBySubCatId/2?page=1&limit=10&sortBy=createdAt&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsBySubCatId", "2"],
+                            "query": [
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By SubCategory Name",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsBySubCatName?name=Gaming&page=1&limit=10&sortBy=createdAt&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsBySubCatName"],
+                            "query": [
+                                {"key": "name", "value": "Gaming"},
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By Third Level Category ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsByThirdLavelCat/3?page=1&limit=10&sortBy=createdAt&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsByThirdLavelCat", "3"],
+                            "query": [
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By Third Level Category Name",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsByThirdLavelCatName?name=Asus&page=1&limit=10&sortBy=createdAt&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsByThirdLavelCatName"],
+                            "query": [
+                                {"key": "name", "value": "Asus"},
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "createdAt"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By Price",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsByPrice?minPrice=1000000&maxPrice=50000000&page=1&limit=10&sortBy=price&order=ASC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsByPrice"],
+                            "query": [
+                                {"key": "minPrice", "value": "1000000"},
+                                {"key": "maxPrice", "value": "50000000"},
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "price"},
+                                {"key": "order", "value": "ASC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products By Rating",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsByRating?minRating=4&page=1&limit=10&sortBy=rating&order=DESC",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsByRating"],
+                            "query": [
+                                {"key": "minRating", "value": "4"},
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"},
+                                {"key": "sortBy", "value": "rating"},
+                                {"key": "order", "value": "DESC"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products Count",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllProductsCount?categoryId=1&isActive=true",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllProductsCount"],
+                            "query": [
+                                {"key": "categoryId", "value": "1"},
+                                {"key": "isActive", "value": "true"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Featured Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/getAllFeaturedProducts?page=1&limit=10",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["getAllFeaturedProducts"],
+                            "query": [
+                                {"key": "page", "value": "1"},
+                                {"key": "limit", "value": "10"}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Product By ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["1"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ADMIN ROUTES",
+            "item": [
+                {
+                    "name": "Upload Images",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{accessToken}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "images",
+                                    "type": "file",
+                                    "src": []
+                                },
+                                {
+                                    "key": "images",
+                                    "type": "file",
+                                    "src": []
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/uploadImages",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["uploadImages"]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Product",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{accessToken}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Laptop ASUS ROG Strix G15\",\n    \"description\": \"Laptop gaming cao cấp với RTX 4060, AMD Ryzen 7, 16GB RAM, 512GB SSD\",\n    \"price\": 35990000,\n    \"salePrice\": 32990000,\n    \"quantity\": 50,\n    \"images\": [\n        {\n            \"url\": \"https://res.cloudinary.com/your-cloud/image/upload/v1234/products/laptop1.jpg\",\n            \"publicId\": \"products/laptop1\"\n        },\n        {\n            \"url\": \"https://res.cloudinary.com/your-cloud/image/upload/v1234/products/laptop2.jpg\",\n            \"publicId\": \"products/laptop2\"\n        }\n    ],\n    \"thumbnail\": \"https://res.cloudinary.com/your-cloud/image/upload/v1234/products/laptop1.jpg\",\n    \"brand\": \"ASUS\",\n    \"specifications\": {\n        \"cpu\": \"AMD Ryzen 7 7735HS\",\n        \"ram\": \"16GB DDR5\",\n        \"storage\": \"512GB NVMe SSD\",\n        \"gpu\": \"NVIDIA RTX 4060 8GB\",\n        \"display\": \"15.6 inch FHD 144Hz\",\n        \"weight\": \"2.3kg\"\n    },\n    \"categoryId\": 1,\n    \"isFeatured\": true,\n    \"isActive\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/create",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["create"]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Product",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{accessToken}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Laptop ASUS ROG Strix G15 - Updated\",\n    \"description\": \"Laptop gaming cao cấp - Phiên bản cập nhật\",\n    \"price\": 34990000,\n    \"salePrice\": 31990000,\n    \"quantity\": 45,\n    \"images\": [\n        {\n            \"url\": \"https://res.cloudinary.com/your-cloud/image/upload/v1234/products/laptop1.jpg\",\n            \"publicId\": \"products/laptop1\"\n        }\n    ],\n    \"thumbnail\": \"https://res.cloudinary.com/your-cloud/image/upload/v1234/products/laptop1.jpg\",\n    \"brand\": \"ASUS\",\n    \"specifications\": {\n        \"cpu\": \"AMD Ryzen 7 7735HS\",\n        \"ram\": \"32GB DDR5\",\n        \"storage\": \"1TB NVMe SSD\",\n        \"gpu\": \"NVIDIA RTX 4060 8GB\",\n        \"display\": \"15.6 inch FHD 165Hz\",\n        \"weight\": \"2.3kg\"\n    },\n    \"categoryId\": 1,\n    \"isFeatured\": true,\n    \"isActive\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/updateProduct/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["updateProduct", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Product",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{accessToken}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Image from Cloudinary",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{accessToken}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"publicId\": \"products/laptop1\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/deleteImage",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["deleteImage"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

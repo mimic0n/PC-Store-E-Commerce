@@ -1,0 +1,117 @@
+/* ===== WISHLIST SECTION ===== */
+.myaccount-wishlist-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.myaccount-wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.myaccount-wishlist-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--ma-border-glow);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.myaccount-wishlist-card:hover {
+    border-color: var(--c-neon-pink);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.myaccount-wishlist-image {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, var(--ma-deep-purple), var(--ma-primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myaccount-image-placeholder {
+    font-size: 2rem;
+    color: var(--c-neon-purple);
+    opacity: 0.5;
+}
+
+.myaccount-circuit-pattern {
+    animation: circuit-blink 1.5s infinite;
+}
+
+@keyframes circuit-blink {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.myaccount-remove-wishlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--c-neon-pink);
+    color: var(--c-neon-pink);
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.myaccount-wishlist-card:hover .myaccount-remove-wishlist {
+    opacity: 1;
+}
+
+.myaccount-remove-wishlist:hover {
+    background: var(--c-neon-pink);
+    color: var(--ma-primary-dark);
+}
+
+.myaccount-wishlist-info {
+    padding: 20px;
+}
+
+.myaccount-wishlist-info h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.myaccount-wishlist-price {
+    color: var(--c-neon-cyan);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--c-neon-cyan);
+}
+
+.myaccount-wishlist-card .myaccount-neon-button {
+    margin: 0 20px 20px;
+    width: calc(100% - 40px);
+    padding: 12px;
+    font-size: 0.85rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

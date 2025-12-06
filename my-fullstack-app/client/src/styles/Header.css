@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: 'techno_hideo';
     src: url("/src/assets/Font/techno_hideo/techno_hideo.ttf") format('truetype');
@@ -6,27 +5,157 @@
     font-style: normal;
 }
 
- .Header_Background {
-    background-color: #374151;
+:root {
+    /* Cyberpunk Theme - Synced with CheckOut */
+    --header-bg: #050508;
+    --header-bg-secondary: #0a0a12;
+    --header-bg-panel: rgba(15, 10, 25, 0.85);
+
+    --purple-deep: #1a0b2e;
+    --purple-dark: #12001a;
+    --purple-mid: #2d1b4e;
+
+    --neon-cyan: #00f3ff;
+    --neon-pink: #ff00ff;
+    --neon-purple: #bc13fe;
+    --neon-blue: #0080ff;
+    --neon-white: #e8e8f0;
+
+    --text-primary: #e8e8f0;
+    --text-secondary: #9090a8;
+    --text-muted: #606080;
+
+    --border-color: rgba(188, 19, 254, 0.2);
+    --border-hover: rgba(0, 243, 255, 0.5);
+
+    --shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.3);
+    --shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.3);
+    --shadow-glow: 0 0 40px rgba(188, 19, 254, 0.2);
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.User-name
+/* ============================================
+   HEADER BACKGROUND - CYBER GRID & CIRCUIT
+============================================ */
+.Header_Background {
+    background: var(--header-bg);
     position: relative;
-    z-index: 10;
- }
- 
- .nav1 {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-right-style: none;
-    border-left-style: none;
-    height: 35px;
+    z-index: 1000;
     width: 100%;
-    background: linear-gradient(90deg, #008B8B, #006666);;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter:blur(8px);
-    border-color: rgba(255, 255, 255, 0.1);
-    animation: gradient 5s ease infinite;
+}
+
+/* Circuit pattern overlay */
+.Header_Background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v20M30 40v20M0 30h20M40 30h20M30 30m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0' stroke='%23bc13fe' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(rgba(188, 19, 254, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(188, 19, 254, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px, 30px 30px, 30px 30px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Scanlines effect */
+.Header_Background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px);
+    pointer-events: none;
+    z-index: 1;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100vh;
+    }
+}
+
+.Header_Background .HeaderContainer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================
+   NAV 1 - TOP BAR WITH GLITCH
+============================================ */
+.Header_Background .HeaderContainer .nav1 {
+    padding: 0.4rem 0;
+    height: auto;
+    min-height: 40px;
+    width: 100%;
+    background: linear-gradient(90deg,
+            var(--purple-deep) 0%,
+            var(--neon-purple) 50%,
+            var(--purple-deep) 100%);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+    animation: gradient 8s ease infinite;
     background-size: 400% 400%;
+    position: relative;
+    box-shadow:
+        inset 0 0 30px rgba(188, 19, 254, 0.2),
+        0 4px 30px rgba(188, 19, 254, 0.3);
+}
+
+/* Neon top border with glitch */
+.Header_Background .HeaderContainer .nav1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--neon-pink) 15%,
+            var(--neon-cyan) 35%,
+            var(--neon-purple) 50%,
+            var(--neon-cyan) 65%,
+            var(--neon-pink) 85%,
+            transparent 100%);
+    box-shadow:
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-purple);
+    animation: shimmer 3s ease-in-out infinite, glitchLine 4s infinite;
+}
+
+/* Bottom glow line */
+.Header_Background .HeaderContainer .nav1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--neon-purple) 20%,
+            var(--neon-cyan) 50%,
+            var(--neon-purple) 80%,
+            transparent 100%);
+    box-shadow: 0 0 15px var(--neon-purple);
 }
 
 @keyframes gradient {
@@ -43,29 +172,73 @@
     }
 }
 
-.nav1 .container {
-    width: 90%;
-    margin: auto;
+@keyframes shimmer {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: translateX(-100%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(100%);
+    }
 }
 
+@keyframes glitchLine {
 
-.nav1 .container .flex-container {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    20%,
+    80% {
+        opacity: 0.8;
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateX(3px);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: translateX(-3px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(2px);
+    }
+}
+
+.Header_Background .HeaderContainer .nav1 .container {
+    width: 90%;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.Header_Background .HeaderContainer .nav1 .container .flex-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 35px;
+    min-height: 35px;
     width: 100%;
 }
 
-.nav1 .col1 {
-    width: 70%;
+.Header_Background .HeaderContainer .nav1 .col1 {
+    width: 50%;
     font-size: 16px;
     font-weight: 500;
     display: flex;
     align-items: center;
 }
 
-.nav1 .col2 {
+.Header_Background .HeaderContainer .nav1 .col2 {
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: end;
@@ -73,178 +246,1236 @@
     font-weight: 500;
 }
 
-.nav1 .nav-bar {
+.Header_Background .HeaderContainer .nav1 .nav-bar {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.nav1 .col1 .SaleFont{
-    font-family: "BBH Sans Hegarty", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+/* Sale text with glitch effect */
+.Header_Background .HeaderContainer .nav1 .col1 .SaleFont {
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: glitchText 5s infinite, neonPulse 2s ease-in-out infinite;
+    color: var(--text-primary);
+    text-shadow:
+        0 0 5px var(--neon-cyan),
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-purple);
+    position: relative;
 }
 
-.nav1 .list-none {
-    list-style: none;
+@keyframes glitchText {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 5px var(--neon-cyan),
+            0 0 10px var(--neon-cyan);
+    }
+
+    10% {
+        text-shadow:
+            -2px 0 var(--neon-pink),
+            2px 0 var(--neon-cyan);
+    }
+
+    20% {
+        text-shadow:
+            0 0 5px var(--neon-cyan),
+            0 0 10px var(--neon-cyan);
+    }
 }
 
-.Help_Center,
-.Order_Tracking {
-    color: #e0e0e0 !important;
-    text-decoration: none;
-    transition: all 0.3s ease;
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 5px var(--neon-cyan),
+            0 0 10px var(--neon-cyan),
+            0 0 20px var(--neon-purple);
+    }
+
+    50% {
+        text-shadow:
+            0 0 10px var(--neon-cyan),
+            0 0 20px var(--neon-cyan),
+            0 0 40px var(--neon-purple),
+            0 0 60px var(--neon-purple);
+    }
 }
 
-
-.Help_Center:hover,
-.Order_Tracking:hover {
-    color: #ffffff !important;
-    text-shadow: 
-        0 0 10px #757F9A,
-        0 0 20px #D7DDE8,
-        0 0 30px #757F9A;
-    transform: scale(1.05);
+/* ============================================
+   HOLOGRAPHIC CARDS - METALLIC PANELS
+============================================ */
+.Header_Background .HeaderContainer .holographic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.header {
+.Header_Background .HeaderContainer .holographic-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0.3rem 0.8rem;
+    background: var(--header-bg-panel);
+    border: 1px solid var(--border-color);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+/* Corner decorations */
+.Header_Background .HeaderContainer .holographic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, transparent 50%);
+    opacity: 0.6;
+}
+
+.Header_Background .HeaderContainer .holographic-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(315deg, var(--neon-pink) 0%, transparent 50%);
+    opacity: 0.6;
+}
+
+.Header_Background .HeaderContainer .holographic-card h2 {
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+}
+
+.Header_Background .HeaderContainer .holographic-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow:
+        var(--shadow-neon-cyan),
+        inset 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.Header_Background .HeaderContainer .holographic-card:hover h2 {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* ============================================
+   NAV 2 - MAIN HEADER WITH CIRCUIT BG
+============================================ */
+.Header_Background .header {
     width: 100%;
     margin: 0 auto;
 }
 
-.nav2 {
+.Header_Background .HeaderContainer .nav2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0rem 2rem;
-    border-bottom-width: 1px;
-    border-bottom-style: groove ;
-    border-right-style: none;
-    border-left-style: none;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(180deg,
+            var(--header-bg-panel) 0%,
+            rgba(10, 10, 18, 0.98) 100%);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow:
+        inset 0 0 50px rgba(188, 19, 254, 0.1),
+        0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-.logo-container {
+/* Animated neon border */
+.Header_Background .HeaderContainer .nav2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--neon-purple) 20%,
+            var(--neon-cyan) 50%,
+            var(--neon-purple) 80%,
+            transparent 100%);
+    box-shadow:
+        0 0 15px var(--neon-purple),
+        0 0 30px var(--neon-cyan);
+    animation: borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        box-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-cyan);
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 25px var(--neon-purple), 0 0 50px var(--neon-cyan), 0 0 80px var(--neon-purple);
+    }
+}
+
+/* Logo Container with hover effect */
+.Header_Background .HeaderContainer .logo-container {
     display: flex;
-    align-items: center;/* Thuộc tính quan trọng nhất để căn giữa theo chiều dọc */
+    align-items: center;
     text-decoration: none;
-    gap :0.1rem
+    gap: 0.75rem;
+    transition: var(--transition);
+    padding: 0.5rem;
+    position: relative;
+    clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+            100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
-.nav2 .col1 {
+.Header_Background .HeaderContainer .logo-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(0, 243, 255, 0.1) 0%,
+            rgba(188, 19, 254, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.Header_Background .HeaderContainer .logo-container:hover::before {
+    opacity: 1;
+}
+
+.Header_Background .HeaderContainer .logo-container:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-neon-cyan);
+}
+
+.Header_Background .HeaderContainer .nav2 .col1 {
     width: 20%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.nav2 .col1 img {
+.Header_Background .HeaderContainer .nav2 .col1 img {
     width: 80px;
     height: 80px;
+    transition: var(--transition);
+    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.3));
+    animation: logoGlow 3s ease-in-out infinite;
 }
 
-.Shop_Name_Title {
-    font-family : techno_hideo;
-    font-size: 2rem;
+@keyframes logoGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.5)) drop-shadow(0 0 40px rgba(188, 19, 254, 0.3));
+    }
 }
 
-.nav2 .col2 {
+.Header_Background .HeaderContainer .logo-container:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 25px var(--neon-cyan));
+}
+
+/* Shop Name with Glitch Effect */
+.Header_Background .HeaderContainer .Shop_Name_Title {
+    font-family: techno_hideo, 'Orbitron', sans-serif;
+    font-size: 32px;
+    background: linear-gradient(135deg,
+            var(--neon-cyan) 0%,
+            var(--neon-purple) 25%,
+            var(--neon-pink) 50%,
+            var(--neon-purple) 75%,
+            var(--neon-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: titleShift 4s linear infinite, glitchSkew 6s infinite;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    position: relative;
+    letter-spacing: 3px;
+}
+
+@keyframes titleShift {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes glitchSkew {
+
+    0%,
+    100% {
+        transform: skew(0deg);
+    }
+
+    20% {
+        transform: skew(0deg);
+    }
+
+    21% {
+        transform: skew(2deg);
+    }
+
+    22% {
+        transform: skew(-1deg);
+    }
+
+    23% {
+        transform: skew(0deg);
+    }
+}
+
+.Header_Background .HeaderContainer .nav2 .col2 {
     width: 45%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.nav2 .col3 {
+.Header_Background .HeaderContainer .nav2 .col3 {
     width: 20%;
     display: flex;
     align-items: center;
-    padding-left: 1.75rem;
+    padding-left: 0.5rem;
     justify-content: flex-end;
 }
 
-.col3Tab{
+/* ============================================
+   CART ITEMS - CYBER BUTTONS
+============================================ */
+.Header_Background .HeaderContainer .col3Tab {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    list-style: none;
-    justify-content: end;
-}  
-
-
-.Login-Resigter{
-    gap: 0.5rem;
-    display: flex;
-    font-size: 18px !important;
+    gap: 20px;
 }
 
-
-.LoginButton {
-    color: rgb(229, 225, 231) !important;
-    transition: all;
-    font-weight: 500;
-    text-decoration: solid;
- 
-}
-
-.ResigterButton{
-    color: rgb(229, 225, 231) !important;
-    transition: all;
-    font-weight: 500;
-    text-decoration: solid;
-}
-
-/* Update existing Login-Resigter styles */
-.Login-Resigter {
-    gap: 0.5rem;
-    display: flex;
-    font-size: 18px !important;
-}
-
-/* Add position relative and transition for both buttons */
-.LoginButton,
-.ResigterButton {
-    color: rgb(229, 225, 231) !important;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    text-decoration: none;
+.Header_Background .HeaderContainer .col3Tab .item-cart {
     position: relative;
-    display: inline-block;
-    padding: 4px 8px;
-}
-
-/* Create the underline effect using ::after pseudo-element */
-.LoginButton::after,
-.ResigterButton::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(90deg, #673ab7, #ff00cc);
-    transition: width 0.3s ease;
-}
-
-/* Expand the underline on hover */
-.LoginButton:hover::after,
-.ResigterButton:hover::after {
-    width: 100%;
-}
-
-/* Optional: Add color change on hover */
-.LoginButton:hover,
-.ResigterButton:hover {
-    color: #ff00cc !important;
-}
-
-.shopIcon{
     list-style: none;
-    color: rgb(229, 225, 231) !important;
+    width: 50px;
+    height: 50px;
+    background: var(--header-bg-panel);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: visible;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1;
 }
 
-.nav3 {
+/* Gradient background on hover */
+.Header_Background .HeaderContainer .col3Tab .item-cart::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--i, var(--neon-cyan)), var(--j, var(--neon-pink)));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+/* Glow effect */
+.Header_Background .HeaderContainer .col3Tab .item-cart::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--i, var(--neon-cyan)), var(--j, var(--neon-pink)));
+    transition: opacity 0.5s ease;
+    filter: blur(20px);
+    z-index: -1;
+    opacity: 0;
+}
+
+.Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+    width: 140px !important;
+    border-color: var(--border-hover);
+    box-shadow:
+        var(--shadow-neon-cyan),
+        var(--shadow-neon-pink);
+}
+
+.Header_Background .HeaderContainer .col3Tab .item-cart:hover::before {
+    opacity: 1;
+}
+
+.Header_Background .HeaderContainer .col3Tab .item-cart:hover::after {
+    opacity: 0.5;
+}
+
+/* Cart content wrapper */
+.Header_Background .HeaderContainer .col3Tab .item-cart .item-cart-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
+.Header_Background .HeaderContainer .col3Tab .item-cart .MuiTooltip-popper {
+    pointer-events: none;
+}
+
+.Header_Background .HeaderContainer .col3Tab .item-cart .MuiBadge-root {
+    transition: all 0.5s ease;
+    transition-delay: 0.25s;
+    position: relative;
+    z-index: 2;
+}
+
+/* Icon styling */
+.Header_Background .HeaderContainer .col3Tab .item-cart .shopIcon {
+    color: var(--neon-white) !important;
+    font-size: 1.1em;
+    transition: all 0.5s ease;
+    transition-delay: 0.25s;
+    z-index: 2;
+    filter: drop-shadow(0 0 5px var(--neon-white));
+}
+
+/* Hide icon on hover */
+.col3Tab .item-cart:hover .shopIcon,
+.col3Tab .item-cart:hover .MuiBadge-root {
+    transform: scale(0);
+    transition-delay: 0s;
+}
+
+/* Title text */
+.col3Tab .item-cart .item-cart-title {
+    position: absolute;
+    color: #fff;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    transition-delay: 0s;
+    z-index: 3;
+    white-space: nowrap;
+    pointer-events: none;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.col3Tab .item-cart:hover .item-cart-title {
+    transform: scale(1);
+    transition-delay: 0.25s;
+}
+
+.col3Tab .item-cart .MuiIconButton-root {
+    padding: 0;
+    transition: all 0.5s ease;
+}
+
+.col3Tab .item-cart:hover .MuiIconButton-root {
+    transform: scale(0);
+    transition-delay: 0s;
+}
+
+/* ============================================
+   LOGIN/REGISTER - CYBER LINKS
+============================================ */
+.Header_Background .HeaderContainer .Login-Resigter *,
+.Header_Background .HeaderContainer .Logout * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.Header_Background .HeaderContainer .Login-Resigter,
+.Header_Background .HeaderContainer .Logout {
+    gap: 0.5rem;
+    display: flex;
+    font-size: 18px !important;
+    align-items: center;
+}
+
+.Header_Background .HeaderContainer .Login-Resigter ul,
+.Header_Background .HeaderContainer .Logout ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.Header_Background .HeaderContainer .Login-Resigter li,
+.Header_Background .HeaderContainer .Logout li {
+    list-style: none;
+}
+
+.Header_Background .HeaderContainer .Login-Resigter a,
+.Header_Background .HeaderContainer .Logout a {
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    background: transparent;
+    border: 1px solid transparent;
+    clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+            100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+.Header_Background .HeaderContainer .Login-Resigter a::before,
+.Header_Background .HeaderContainer .Logout a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.Header_Background .HeaderContainer .Login-Resigter a:hover,
+.Header_Background .HeaderContainer .Logout a:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+    box-shadow: var(--shadow-neon-cyan);
+}
+
+.Header_Background .HeaderContainer .Login-Resigter a:hover::before,
+.Header_Background .HeaderContainer .Logout a:hover::before {
+    left: 100%;
+}
+
+/* User info styling */
+.Header_Background .HeaderContainer .UserPlace {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0 !important;
+}
+
+.Header_Background .HeaderContainer .User-name {
+    font-weight: 700 !important;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family:  'Rajdhani', sans-serif;
+    letter-spacing: 1px;
+}
+
+.Header_Background .HeaderContainer .User-email {
+    font-weight: 400 !important;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.Header_Background .HeaderContainer .User-info {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+}
+
+/* Shop Icon */
+.Header_Background .shopIcon {
+    list-style: none;
+    color: var(--neon-cyan) !important;
+    transition: var(--transition);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    filter: drop-shadow(0 0 5px var(--neon-cyan));
+}
+
+.Header_Background .shopIcon:hover {
+    color: var(--neon-pink) !important;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 15px var(--neon-pink));
+}
+
+/* ============================================
+   NAV 3
+============================================ */
+.Header_Background .HeaderContainer .nav3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 5, 8, 0.9);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+/* Desktop */
+@media (max-width: 1200px) {
+    .Header_Background .HeaderContainer .nav1 .container {
+        width: 95%;
+    }
+
+    .Header_Background .HeaderContainer .nav2 {
+        padding: 0.5rem 1rem;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 {
+        width: 22%;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col2 {
+        width: 48%;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col3 {
+        width: 30%;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 28px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab {
+        gap: 15px;
+    }
+}
+
+/* Tablet Landscape */
+@media (max-width: 1024px) {
+    .Header_Background .HeaderContainer .nav1 .container {
+        width: 96%;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col1 {
+        width: 55%;
+        font-size: 14px;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col2 {
+        width: 45%;
+        font-size: 11px;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .nav-bar {
+        gap: 1rem;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card h2 {
+        font-size: 10px;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a,
+    .Header_Background .HeaderContainer .Logout a {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 24px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart {
+        width: 42px;
+        height: 42px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+        width: 125px !important;
+    }
+}
+
+/* Tablet Portrait */
+@media (max-width: 992px) {
+    .Header_Background .HeaderContainer .nav1 .flex-container {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.5rem 0;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col1 {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col2 {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .Header_Background .HeaderContainer .nav2 {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 {
+        width: auto;
+        order: 1;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col2 {
+        width: 100%;
+        order: 3;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col3 {
+        width: auto;
+        order: 2;
+        margin-left: auto;
+    }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+    .Header_Background .HeaderContainer .nav1 {
+        height: auto;
+        padding: 0.5rem 0;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .container {
+        width: 96%;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .flex-container {
+        flex-direction: column;
+        height: auto;
+        gap: 0.5rem;
+        padding: 0.25rem 0;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col1 {
+        width: 100%;
+        font-size: 12px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col2 {
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .nav-bar {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card {
+        padding: 0.2rem 0.5rem;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card h2 {
+        font-size: 9px;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a,
+    .Header_Background .HeaderContainer .Logout a {
+        font-size: 10px;
+        padding: 10px 14px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .Header_Background .HeaderContainer .nav2 {
+        padding: 0.75rem;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1,
+    .Header_Background .HeaderContainer .nav2 .col2,
+    .Header_Background .HeaderContainer .nav2 .col3 {
+        width: 100%;
+        justify-content: center;
+        order: unset;
+    }
+
+    .Header_Background .HeaderContainer .logo-container {
+        justify-content: center;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 22px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab {
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart {
+        width: 44px;
+        height: 44px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+        width: 115px !important;
+    }
+}
+
+/* Mobile Medium */
+@media (max-width: 640px) {
+    .Header_Background .HeaderContainer .nav1 .col1 .SaleFont {
+        font-size: 11px;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card h2 {
+        font-size: 8px;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+}
+
+/* Mobile Small */
+@media (max-width: 576px) {
+    .Header_Background .HeaderContainer .nav1 {
+        padding: 0.4rem 0;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .nav-bar {
+        gap: 0.5rem;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card {
+        padding: 0.15rem 0.4rem;
+        margin: 0.1rem;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card h2 {
+        font-size: 7px;
+        white-space: nowrap;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter,
+    .Header_Background .HeaderContainer .Logout {
+        gap: 0.25rem;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a,
+    .Header_Background .HeaderContainer .Logout a {
+        font-size: 9px;
+        padding: 8px 10px;
+        min-height: 44px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab {
+        gap: 10px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Mobile Extra Small */
+@media (max-width: 480px) {
+    .Header_Background .HeaderContainer .nav1 .col1 .SaleFont {
+        font-size: 10px;
+    }
+
+    .Header_Background .HeaderContainer .nav2 {
+        padding: 0.5rem 0.4rem;
+        gap: 0.5rem;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab {
+        gap: 8px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+        width: 100px !important;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart .item-cart-title {
+        font-size: 0.75em !important;
+    }
+
+    .Header_Background .HeaderContainer .User-name {
+        font-size: 12px;
+    }
+
+    .Header_Background .HeaderContainer .User-email {
+        font-size: 10px;
+    }
+}
+
+/* Very Small Mobile */
+@media (max-width: 400px) {
+    .Header_Background .HeaderContainer .nav1 .col1 .SaleFont {
+        font-size: 9px;
+        line-height: 1.3;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card h2 {
+        font-size: 6px;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a,
+    .Header_Background .HeaderContainer .Logout a {
+        font-size: 8px;
+        padding: 8px 6px;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 16px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart {
+        width: 42px;
+        height: 42px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+        width: 90px !important;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 320px) {
+    .Header_Background .HeaderContainer .nav1 .container {
+        width: 98%;
+    }
+
+    .Header_Background .HeaderContainer .nav2 {
+        padding: 0.4rem 0.3rem;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 14px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab {
+        gap: 6px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart {
+        width: 40px;
+        height: 40px;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+        width: 80px !important;
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .Header_Background .HeaderContainer .nav1 {
+        min-height: 30px;
+        padding: 0.2rem 0;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .flex-container {
+        flex-direction: row;
+        min-height: 30px;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col1,
+    .Header_Background .HeaderContainer .nav1 .col2 {
+        width: 50%;
+    }
+
+    .Header_Background .HeaderContainer .nav2 {
+        padding: 0.4rem 1rem;
+        flex-direction: row;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1,
+    .Header_Background .HeaderContainer .nav2 .col2,
+    .Header_Background .HeaderContainer .nav2 .col3 {
+        width: auto;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col2 {
+        flex: 1;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        font-size: 18px;
+    }
+}
+
+/* Touch Device */
+@media (hover: none) and (pointer: coarse) {
+    .Header_Background .shopIcon:hover {
+        transform: none;
+        filter: drop-shadow(0 0 5px var(--neon-cyan));
+    }
+
+    .Header_Background .shopIcon:active {
+        transform: scale(0.95);
+        color: var(--neon-pink) !important;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover {
+        width: 44px !important;
+        box-shadow: none;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:active {
+        transform: scale(0.95);
+        box-shadow: var(--shadow-neon-cyan);
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover::before,
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover::after {
+        opacity: 0;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover .shopIcon,
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover .MuiBadge-root {
+        transform: none;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab .item-cart:hover .item-cart-title {
+        transform: scale(0);
+    }
+
+    .Header_Background .HeaderContainer .holographic-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card:active {
+        transform: scale(0.98);
+        box-shadow: var(--shadow-neon-cyan);
+    }
+
+    .Header_Background .HeaderContainer .logo-container:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .Header_Background .HeaderContainer .logo-container:active {
+        transform: scale(0.98);
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a:hover,
+    .Header_Background .HeaderContainer .Logout a:hover {
+        color: var(--text-primary);
+        border-color: transparent;
+        box-shadow: none;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a:active,
+    .Header_Background .HeaderContainer .Logout a:active {
+        color: var(--neon-cyan);
+        background: rgba(0, 243, 255, 0.1);
+    }
+}
+
+/* High DPI */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+    .Header_Background .HeaderContainer .nav1::before,
+    .Header_Background .HeaderContainer .nav1::after,
+    .Header_Background .HeaderContainer .nav2::after {
+        height: 1px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .Header_Background::after {
+        animation: none;
+    }
+
+    .Header_Background .HeaderContainer .nav1 {
+        animation: none;
+    }
+
+    .Header_Background .HeaderContainer .nav1::before {
+        animation: none;
+    }
+
+    .Header_Background .HeaderContainer .nav2::after {
+        animation: none;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        animation: none;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col1 .SaleFont {
+        animation: none;
+    }
+
+    .Header_Background .HeaderContainer .nav2 .col1 img {
+        animation: none;
+    }
+
+    .Header_Background *,
+    .Header_Background *::before,
+    .Header_Background *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .Header_Background {
+        background: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .Header_Background::before,
+    .Header_Background::after,
+    .Header_Background .HeaderContainer .nav1::before,
+    .Header_Background .HeaderContainer .nav1::after,
+    .Header_Background .HeaderContainer .nav2::after {
+        display: none !important;
+    }
+
+    .Header_Background .HeaderContainer .nav1 {
+        background: #f0f0f0 !important;
+        animation: none !important;
+    }
+
+    .Header_Background .HeaderContainer .Shop_Name_Title {
+        background: none !important;
+        -webkit-text-fill-color: #000 !important;
+        color: #000 !important;
+        animation: none !important;
+    }
+
+    .Header_Background .HeaderContainer .nav1 .col1 .SaleFont {
+        color: #000 !important;
+        text-shadow: none !important;
+        animation: none !important;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card {
+        background: #f5f5f5 !important;
+        border-color: #ccc !important;
+    }
+
+    .Header_Background .HeaderContainer .holographic-card h2 {
+        color: #000 !important;
+    }
+
+    .Header_Background .HeaderContainer .Login-Resigter a,
+    .Header_Background .HeaderContainer .Logout a {
+        color: #000 !important;
+    }
+
+    .Header_Background .HeaderContainer .col3Tab {
+        display: none !important;
+    }
+}
+
+/* Performance */
+.Header_Background .HeaderContainer * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus Visible for Accessibility */
+.Header_Background .HeaderContainer a:focus-visible,
+.Header_Background .HeaderContainer button:focus-visible,
+.Header_Background .HeaderContainer .item-cart:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+    box-shadow: var(--shadow-neon-cyan);
+}
