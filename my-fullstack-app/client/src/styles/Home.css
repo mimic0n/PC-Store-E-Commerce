@@ -385,3 +385,88 @@
     background: rgba(0, 0, 0, 0.35);
     transform: translateY(-2px);
 }
+
+/* Filter Info Text */
+.Home_Container .ProductBox_Filter_Info {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+/* ProductBox_2 for Featured Products */
+.Home_Container .ProductBox_2_section {
+    width: 100%;
+}
+
+.Home_Container .ProductBox_2 {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.Home_Container .ProductBox_2_container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.Home_Container .ProductBox_2_content {
+    margin-bottom: 15px;
+}
+
+.Home_Container .ProductBox_2_Font {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+}
+
+.Home_Container .ProductBox_2_Font::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #8a2be2, #4a0080);
+    border-radius: 2px;
+}
+
+/* Tabs Styling Enhancement */
+.Home_Container .Product_Nav .MuiTabs-root {
+    min-height: 40px;
+}
+
+.Home_Container .Product_Nav .MuiTab-root {
+    color: #aaa;
+    text-transform: none;
+    font-weight: 500;
+    min-height: 40px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.Home_Container .Product_Nav .MuiTab-root:hover {
+    color: #fff;
+    background: rgba(138, 43, 226, 0.1);
+}
+
+.Home_Container .Product_Nav .MuiTab-root.Mui-selected {
+    color: #8a2be2;
+}
+
+.Home_Container  .Product_Nav .MuiTabs-indicator {
+    background: linear-gradient(90deg, #8a2be2, #4a0080);
+    height: 3px;
+    border-radius: 2px;
+}
+
+/* Scrollable tabs for mobile */
+.Home_Container .Product_Nav .MuiTabs-scrollButtons {
+    color: #8a2be2;
+}
+
+.Home_Container .Product_Nav .MuiTabs-scrollButtons.Mui-disabled {
+    opacity: 0.3;
+}

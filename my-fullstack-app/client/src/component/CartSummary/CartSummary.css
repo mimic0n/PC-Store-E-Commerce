@@ -914,6 +914,147 @@
     color: var(--c-text-secondary);
 }
 
+/* Selected Badge in Header */
+.cart-summary-selected-badge {
+    font-size: 11px;
+    background: linear-gradient(135deg, #00fff9, #00d4aa);
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+/* Select All Section */
+.cart-summary-select-all {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: rgba(138, 43, 226, 0.1);
+    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.cart-summary-select-all:hover {
+    background: rgba(138, 43, 226, 0.2);
+}
+
+.cart-summary-select-all-text {
+    font-size: 13px;
+    color: #ccc;
+    font-weight: 500;
+}
+
+/* Checkbox Styles */
+.cart-summary-checkbox,
+.cart-summary-item-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.checkbox-icon {
+    font-size: 20px;
+    color: rgba(138, 43, 226, 0.5);
+    transition: all 0.3s ease;
+}
+
+.checkbox-icon.checked {
+    color: #00fff9;
+}
+
+.cart-summary-item-checkbox {
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+/* Product Item with Checkbox */
+.cart-summary-product-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.cart-summary-product-item.selected {
+    background: rgba(0, 255, 249, 0.05);
+    border-left: 2px solid #00fff9;
+}
+
+.cart-summary-product-item:hover {
+    background: rgba(138, 43, 226, 0.1);
+}
+
+/* Item Actions */
+.cart-summary-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.cart-summary-buy-now-btn {
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #00fff9, #00d4aa);
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.cart-summary-buy-now-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px rgba(0, 255, 249, 0.4);
+}
+
+.cart-summary-Delete-icon {
+    font-size: 18px;
+    color: #ff4757;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cart-summary-Delete-icon:hover {
+    color: #ff6b7a;
+    transform: scale(1.1);
+}
+
+/* Summary Selected Info */
+.summary-selected-info {
+    font-size: 11px;
+    color: #00fff9;
+    margin-left: 5px;
+}
+
+/* Checkout Button Update */
+.checkout-btn {
+    background: linear-gradient(135deg, #8a2be2, #b24bf3) !important;
+    border: none !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(138, 43, 226, 0.5);
+}
+
+.checkout-btn .btn-text {
+    color: #fff;
+}
+
+
 /* ============================================
    RESPONSIVE DESIGN
 ============================================ */

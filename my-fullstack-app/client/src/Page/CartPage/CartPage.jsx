@@ -1,57 +1,93 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './CartPage.css'
+import { Link, useNavigate } from 'react-router-dom';
 
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { AiFillLock } from "react-icons/ai";
 import { GiReturnArrow } from "react-icons/gi";
 import { FaCcMastercard } from "react-icons/fa6";
-import { FaGifts } from "react-icons/fa";
+import { useCart } from '../../context/CartContext'; 
 
 export const CartPage = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: 'PC AMD GAMING LUXURY RYZEN 9 9950X3D - RTX 5090 32GB OC',
-      image: '/src/assets/Product/PC/PC-AMD-Gaming/PC AMD GAMING LUXURY RYZEN 9 9950X3D - RTX 5090 32GB OC/PC_AMD_GAMING_LUXURY_RYZEN_9_9950X3D-RTX_5090_32GB_OC_1.jpg',
-      price: 48880000,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: 'PC AMD GAMING LUXURY RYZEN 9 9950X3D - RTX 5090 32GB OC',
-      image: '/src/assets/Product/PC/PC-AMD-Gaming/PC AMD GAMING LUXURY RYZEN 9 9950X3D - RTX 5090 32GB OC/PC_AMD_GAMING_LUXURY_RYZEN_9_9950X3D-RTX_5090_32GB_OC_1.jpg',
-      price: 48880000,
-      quantity: 1,
+  const navigate = useNavigate();
+  const { 
+    cartItems, 
+    cartTotal, 
+    loading, 
+    updateQuantity, 
+    removeItem,
+    // NEW: Import các functions mới
+    selectedItems,
+    toggleSelectItem,
+    selectAllItems,
+    deselectAllItems,
+    isItemSelected,
+    calculateSelectedTotal,
+    setItemsForCheckout
+  } = useCart();
+
+  const [showPromoCode, setShowPromoCode] = React.useState(false);
+
+  const handleUpdateQuantity = async (itemId, delta) => {
+    const item = cartItems.find(i => (i.id || i.productId) === itemId);
+    if (item) {
+      const newQuantity = item.quantity + delta;
+      if (newQuantity >= 1) {
+        await updateQuantity(itemId, newQuantity);
+      }
     }
-  ])
+  };
 
-  const [showPromoCode, setShowPromoCode] = useState(false)
+  const handleRemoveItem = async (itemId) => {
+    await removeItem(itemId);
+  };
 
-  const updateQuantity = (id, delta) => {
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      )
-    )
-  }
+  // NEW: Tính toán dựa trên items được chọn
+  const selectedTotal = calculateSelectedTotal();
+  const hasSelectedItems = selectedItems.length > 0;
+  const subtotal = hasSelectedItems ? selectedTotal : cartTotal;
+  const shipping = 30000;
+  const total = subtotal + shipping;
 
-  const removeItem = (id) => {
-    setCartItems(items => items.filter(item => item.id !== id))
-  }
+  // NEW: Kiểm tra tất cả đã được chọn chưa
+  const isAllSelected = cartItems.length > 0 && 
+    cartItems.every(item => selectedItems.includes(item.id || item.productId));
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = 30000
-  const total = subtotal + shipping
+  // NEW: Handle toggle all
+  const handleToggleAll = () => {
+    if (isAllSelected) {
+      deselectAllItems();
+    } else {
+      selectAllItems();
+    }
+  };
+
+  // NEW: Handle checkout với selected items
+  const handleCheckout = () => {
+    if (hasSelectedItems) {
+      setItemsForCheckout();
+      navigate('/CheckOut');
+    } else {
+      // Nếu không chọn gì, checkout tất cả
+      setItemsForCheckout();
+      navigate('/CheckOut');
+    }
+  };
+
+  // NEW: Handle Buy Now cho 1 item
+  const handleBuyNow = (item) => {
+    const itemsToCheckout = [item];
+    setItemsForCheckout(itemsToCheckout);
+    navigate('/CheckOut');
+  };
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
-        currency: 'VND',
-        currencyDisplay: 'code'
+      currency: 'VND',
+      currencyDisplay: 'code'
     }).format(price);
-  }
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -72,9 +108,11 @@ export const CartPage = () => {
             </div>
             <h2 className='cart-page-empty-title'>Your Cart is Empty</h2>
             <p className='cart-page-empty-text'>Add products to experience future technology</p>
-            <button className='cart-page-empty-btn'>
-              <span>Explore Now</span>
-            </button>
+            <Link to="/ProductListing">
+              <button className='cart-page-empty-btn'>
+                <span>Explore Now</span>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -89,71 +127,133 @@ export const CartPage = () => {
             <h2 className='cart-page-title'>Your Shopping Cart</h2>
             <p className='cart-page-count'>
               You have <span className='cart-page-count-number'>{cartItems.length}</span> {cartItems.length > 1 ? 'items' : 'item'} in your cart
+              {hasSelectedItems && (
+                <span className='cart-page-selected-count'>
+                  {' '}• {selectedItems.length} selected
+                </span>
+              )}
             </p>
           </div>
 
-          <div className='cart-page-list'>
-            {cartItems.map((item) => (
-              <div key={item.id} className='cart-page-item'>
-                <div className='cart-page-item-image'>
-                  <img src={item.image} alt={item.name} className='cart-page-item-img' />
-                  <div className='cart-page-item-overlay'></div>
-                </div>
-                
-                <div className='cart-page-item-details'>
-                  <div className='cart-page-item-name'>{item.name}</div>
-                  <div className='cart-page-item-attributes'>
-                  </div>
-                  <p className='cart-page-item-price'>
-                    <span className='cart-page-item-price-title'>Price:</span>
-                    {formatPrice(item.price)}
-                  </p>
-                </div>
-
-                <div className='cart-page-item-actions'>
-                  <div className='cart-page-quantity'>
-                    <button 
-                      className='cart-page-quantity-btn' 
-                      onClick={() => updateQuantity(item.id, -1)}
-                      disabled={item.quantity <= 1}
-                    >
-                      <span>−</span>
-                    </button>
-                    <span className='cart-page-quantity-display'>{item.quantity}</span>
-                    <button 
-                      className='cart-page-quantity-btn' 
-                      onClick={() => updateQuantity(item.id, 1)}
-                    >
-                      <span>+</span>
-                    </button>
-                  </div>
-                  
-                  <button 
-                    className='cart-page-remove-btn' 
-                    onClick={() => removeItem(item.id)}
-                    title='Remove Product'
-                  >
-                    <RiDeleteBin6Fill />
-                  </button>
-                </div>
-
-                <div className='cart-page-item-total'>
-                  <span className='cart-page-item-total-label'>Total:</span>
-                  <span className='cart-page-item-total-price'>{formatPrice(item.price * item.quantity)}</span>
-                </div>
-              </div>
-            ))}
+          {/* NEW: Select All Checkbox */}
+          <div className='cart-page-select-all'>
+            <label className='cart-page-checkbox-label'>
+              <input 
+                type='checkbox' 
+                checked={isAllSelected}
+                onChange={handleToggleAll}
+                className='cart-page-checkbox'
+              />
+              <span className='cart-page-checkbox-custom'></span>
+              <span>Select All ({cartItems.length} items)</span>
+            </label>
           </div>
 
-          <button className='cart-page-continue-btn'>
-            <span>← Continue Shopping</span>
-          </button>
+          <div className='cart-page-list'>
+            {cartItems.map((item) => {
+              const product = item.product || item;
+              const itemPrice = product.salePrice || product.price || item.price;
+              const itemId = item.id || item.productId;
+              const isSelected = isItemSelected(itemId);
+              
+              return (
+                <div key={itemId} className={`cart-page-item ${isSelected ? 'selected' : ''}`}>
+                  {/* NEW: Checkbox cho mỗi item */}
+                  <div className='cart-page-item-checkbox'>
+                    <label className='cart-page-checkbox-label'>
+                      <input 
+                        type='checkbox' 
+                        checked={isSelected}
+                        onChange={() => toggleSelectItem(itemId)}
+                        className='cart-page-checkbox'
+                      />
+                      <span className='cart-page-checkbox-custom'></span>
+                    </label>
+                  </div>
+
+                  <div className='cart-page-item-image'>
+                    <img 
+                      src={product.thumbnail || '/src/assets/placeholder.jpg'} 
+                      alt={product.name} 
+                      className='cart-page-item-img' 
+                    />
+                    <div className='cart-page-item-overlay'></div>
+                  </div>
+                  
+                  <div className='cart-page-item-details'>
+                    <div className='cart-page-item-name'>{product.name}</div>
+                    <div className='cart-page-item-attributes'>
+                    </div>
+                    <p className='cart-page-item-price'>
+                      <span className='cart-page-item-price-title'>Price:</span>
+                      {formatPrice(itemPrice)}
+                    </p>
+                  </div>
+
+                  <div className='cart-page-item-actions'>
+                    <div className='cart-page-quantity'>
+                      <button 
+                        className='cart-page-quantity-btn' 
+                        onClick={() => handleUpdateQuantity(itemId, -1)}
+                        disabled={item.quantity <= 1 || loading}
+                      >
+                        <span>−</span>
+                      </button>
+                      <span className='cart-page-quantity-display'>{item.quantity}</span>
+                      <button 
+                        className='cart-page-quantity-btn' 
+                        onClick={() => handleUpdateQuantity(itemId, 1)}
+                        disabled={loading}
+                      >
+                        <span>+</span>
+                      </button>
+                    </div>
+                    
+                    {/* NEW: Buy Now button cho từng item */}
+                    <button 
+                      className='cart-page-buy-now-btn' 
+                      onClick={() => handleBuyNow(item)}
+                      title='Buy Now'
+                      disabled={loading}
+                    >
+                      Buy Now
+                    </button>
+
+                    <button 
+                      className='cart-page-remove-btn' 
+                      onClick={() => handleRemoveItem(itemId)}
+                      title='Remove Product'
+                      disabled={loading}
+                    >
+                      <RiDeleteBin6Fill />
+                    </button>
+                  </div>
+
+                  <div className='cart-page-item-total'>
+                    <span className='cart-page-item-total-label'>Total:</span>
+                    <span className='cart-page-item-total-price'>{formatPrice(itemPrice * item.quantity)}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <Link to="/ProductListing">
+            <button className='cart-page-continue-btn'>
+              <span>← Continue Shopping</span>
+            </button>
+          </Link>
         </div>
 
         <div className='cart-page-right'>
           <div className='cart-page-summary'>
             <div className='cart-page-summary-title'>
-              <h3 >Order Summary</h3>
+              <h3>Order Summary</h3>
+              {hasSelectedItems && (
+                <span className='cart-page-summary-selected'>
+                  ({selectedItems.length} items selected)
+                </span>
+              )}
             </div>
             <div className='cart-page-summary-row'>
               <span className='cart-page-summary-label'>Subtotal:</span>
@@ -191,8 +291,17 @@ export const CartPage = () => {
               <span className='cart-page-summary-total-amount'>{formatPrice(total)}</span>
             </div>
 
-            <button className='cart-page-checkout-btn'>
-              <span>CHECKOUT</span>
+            <button 
+              className='cart-page-checkout-btn'
+              onClick={handleCheckout}
+              disabled={loading}
+            >
+              <span>
+                {hasSelectedItems 
+                  ? `CHECKOUT (${selectedItems.length} items)` 
+                  : 'CHECKOUT ALL'
+                }
+              </span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M7 3L14 10L7 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               </svg>
@@ -218,10 +327,15 @@ export const CartPage = () => {
 
       <div className='cart-page-mobile-bar'>
         <div className='cart-page-mobile-total'>
-          <span className='cart-page-mobile-label'>Total:</span>
+          <span className='cart-page-mobile-label'>
+            Total {hasSelectedItems ? `(${selectedItems.length})` : ''}:
+          </span>
           <span className='cart-page-mobile-amount'>{formatPrice(total)}</span>
         </div>
-        <button className='cart-page-mobile-checkout'>
+        <button 
+          className='cart-page-mobile-checkout'
+          onClick={handleCheckout}
+        >
           Checkout
         </button>
       </div>

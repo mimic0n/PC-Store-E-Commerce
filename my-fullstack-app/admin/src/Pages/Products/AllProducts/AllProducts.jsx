@@ -23,10 +23,23 @@ import {
   IoWarningOutline,
   IoBanOutline,
   IoSparkles,
-  IoCopyOutline
+  IoCopyOutline,
+  IoRefreshOutline
 } from 'react-icons/io5'
 import { BiPackage } from 'react-icons/bi'
 import { HiOutlineLightningBolt } from 'react-icons/hi'
+import { 
+  Dialog, 
+  DialogTitle, 
+  DialogContent, 
+  DialogActions, 
+  Button,
+  CircularProgress,
+  Snackbar,
+  Alert
+} from '@mui/material'
+import { getAllProducts, deleteProduct, getProductsCount } from '../../../api/productService'
+import { getAllCategories } from '../../../api/categoryService'
 
 const AllProducts = () => {
   const [viewMode, setViewMode] = useState('table')
@@ -38,292 +51,208 @@ const AllProducts = () => {
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
 
+  // Data states
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [pagination, setPagination] = useState({
+    total: 0,
+    page: 1,
+    limit: 10,
+    totalPages: 1
+  })
+  const [stats, setStats] = useState({
+    total: 0,
+    active: 0,
+    lowStock: 0,
+    outOfStock: 0
+  })
+
+  // Filter states
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedStatus, setSelectedStatus] = useState('')
+  const [itemsPerPage, setItemsPerPage] = useState(10)
+
+  // Delete dialog
+  const [deleteDialog, setDeleteDialog] = useState({ open: false, product: null })
+  const [deleting, setDeleting] = useState(false)
+
+  // Snackbar
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' })
+
   const handleAddProduct = () => {
     navigate('/products/AddProducts');
   };
 
+  const handleEditProduct = (productId) => {
+    navigate(`/products/EditProduct/${productId}`);
+  };
+
+  // Fetch products
+  const fetchProducts = async () => {
+    setIsLoading(true);
+    try {
+      const params = {
+        page: currentPage,
+        limit: itemsPerPage,
+        search: searchQuery || undefined,
+        isActive: selectedStatus === 'active' ? true : 
+                  selectedStatus === 'inactive' ? false : undefined
+      };
+
+      const response = await getAllProducts(params);
+      if (response.success) {
+        setProducts(response.data);
+        setPagination(response.pagination);
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      showSnackbar('Error loading products', 'error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch categories
+  const fetchCategories = async () => {
+    try {
+      const response = await getAllCategories();
+      if (response.success) {
+        setCategories(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  // Fetch stats
+  const fetchStats = async () => {
+    try {
+      const response = await getProductsCount();
+      if (response.success) {
+        setStats({
+          total: response.data.total || 0,
+          active: response.data.active || 0,
+          lowStock: response.data.lowStock || 0,
+          outOfStock: response.data.outOfStock || 0
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
+
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 1000)
-  }, [])
+    fetchProducts();
+    fetchCategories();
+    fetchStats();
+  }, [currentPage, itemsPerPage]);
 
-  // Updated PC Store product data
-  const products = [
-    {
-      id: 1,
-      name: 'PC AMD GAMING LUXURY RYZEN 9 9950X3D - RTX 5090 32GB OC',
-      image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=100',
-      sku: 'PC-AMD-LUX-001',
-      category: 'PC AMD Gaming',
-      oldPrice: 52700000,
-      price: 48800000,
-      discount: 18,
-      stock: 5,
-      status: 'active',
-      sales: 12,
-      guarantee: '36M',
-      specs: {
-        cpu: 'AMD Ryzen 9 9950X3D',
-        vga: 'RTX 5090 32GB OC',
-        ram: '64GB DDR5',
-        ssd: '2TB NVMe'
+  // Debounced search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (currentPage === 1) {
+        fetchProducts();
+      } else {
+        setCurrentPage(1);
       }
-    },
-    {
-      id: 2,
-      name: 'PC Intel Gaming Ultra i9-14900K - RTX 4090 24GB',
-      image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=100',
-      sku: 'PC-INT-ULT-002',
-      category: 'PC Intel Gaming',
-      oldPrice: 45000000,
-      price: 39900000,
-      discount: 11,
-      stock: 8,
-      status: 'active',
-      sales: 23,
-      guarantee: '36M',
-      specs: {
-        cpu: 'Intel i9-14900K',
-        vga: 'RTX 4090 24GB',
-        ram: '64GB DDR5',
-        ssd: '2TB NVMe'
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchQuery, selectedStatus]);
+
+  const showSnackbar = (message, severity = 'success') => {
+    setSnackbar({ open: true, message, severity });
+  };
+
+  const handleDeleteClick = (product) => {
+    setDeleteDialog({ open: true, product });
+    setActiveDropdown(null);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deleteDialog.product) return;
+    
+    setDeleting(true);
+    try {
+      const response = await deleteProduct(deleteDialog.product.id);
+      if (response.success) {
+        showSnackbar('Product deleted successfully!', 'success');
+        fetchProducts();
+        fetchStats();
+      } else {
+        showSnackbar(response.message || 'Error deleting product', 'error');
       }
-    },
-    {
-      id: 3,
-      name: 'PC AMD Ryzen 7 7800X3D - RTX 4080 16GB Gaming',
-      image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=100',
-      sku: 'PC-AMD-MID-003',
-      category: 'PC AMD Gaming',
-      oldPrice: 35000000,
-      price: 32500000,
-      discount: 7,
-      stock: 15,
-      status: 'active',
-      sales: 45,
-      guarantee: '36M',
-      specs: {
-        cpu: 'AMD Ryzen 7 7800X3D',
-        vga: 'RTX 4080 16GB',
-        ram: '32GB DDR5',
-        ssd: '1TB NVMe'
-      }
-    },
-    {
-      id: 4,
-      name: 'Laptop Gaming ASUS ROG Strix G16 - RTX 4070',
-      image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=100',
-      sku: 'LAP-ASUS-ROG-004',
-      category: 'Laptop Gaming',
-      oldPrice: 42000000,
-      price: 38900000,
-      discount: 7,
-      stock: 12,
-      status: 'active',
-      sales: 34,
-      guarantee: '24M',
-      specs: {
-        cpu: 'Intel i9-13980HX',
-        vga: 'RTX 4070 8GB',
-        ram: '32GB DDR5',
-        ssd: '1TB NVMe'
-      }
-    },
-    {
-      id: 5,
-      name: 'ASUS ROG STRIX X870E-E Gaming Wifi DDR5',
-      image: 'https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=100',
-      sku: 'MB-ASUS-X870-005',
-      category: 'Components',
-      oldPrice: 15000000,
-      price: 14200000,
-      discount: 5,
-      stock: 25,
-      status: 'active',
-      sales: 67,
-      guarantee: '36M',
-      specs: {
-        chipset: 'AMD X870E',
-        socket: 'AM5',
-        formFactor: 'ATX',
-        memory: 'DDR5'
-      }
-    },
-    {
-      id: 6,
-      name: 'G.SKILL Trident Z5 RGB 64GB (32GBx2) 6000MHz DDR5',
-      image: 'https://images.unsplash.com/photo-1541823709867-1b206113eafd?w=100',
-      sku: 'RAM-GSKILL-Z5-006',
-      category: 'Components',
-      oldPrice: 8500000,
-      price: 7900000,
-      discount: 7,
-      stock: 45,
-      status: 'active',
-      sales: 89,
-      guarantee: '36M',
-      specs: {
-        capacity: '64GB (32GBx2)',
-        speed: '6000MHz',
-        type: 'DDR5',
-        rgb: 'Yes'
-      }
-    },
-    {
-      id: 7,
-      name: 'Samsung 990 PRO 2TB M.2 NVMe PCIe Gen4.0 x4',
-      image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=100',
-      sku: 'SSD-SAMS-990-007',
-      category: 'Components',
-      oldPrice: 6500000,
-      price: 5900000,
-      discount: 9,
-      stock: 3,
-      status: 'low-stock',
-      sales: 123,
-      guarantee: '60M',
-      specs: {
-        capacity: '2TB',
-        interface: 'PCIe 4.0 x4',
-        formFactor: 'M.2 2280',
-        speed: '7450MB/s'
-      }
-    },
-    {
-      id: 8,
-      name: 'HYTE Y70 - BLACK (ATX/MID TOWER/BLACK)',
-      image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=100',
-      sku: 'CASE-HYTE-Y70-008',
-      category: 'Components',
-      oldPrice: 4500000,
-      price: 4200000,
-      discount: 7,
-      stock: 18,
-      status: 'active',
-      sales: 56,
-      guarantee: '24M',
-      specs: {
-        type: 'Mid Tower',
-        formFactor: 'ATX',
-        color: 'Black',
-        glass: 'Tempered Glass'
-      }
-    },
-    {
-      id: 9,
-      name: 'Logitech G Pro X Superlight 2 Wireless Gaming Mouse',
-      image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=100',
-      sku: 'PER-LOGI-GPRO-009',
-      category: 'Peripherals',
-      oldPrice: 3500000,
-      price: 3200000,
-      discount: 9,
-      stock: 32,
-      status: 'active',
-      sales: 145,
-      guarantee: '24M',
-      specs: {
-        sensor: 'HERO 2',
-        dpi: '32000',
-        weight: '60g',
-        wireless: 'Yes'
-      }
-    },
-    {
-      id: 10,
-      name: 'TRYX PANORAMA ARGB 360 (6.5" AMOLED Screen)',
-      image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=100',
-      sku: 'COOL-TRYX-PAN-010',
-      category: 'Components',
-      oldPrice: 12000000,
-      price: 11200000,
-      discount: 7,
-      stock: 0,
-      status: 'out-of-stock',
-      sales: 34,
-      guarantee: '24M',
-      specs: {
-        type: 'AIO Water Cooling',
-        radiator: '360mm',
-        screen: '6.5" AMOLED',
-        pump: 'ASETEK 8'
-      }
-    },
-    {
-      id: 11,
-      name: 'PC Budget AMD Ryzen 5 5600 - RX 6600 8GB',
-      image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=100',
-      sku: 'PC-AMD-BUD-011',
-      category: 'PC AMD Gaming',
-      oldPrice: 15000000,
-      price: 13900000,
-      discount: 7,
-      stock: 0,
-      status: 'draft',
-      sales: 0,
-      guarantee: '24M',
-      specs: {
-        cpu: 'AMD Ryzen 5 5600',
-        vga: 'RX 6600 8GB',
-        ram: '16GB DDR4',
-        ssd: '500GB NVMe'
-      }
-    },
-    {
-      id: 12,
-      name: 'Keychron Q1 Pro QMK Mechanical Keyboard',
-      image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=100',
-      sku: 'PER-KEY-Q1P-012',
-      category: 'Peripherals',
-      oldPrice: 4500000,
-      price: 4200000,
-      discount: 7,
-      stock: 28,
-      status: 'active',
-      sales: 78,
-      guarantee: '12M',
-      specs: {
-        layout: '75%',
-        switches: 'Hot-swappable',
-        backlight: 'RGB',
-        wireless: 'Yes'
-      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      showSnackbar(error.response?.data?.message || 'Error deleting product', 'error');
+    } finally {
+      setDeleting(false);
+      setDeleteDialog({ open: false, product: null });
     }
-  ]
+  };
 
-  const categories = [
-    'All Categories', 
-    'PC AMD Gaming', 
-    'PC Intel Gaming', 
-    'Laptop Gaming', 
-    'Components', 
-    'Peripherals', 
-    'Accessories'
-  ]
-  
-  const statuses = ['All Status', 'Active', 'Low Stock', 'Out of Stock', 'Draft']
-
-  const getStatusBadge = (status) => {
-    const statusConfig = {
-      'active': { label: 'Available', class: 'status-active', icon: <IoCheckmarkCircle /> },
-      'low-stock': { label: 'Low Stock', class: 'status-warning', icon: <IoAlertCircle /> },
-      'out-of-stock': { label: 'Out of Stock', class: 'status-danger', icon: <IoBanOutline /> },
-      'draft': { label: 'Draft', class: 'status-draft', icon: <IoPauseCircle /> }
+  const handleBulkDelete = async () => {
+    if (selectedProducts.length === 0) return;
+    
+    setDeleting(true);
+    try {
+      for (const productId of selectedProducts) {
+        await deleteProduct(productId);
+      }
+      showSnackbar(`${selectedProducts.length} products deleted successfully!`, 'success');
+      setSelectedProducts([]);
+      fetchProducts();
+      fetchStats();
+    } catch (error) {
+      showSnackbar('Error deleting some products', 'error');
+    } finally {
+      setDeleting(false);
     }
-    const config = statusConfig[status] || statusConfig['draft']
+  };
+
+  const getStatusBadge = (product) => {
+    if (!product.isActive) {
+      return (
+        <span className='product-status status-draft'>
+          <IoPauseCircle />
+          Draft
+        </span>
+      );
+    }
+    if (product.quantity === 0) {
+      return (
+        <span className='product-status status-danger'>
+          <IoBanOutline />
+          Out of Stock
+        </span>
+      );
+    }
+    if (product.quantity < 10) {
+      return (
+        <span className='product-status status-warning'>
+          <IoAlertCircle />
+          Low Stock
+        </span>
+      );
+    }
     return (
-      <span className={`product-status ${config.class}`}>
-        {config.icon}
-        {config.label}
+      <span className='product-status status-active'>
+        <IoCheckmarkCircle />
+        Available
       </span>
-    )
-  }
+    );
+  };
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND'
-    }).format(price)
-  }
+    }).format(price);
+  };
+
+  const getDiscountPercentage = (price, salePrice) => {
+    if (!salePrice || salePrice >= price) return 0;
+    return Math.round(((price - salePrice) / price) * 100);
+  };
 
   const handleSelectAll = (e) => {
     if (e.target.checked) {
@@ -345,11 +274,18 @@ const AllProducts = () => {
     setActiveDropdown(activeDropdown === productId ? null : productId)
   }
 
-  // Calculate stats
-  const totalProducts = products.length
-  const activeProducts = products.filter(p => p.status === 'active').length
-  const lowStockProducts = products.filter(p => p.status === 'low-stock').length
-  const outOfStockProducts = products.filter(p => p.status === 'out-of-stock').length
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const categoryOptions = ['All Categories', ...categories.map(c => c.name)];
+  const statusOptions = [
+    { value: '', label: 'All Status' },
+    { value: 'active', label: 'Active' },
+    { value: 'inactive', label: 'Inactive' }
+  ];
 
   return (
     <div className='all-products-page'>
@@ -387,6 +323,14 @@ const AllProducts = () => {
             </div>
           </div>
           <div className='all-products__header-right'>
+            <button 
+              className='cyber-btn cyber-btn--outline'
+              onClick={() => { fetchProducts(); fetchStats(); }}
+              disabled={isLoading}
+            >
+              <IoRefreshOutline className={isLoading ? 'spinning' : ''} />
+              <span>Refresh</span>
+            </button>
             <button className='cyber-btn cyber-btn--outline'>
               <IoCloudDownloadOutline />
               <span>Export</span>
@@ -411,12 +355,12 @@ const AllProducts = () => {
               </div>
               <div className='stat-card__info'>
                 <span className='stat-card__label'>Total Products</span>
-                <span className='stat-card__value'>{totalProducts}</span>
+                <span className='stat-card__value'>{stats.total}</span>
               </div>
             </div>
             <div className='stat-card__trend positive'>
               <IoTrendingUpOutline />
-              +12.5%
+              Live
             </div>
             <div className='stat-card__corner'></div>
           </div>
@@ -429,7 +373,7 @@ const AllProducts = () => {
               </div>
               <div className='stat-card__info'>
                 <span className='stat-card__label'>Available</span>
-                <span className='stat-card__value'>{activeProducts}</span>
+                <span className='stat-card__value'>{stats.active}</span>
               </div>
             </div>
             <div className='stat-card__badge active'>ONLINE</div>
@@ -444,7 +388,7 @@ const AllProducts = () => {
               </div>
               <div className='stat-card__info'>
                 <span className='stat-card__label'>Low Stock</span>
-                <span className='stat-card__value'>{lowStockProducts}</span>
+                <span className='stat-card__value'>{stats.lowStock}</span>
               </div>
             </div>
             <div className='stat-card__badge warning'>ALERT</div>
@@ -459,7 +403,7 @@ const AllProducts = () => {
               </div>
               <div className='stat-card__info'>
                 <span className='stat-card__label'>Out of Stock</span>
-                <span className='stat-card__value'>{outOfStockProducts}</span>
+                <span className='stat-card__value'>{stats.outOfStock}</span>
               </div>
             </div>
             <div className='stat-card__badge danger'>CRITICAL</div>
@@ -487,17 +431,23 @@ const AllProducts = () => {
 
           <div className='all-products__filters'>
             <div className='cyber-select'>
-              <select>
-                {categories.map((cat, idx) => (
-                  <option key={idx} value={cat}>{cat}</option>
+              <select 
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                {categoryOptions.map((cat, idx) => (
+                  <option key={idx} value={cat === 'All Categories' ? '' : cat}>{cat}</option>
                 ))}
               </select>
               <div className='select-arrow'></div>
             </div>
             <div className='cyber-select'>
-              <select>
-                {statuses.map((status, idx) => (
-                  <option key={idx} value={status}>{status}</option>
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+              >
+                {statusOptions.map((status, idx) => (
+                  <option key={idx} value={status.value}>{status.label}</option>
                 ))}
               </select>
               <div className='select-arrow'></div>
@@ -539,13 +489,26 @@ const AllProducts = () => {
             <div className='bulk-buttons'>
               <button className='cyber-btn cyber-btn--sm cyber-btn--outline'>Edit Selected</button>
               <button className='cyber-btn cyber-btn--sm cyber-btn--outline'>Change Status</button>
-              <button className='cyber-btn cyber-btn--sm cyber-btn--danger'>Delete Selected</button>
+              <button 
+                className='cyber-btn cyber-btn--sm cyber-btn--danger'
+                onClick={handleBulkDelete}
+                disabled={deleting}
+              >
+                {deleting ? <CircularProgress size={16} /> : 'Delete Selected'}
+              </button>
             </div>
           </div>
         )}
 
+        {/* Loading State */}
+        {isLoading && (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+            <CircularProgress />
+          </div>
+        )}
+
         {/* Table View */}
-        {viewMode === 'table' && (
+        {!isLoading && viewMode === 'table' && (
           <div className='cyber-table-container'>
             <div className='table-glow'></div>
             <div className='table-corner tl'></div>
@@ -559,223 +522,339 @@ const AllProducts = () => {
                     <label className='cyber-checkbox'>
                       <input 
                         type='checkbox'
-                        checked={selectedProducts.length === products.length}
+                        checked={selectedProducts.length === products.length && products.length > 0}
                         onChange={handleSelectAll}
                       />
                       <span className='checkmark'></span>
                     </label>
                   </th>
                   <th>Product</th>
-                  <th>SKU</th>
                   <th>Category</th>
-                  <th>Old Price</th>
-                  <th>Current Price</th>
+                  <th>Price</th>
+                  <th>Sale Price</th>
                   <th>Discount</th>
                   <th>Stock</th>
-                  <th>Sales</th>
-                  <th>Warranty</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, index) => (
-                  <tr 
-                    key={product.id} 
-                    className={selectedProducts.includes(product.id) ? 'selected' : ''}
-                    style={{ animationDelay: `${index * 0.05}s` }}
-                  >
-                    <td className='checkbox-col'>
-                      <label className='cyber-checkbox'>
-                        <input 
-                          type='checkbox'
-                          checked={selectedProducts.includes(product.id)}
-                          onChange={() => handleSelectProduct(product.id)}
-                        />
-                        <span className='checkmark'></span>
-                      </label>
-                    </td>
-                    <td>
-                      <div className='product-cell'>
-                        <div className='product-image-wrapper'>
-                          <img src={product.image} alt={product.name} className='product-image' />
-                          <div className='image-overlay'></div>
-                        </div>
-                        <div>
-                          <span className='product-name'>{product.name}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td><span className='sku-badge'>{product.sku}</span></td>
-                    <td><span className='category-tag'>{product.category}</span></td>
-                    <td className='price-col' style={{textDecoration: 'line-through', opacity: 0.6}}>
-                      {formatPrice(product.oldPrice)}
-                    </td>
-                    <td className='price-col'>{formatPrice(product.price)}</td>
-                    <td>
-                      <span className='stock-badge' style={{background: 'rgba(239, 68, 68, 0.15)', color: 'var(--c-neon-danger)'}}>
-                        -{product.discount}%
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`stock-badge ${product.stock === 0 ? 'out' : product.stock < 10 ? 'low' : ''}`}>
-                        {product.stock}
-                      </span>
-                    </td>
-                    <td className='sales-col'>{product.sales}</td>
-                    <td>
-                      <span className='sku-badge'>{product.guarantee}</span>
-                    </td>
-                    <td>{getStatusBadge(product.status)}</td>
-                    <td>
-                      <div className='actions-cell'>
-                        <button className='cyber-action-btn' title='View'>
-                          <IoEyeOutline />
-                        </button>
-                        <button className='cyber-action-btn' title='Edit'>
-                          <IoCreateOutline />
-                        </button>
-                        <div className='action-dropdown'>
-                          <button 
-                            className='cyber-action-btn'
-                            onClick={() => toggleDropdown(product.id)}
-                          >
-                            <IoEllipsisVerticalOutline />
-                          </button>
-                          {activeDropdown === product.id && (
-                            <div className='cyber-dropdown-menu'>
-                              <button className='dropdown-item'>
-                                <IoEyeOutline /> View Details
-                              </button>
-                              <button className='dropdown-item'>
-                                <IoCreateOutline /> Edit Product
-                              </button>
-                              <button className='dropdown-item'>
-                                <IoCopyOutline /> Duplicate
-                              </button>
-                              <div className='dropdown-divider'></div>
-                              <button className='dropdown-item danger'>
-                                <IoTrashOutline /> Delete
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                {products.length === 0 ? (
+                  <tr>
+                    <td colSpan="9" style={{ textAlign: 'center', padding: '40px' }}>
+                      No products found
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  products.map((product, index) => (
+                    <tr 
+                      key={product.id} 
+                      className={selectedProducts.includes(product.id) ? 'selected' : ''}
+                      style={{ animationDelay: `${index * 0.05}s` }}
+                    >
+                      <td className='checkbox-col'>
+                        <label className='cyber-checkbox'>
+                          <input 
+                            type='checkbox'
+                            checked={selectedProducts.includes(product.id)}
+                            onChange={() => handleSelectProduct(product.id)}
+                          />
+                          <span className='checkmark'></span>
+                        </label>
+                      </td>
+                      <td>
+                        <div className='product-cell'>
+                          <div className='product-image-wrapper'>
+                            <img 
+                              src={product.thumbnail || (product.images?.[0]?.url) || '/placeholder.png'} 
+                              alt={product.name} 
+                              className='product-image' 
+                            />
+                            <div className='image-overlay'></div>
+                          </div>
+                          <div>
+                            <span className='product-name'>{product.name}</span>
+                            {product.brand && (
+                              <span className='product-brand'>{product.brand}</span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span className='category-tag'>{product.category?.name || 'N/A'}</span>
+                      </td>
+                      <td className='price-col'>
+                        {formatPrice(product.price)}
+                      </td>
+                      <td className='price-col'>
+                        {product.salePrice ? formatPrice(product.salePrice) : '-'}
+                      </td>
+                      <td>
+                        {getDiscountPercentage(product.price, product.salePrice) > 0 ? (
+                          <span className='stock-badge' style={{background: 'rgba(239, 68, 68, 0.15)', color: 'var(--c-neon-danger)'}}>
+                            -{getDiscountPercentage(product.price, product.salePrice)}%
+                          </span>
+                        ) : '-'}
+                      </td>
+                      <td>
+                        <span className={`stock-badge ${product.quantity === 0 ? 'out' : product.quantity < 10 ? 'low' : ''}`}>
+                          {product.quantity}
+                        </span>
+                      </td>
+                      <td>{getStatusBadge(product)}</td>
+                      <td>
+                        <div className='actions-cell'>
+                          <button 
+                            className='cyber-action-btn' 
+                            title='View'
+                            onClick={() => navigate(`/products/view/${product.id}`)}
+                          >
+                            <IoEyeOutline />
+                          </button>
+                          <button 
+                            className='cyber-action-btn' 
+                            title='Edit'
+                            onClick={() => handleEditProduct(product.id)}
+                          >
+                            <IoCreateOutline />
+                          </button>
+                          <div className='action-dropdown'>
+                            <button 
+                              className='cyber-action-btn'
+                              onClick={() => toggleDropdown(product.id)}
+                            >
+                              <IoEllipsisVerticalOutline />
+                            </button>
+                            {activeDropdown === product.id && (
+                              <div className='cyber-dropdown-menu'>
+                                <button 
+                                  className='dropdown-item'
+                                  onClick={() => navigate(`/products/view/${product.id}`)}
+                                >
+                                  <IoEyeOutline /> View Details
+                                </button>
+                                <button 
+                                  className='dropdown-item'
+                                  onClick={() => handleEditProduct(product.id)}
+                                >
+                                  <IoCreateOutline /> Edit Product
+                                </button>
+                                <button className='dropdown-item'>
+                                  <IoCopyOutline /> Duplicate
+                                </button>
+                                <div className='dropdown-divider'></div>
+                                <button 
+                                  className='dropdown-item danger'
+                                  onClick={() => handleDeleteClick(product)}
+                                >
+                                  <IoTrashOutline /> Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         )}
 
         {/* Grid View */}
-        {viewMode === 'grid' && (
+        {!isLoading && viewMode === 'grid' && (
           <div className='cyber-grid-container'>
-            {products.map((product, index) => (
-              <div 
-                key={product.id} 
-                className='cyber-product-card'
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className='card-glow'></div>
-                <div className='card-corner tl'></div>
-                <div className='card-corner tr'></div>
-                <div className='card-corner bl'></div>
-                <div className='card-corner br'></div>
-                
-                <div className='card__image'>
-                  <img src={product.image} alt={product.name} />
-                  <div className='card__image-overlay'></div>
-                  <div className='card__actions-overlay'>
-                    <button className='overlay-btn'><IoEyeOutline /></button>
-                    <button className='overlay-btn'><IoCreateOutline /></button>
-                    <button className='overlay-btn danger'><IoTrashOutline /></button>
-                  </div>
-                  <label className='cyber-checkbox card__checkbox'>
-                    <input 
-                      type='checkbox'
-                      checked={selectedProducts.includes(product.id)}
-                      onChange={() => handleSelectProduct(product.id)}
-                    />
-                    <span className='checkmark'></span>
-                  </label>
-                  <div className='card__status'>
-                    {getStatusBadge(product.status)}
-                  </div>
-                </div>
-                
-                <div className='card__body'>
-                  <span className='card__category'>{product.category}</span>
-                  <h3 className='card__name'>{product.name}</h3>
-                  <p className='card__sku'>{product.sku}</p>
-                  <div className='card__footer'>
-                    <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                      <span style={{fontSize: '14px', textDecoration: 'line-through', opacity: 0.6, color: 'var(--c-text-muted)'}}>
-                        {formatPrice(product.oldPrice)}
-                      </span>
-                      <span className='card__price'>{formatPrice(product.price)}</span>
-                    </div>
-                    {product.discount > 0 && (
-                      <span style={{
-                        padding: '4px 8px',
-                        background: 'rgba(239, 68, 68, 0.15)',
-                        color: 'var(--c-neon-danger)',
-                        borderRadius: '4px',
-                        fontSize: '12px',
-                        fontWeight: '700'
-                      }}>
-                        -{product.discount}%
-                      </span>
-                    )}
-                  </div>
-                  <div className='card__meta'>
-                    <span><IoCubeOutline /> {product.stock}</span>
-                    <span><IoTrendingUpOutline /> {product.sales} sold</span>
-                  </div>
-                  <div style={{
-                    marginTop: '8px',
-                    padding: '8px',
-                    background: 'rgba(99, 102, 241, 0.1)',
-                    borderRadius: '6px',
-                    fontSize: '11px',
-                    color: 'var(--c-text-secondary)'
-                  }}>
-                    <strong>Warranty:</strong> {product.guarantee}
-                  </div>
-                </div>
+            {products.length === 0 ? (
+              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px' }}>
+                No products found
               </div>
-            ))}
+            ) : (
+              products.map((product, index) => (
+                <div 
+                  key={product.id} 
+                  className='cyber-product-card'
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className='card-glow'></div>
+                  <div className='card-corner tl'></div>
+                  <div className='card-corner tr'></div>
+                  <div className='card-corner bl'></div>
+                  <div className='card-corner br'></div>
+                  
+                  <div className='card__image'>
+                    <img 
+                      src={product.thumbnail || (product.images?.[0]?.url) || '/placeholder.png'} 
+                      alt={product.name} 
+                    />
+                    <div className='card__image-overlay'></div>
+                    <div className='card__actions-overlay'>
+                      <button className='overlay-btn' onClick={() => navigate(`/products/view/${product.id}`)}>
+                        <IoEyeOutline />
+                      </button>
+                      <button className='overlay-btn' onClick={() => handleEditProduct(product.id)}>
+                        <IoCreateOutline />
+                      </button>
+                      <button className='overlay-btn danger' onClick={() => handleDeleteClick(product)}>
+                        <IoTrashOutline />
+                      </button>
+                    </div>
+                    <label className='cyber-checkbox card__checkbox'>
+                      <input 
+                        type='checkbox'
+                        checked={selectedProducts.includes(product.id)}
+                        onChange={() => handleSelectProduct(product.id)}
+                      />
+                      <span className='checkmark'></span>
+                    </label>
+                    <div className='card__status'>
+                      {getStatusBadge(product)}
+                    </div>
+                  </div>
+                  
+                  <div className='card__body'>
+                    <span className='card__category'>{product.category?.name || 'N/A'}</span>
+                    <h3 className='card__name'>{product.name}</h3>
+                    {product.brand && <p className='card__sku'>{product.brand}</p>}
+                    <div className='card__footer'>
+                      <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                        {product.salePrice && (
+                          <span style={{fontSize: '14px', textDecoration: 'line-through', opacity: 0.6, color: 'var(--c-text-muted)'}}>
+                            {formatPrice(product.price)}
+                          </span>
+                        )}
+                        <span className='card__price'>
+                          {formatPrice(product.salePrice || product.price)}
+                        </span>
+                      </div>
+                      {getDiscountPercentage(product.price, product.salePrice) > 0 && (
+                        <span style={{
+                          padding: '4px 8px',
+                          background: 'rgba(239, 68, 68, 0.15)',
+                          color: 'var(--c-neon-danger)',
+                          borderRadius: '4px',
+                          fontSize: '12px',
+                          fontWeight: '700'
+                        }}>
+                          -{getDiscountPercentage(product.price, product.salePrice)}%
+                        </span>
+                      )}
+                    </div>
+                    <div className='card__meta'>
+                      <span><IoCubeOutline /> {product.quantity}</span>
+                      <span>{product.isFeatured ? '⭐ Featured' : ''}</span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         )}
 
         {/* Pagination */}
-        <div className='cyber-pagination'>
-          <div className='pagination-info'>
-            Showing <strong>1-{products.length}</strong> of <strong>{products.length}</strong> products
-          </div>
-          <div className='pagination-controls'>
-            <div className='cyber-select sm'>
-              <select>
-                <option value='10'>10 per page</option>
-                <option value='25'>25 per page</option>
-                <option value='50'>50 per page</option>
-                <option value='100'>100 per page</option>
-              </select>
+        {!isLoading && products.length > 0 && (
+          <div className='cyber-pagination'>
+            <div className='pagination-info'>
+              Showing <strong>{(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, pagination.total)}</strong> of <strong>{pagination.total}</strong> products
             </div>
-            <div className='pagination-buttons'>
-              <button className='page-btn' disabled>
-                <IoChevronBackOutline />
-              </button>
-              <button className='page-btn active'>1</button>
-              <button className='page-btn'>
-                <IoChevronForwardOutline />
-              </button>
+            <div className='pagination-controls'>
+              <div className='cyber-select sm'>
+                <select 
+                  value={itemsPerPage}
+                  onChange={(e) => {
+                    setItemsPerPage(Number(e.target.value));
+                    setCurrentPage(1);
+                  }}
+                >
+                  <option value='10'>10 per page</option>
+                  <option value='25'>25 per page</option>
+                  <option value='50'>50 per page</option>
+                  <option value='100'>100 per page</option>
+                </select>
+              </div>
+              <div className='pagination-buttons'>
+                <button 
+                  className='page-btn' 
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                >
+                  <IoChevronBackOutline />
+                </button>
+                {[...Array(pagination.totalPages)].map((_, idx) => (
+                  <button 
+                    key={idx}
+                    className={`page-btn ${currentPage === idx + 1 ? 'active' : ''}`}
+                    onClick={() => handlePageChange(idx + 1)}
+                  >
+                    {idx + 1}
+                  </button>
+                )).slice(
+                  Math.max(0, currentPage - 3),
+                  Math.min(pagination.totalPages, currentPage + 2)
+                )}
+                <button 
+                  className='page-btn'
+                  disabled={currentPage === pagination.totalPages}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
+                  <IoChevronForwardOutline />
+                </button>
+              </div>
             </div>
+            <div className='pagination-glow'></div>
           </div>
-          <div className='pagination-glow'></div>
-        </div>
+        )}
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialog.open}
+        onClose={() => setDeleteDialog({ open: false, product: null })}
+        PaperProps={{
+          style: {
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            border: '1px solid rgba(99, 102, 241, 0.3)',
+            borderRadius: '12px',
+            color: '#fff'
+          }
+        }}
+      >
+        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete "{deleteDialog.product?.name}"? This action cannot be undone.
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={() => setDeleteDialog({ open: false, product: null })}
+            style={{ color: '#94a3b8' }}
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleDeleteConfirm}
+            color="error"
+            variant="contained"
+            disabled={deleting}
+          >
+            {deleting ? <CircularProgress size={20} /> : 'Delete'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Snackbar */}
+      <Snackbar 
+        open={snackbar.open} 
+        autoHideDuration={4000} 
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Alert 
+          onClose={() => setSnackbar({ ...snackbar, open: false })} 
+          severity={snackbar.severity}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }

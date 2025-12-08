@@ -91,8 +91,10 @@ CartItem.belongsTo(Cart, { foreignKey: 'cartId', as: 'cart' });
 // =============================================
 // ORDER ASSOCIATIONS
 // =============================================
-Order.hasMany(OrderItem, { foreignKey: 'orderId', as: 'items', onDelete: 'CASCADE' });
+Order.hasMany(OrderItem, { as: 'orderItems', foreignKey: 'orderId' });
 OrderItem.belongsTo(Order, { foreignKey: 'orderId', as: 'order' });
+
+
 
 // =============================================
 // EXPORT ALL MODELS

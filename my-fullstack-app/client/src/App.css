@@ -55,3 +55,45 @@
 .ProductDetailsModel_Root {
     z-index: 1300 !important;
 }
+/*////////////////////////////// Skeleton Loaders //////////////////////////// */
+.skeleton {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.skeleton-text {
+    height: 16px;
+    border-radius: 4px;
+}
+
+.skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.ProductItem-Skeleton {
+    pointer-events: none;
+}
+
+.ProductItem-Skeleton .imgWrapper {
+    background: transparent;
+}

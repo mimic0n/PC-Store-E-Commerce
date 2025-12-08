@@ -200,11 +200,11 @@ const Sidebar = ({ isCollapsed, isOpen, toggleSidebar }) => {
       <div className='admin-sidebar__header'>
         <div className='admin-sidebar__logo'>
           <div className='admin-sidebar__logo-icon'>
-            <span>E</span>
+            <span style={{fontSize : "16px"}}>HKT</span>
           </div>
           {!isCollapsed && (
             <div className='admin-sidebar__logo-text'>
-              <span className='admin-sidebar__brand-name'>E-Commerce</span>
+              <span className='admin-sidebar__brand-name'>HKTstore</span>
               <span className='admin-sidebar__brand-label'>Admin Panel</span>
             </div>
           )}

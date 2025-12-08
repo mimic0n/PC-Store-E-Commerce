@@ -1,8 +1,8 @@
 import React, {useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { useCart } from '../../context/CartContext';
 
 import "/src/styles/Header.css"
-
 
 import ClickSpark from "/src/styles/Animation/ClickSpark.jsx"
 import GradientText from '/src/styles/Animation/Gradient Text/GradientText.jsx'
@@ -70,6 +70,8 @@ const Header = () => {
       handleClose();
       navigate('/MyAccount');
     };
+
+    const { cartCount } = useCart();
 
     return (
        <div className='Header_Background'>
@@ -215,7 +217,7 @@ const Header = () => {
                                 <li className="item-cart" style={{'--i':'#3C096C', '--j':'#FF006E'}} onClick={() => context.setOpenCartPanel(true)}>
                                     <Tooltip title="Cart">
                                         <IconButton aria-label="cart">
-                                            <StyledBadge badgeContent={4}
+                                            <StyledBadge badgeContent={cartCount}
                                                 color="primary" 
                                                 sx={{
                                                     '& .MuiBadge-badge': {

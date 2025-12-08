@@ -12,7 +12,6 @@
     --text-gray: #a8a8a8;
 }
 
-/* MAIN SECTION (Root Wrapper) */
 .cart-page-section {
     padding: 2rem 1rem !important;
     background: linear-gradient(135deg,
@@ -1011,6 +1010,110 @@
     box-shadow: 0 0 35px rgba(0, 255, 249, 0.7),
         0 0 60px rgba(138, 43, 226, 0.5);
     transform: translateY(-3px);
+}
+
+/* NEW: Select All Section */
+.cart-page-select-all {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(138, 43, 226, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Checkbox Styles */
+.cart-page-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.cart-page-checkbox {
+    display: none;
+}
+
+.cart-page-checkbox-custom {
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(138, 43, 226, 0.6);
+    border-radius: 5px;
+    background: transparent;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.cart-page-checkbox:checked+.cart-page-checkbox-custom {
+    background: linear-gradient(135deg, #8a2be2, #b24bf3);
+    border-color: #b24bf3;
+}
+
+.cart-page-checkbox:checked+.cart-page-checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Item Checkbox */
+.cart-page-item-checkbox {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+
+/* Selected Item Highlight */
+.cart-page-item.selected {
+    background: rgba(138, 43, 226, 0.15);
+    border-color: rgba(138, 43, 226, 0.5);
+}
+
+/* Selected Count Badge */
+.cart-page-selected-count {
+    color: #b24bf3;
+    font-weight: 600;
+}
+
+/* Buy Now Button */
+.cart-page-buy-now-btn {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #00fff9, #00d4aa);
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.cart-page-buy-now-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 249, 0.4);
+}
+
+.cart-page-buy-now-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Summary Selected Text */
+.cart-page-summary-selected {
+    font-size: 12px;
+    color: #b24bf3;
+    margin-left: 8px;
 }
 
 /* MOBILE STICKY BAR */

@@ -96,10 +96,6 @@ function AppContent() {
         element: <AdminVerify />
       },
       {
-        path: "customers/All_Customer",
-        element: <All_Customer />
-      },
-      {
         path: "/admin/profile",
         element: <AdminProfile />
       },

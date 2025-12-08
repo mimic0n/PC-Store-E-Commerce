@@ -670,6 +670,174 @@
     background: var(--c-neon-primary);
 }
 
+
+.All_Customer_Header_Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.Refresh_Button {
+    color: #00fff9 !important;
+    background: rgba(0, 255, 249, 0.1) !important;
+    border: 1px solid rgba(0, 255, 249, 0.3) !important;
+}
+
+.Refresh_Button:hover {
+    background: rgba(0, 255, 249, 0.2) !important;
+}
+
+.Stat_Number.New {
+    color: #00bcd4;
+}
+
+/* Loading Container */
+.Loading_Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 15px;
+}
+
+.Loading_Container p {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.Empty_Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.Empty_Container p {
+    color: #666;
+    font-size: 16px;
+}
+
+.Pagination_Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.Pagination_Info {
+    color: #888;
+    font-size: 13px;
+}
+
+.Customer_Detail_Content {
+    padding: 10px 0;
+}
+
+.Detail_Section {
+    margin-bottom: 25px;
+}
+
+.Detail_Section h3 {
+    color: #00fff9;
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 255, 249, 0.2);
+}
+
+.Detail_Grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.Detail_Item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Detail_Item label {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.Detail_Item span {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* Stats Grid */
+.Stats_Grid {
+    display: flex;
+    gap: 20px;
+}
+
+.Stat_Box {
+    flex: 1;
+    background: rgba(138, 43, 226, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.Stat_Value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #00fff9;
+    margin-bottom: 5px;
+}
+
+.Stat_Label {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.Recent_Orders_List {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Order_Item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.Order_Code {
+    font-weight: 600;
+    color: #00fff9;
+    font-family: monospace;
+}
+
+.Order_Amount {
+    color: #4caf50;
+    font-weight: 500;
+}
+
+.Order_Date {
+    color: #888;
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.Last_Login {
+    color: #888;
+    font-size: 13px;
+}
 /* ============================================
    RESPONSIVE DESIGN
 ============================================ */

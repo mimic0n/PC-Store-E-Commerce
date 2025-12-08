@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useState, useEffect, createContext } from 'react';
+import { CartProvider } from './context/CartContext.jsx';
 
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
 import './index.css'
 import ClickSpark from "/src/styles/Animation/ClickSpark.jsx"
@@ -32,6 +31,7 @@ import { Orders} from './Page/MyAccount/Orders/Orders.jsx';
 import { Wishlist } from './Page/MyAccount/Wishlist/Wishlist.jsx';
 import { Addresses } from './Page/MyAccount/Addresses/Addresses.jsx';
 import { Profile } from './Page/MyAccount/Profile/Profile.jsx';
+import { OrderSuccess } from './Page/OrderSuccess/OrderSuccess.jsx';
 
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
@@ -46,6 +46,7 @@ export const MyContext = createContext()
 function App() {
   const [message, setMessage] = useState('');
   const [openProductDetailsModel, setOpenProductDetailsModel] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('lg');
   const [isLogin , setisLogin] = useState(false);
@@ -86,7 +87,7 @@ function App() {
       setIsLoading(false)
     }
     checkAuth();
-  }, []); // Mảng rỗng đảm bảo useEffect chỉ chạy 1 lần
+  }, []);
 
   const handleLogout = () => { 
     localStorage.removeItem('accessToken');
@@ -98,6 +99,8 @@ function App() {
 
   const values = {
     setOpenProductDetailsModel,
+    setSelectedProduct,
+    selectedProduct,
     setOpenCartPanel,
     openCartPanel,
     toggleCartPanel,
@@ -113,6 +116,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <CartProvider> 
         <MyContext.Provider value={values}>
             <div style={{ 
                 position: 'fixed',
@@ -125,9 +129,7 @@ function App() {
               }}>
               <FloatingLines 
                 enabledWaves={['top', 'middle', 'bottom']}
-                // Array - specify line count per wave; Number - same count for all waves
                 lineCount={[10, 15, 20]}
-                // Array - specify line distance per wave; Number - same distance for all waves
                 lineDistance={[8, 6, 4]}
                 bendRadius={5.0}
                 bendStrength={-0.5}
@@ -158,56 +160,69 @@ function App() {
                     </div>
                   } />
 
-                  <Route path={"/ProductDetails/:id"} exact = "true" element={ 
+                  <Route path={"/ProductDetails/:id"} exact="true" element={ 
                     <ProductDetails/>
                   } />
                   
-                  <Route path={"/ProductListing/"} exact = "true" element={ 
+                  {/* Route cho tất cả products */}
+                  <Route path={"/ProductListing"} exact="true" element={ 
+                    <ProductListing/>
+                  } />
+
+                  <Route path={"/category/:categorySlug"} element={ 
+                    <ProductListing/>
+                  } />
+
+                  <Route path={"/category/:categorySlug/:subCategorySlug"} element={ 
+                    <ProductListing/>
+                  } />
+
+                  <Route path={"/category/:categorySlug/:subCategorySlug/:thirdCategorySlug"} element={ 
                     <ProductListing/>
                   } />
                     
-                  <Route path={"/Login/"} exact = "true" element={ 
+                  <Route path={"/Login/"} exact="true" element={ 
                     <Login/>
                   } />
                     
-                  <Route path={"/Register/"} exact = "true" element={ 
+                  <Route path={"/Register/"} exact="true" element={ 
                     <Register/>
                   } />
                     
-                  <Route path={"/CartPage/"} exact = "true" element={ 
+                  <Route path={"/CartPage/"} exact="true" element={ 
                     <CartPage/>
                   } />
               
-                  <Route path={"/Verify/"} exact = "true" element={ 
+                  <Route path={"/Verify/"} exact="true" element={ 
                     <Verify/>
                   } />  
               
-                  <Route path={"/ForgotPassword/"} exact = "true" element={ 
+                  <Route path={"/ForgotPassword/"} exact="true" element={ 
                     <ForgotPassword/>
                   } />
               
-                  <Route path={"/CheckOut/"} exact = "true" element={ 
+                  <Route path={"/CheckOut/"} exact="true" element={ 
                     <CheckOut/>
+                  } />
+                
+                  <Route path={"/order-success/:orderId"} exact="true" element={
+                    <OrderSuccess />
                   } />
               
                   <Route path="/MyAccount/*" element={<MyAccount />}>
-                    <Route index element={<Profile />} /> {/* Default route - /MyAccount */}
-                    <Route path="profile" element={<Profile />} /> {/* /MyAccount/profile */}
-                    <Route path="orders" element={<Orders />} /> {/* /MyAccount/orders */}
-                    <Route path="addresses" element={<Addresses />} /> {/* /MyAccount/addresses */}
-                    <Route path="wishlist" element={<Wishlist />} /> {/* /MyAccount/wishlist */}
+                    <Route index element={<Profile />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="orders" element={<Orders />} />
+                    <Route path="addresses" element={<Addresses />} />
+                    <Route path="wishlist" element={<Wishlist />} />
                   </Route>
               
               </Routes>
 
-              
-
               <Footer />
                   <div className="card">
-                {/* Hiển thị tin nhắn từ backend */}
                 <p>{message || "Đang tải dữ liệu từ backend..."}</p>
                 </div>
-                  
 
               <Dialog
               fullWidth={fullWidth}
@@ -259,7 +274,8 @@ function App() {
               </div>
             </Drawer>
           </ClickSpark>
-        </MyContext.Provider>  
+          </MyContext.Provider>  
+          </CartProvider>
       </BrowserRouter>
 
       <Toaster />

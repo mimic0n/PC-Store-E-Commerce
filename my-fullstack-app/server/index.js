@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import sequelize, { connectDB } from './config/connectDB.js'; 
 import sendEmail from './config/emailService.js';
+import orderRouter from './route/order.route.js';
 
 import './models/index.js'; 
 
@@ -15,6 +16,7 @@ import categoryRouter from './route/category.route.js';
 import productRouter from './route/product.route.js';
 import cartRouter from './route/cart.route.js';
 import wishlistRouter from './route/wishlist.route.js';
+import ManageUserRouter from './route/ManageUser.route.js';
 
 
 const app = express();
@@ -67,6 +69,8 @@ app.use('/api/categories', categoryRouter);
 app.use('/api/products', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/wishlist', wishlistRouter); 
+app.use('/api/orders', orderRouter);
+app.use('/api/admin/users', ManageUserRouter);
 
 app.use((request, response) => {
   response.status(404).json({

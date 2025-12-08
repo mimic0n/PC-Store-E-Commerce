@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import GradientText from '/src/styles/Animation/Gradient Text/GradientText.jsx'
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { HiMinusCircle } from "react-icons/hi";
-import { getCategoryTree, getAllCategories } from '/src/api/categoryService';
+import { getAllCategories } from '/src/api/categoryService';
 import "/src/styles/Category.css"
 
 const Category = (props) => {
+  const navigate = useNavigate();
   const [submenuIndex, setSubmenuIndex] = useState(null);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +21,6 @@ const Category = (props) => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        // Lấy root categories với children
         const response = await getAllCategories({
           parentId: 'null',
           includeChildren: 'true',
@@ -28,7 +29,6 @@ const Category = (props) => {
         });
         
         if (response.success) {
-          // Transform data để match với UI structure
           const transformedData = response.data.map(cat => ({
             id: cat.id,
             title: cat.name,
@@ -37,12 +37,14 @@ const Category = (props) => {
               ? cat.children.map(child => ({
                   id: child.id,
                   label: child.name,
-                  href: `/${child.slug}`,
-                  // Level 3 nếu có
+                  slug: child.slug,
+                  parentSlug: cat.slug,
                   children: child.children?.map(subChild => ({
                     id: subChild.id,
                     label: subChild.name,
-                    href: `/${subChild.slug}`
+                    slug: subChild.slug,
+                    parentSlug: child.slug,
+                    grandParentSlug: cat.slug
                   }))
                 }))
               : null
@@ -57,7 +59,6 @@ const Category = (props) => {
       }
     };
 
-    // Chỉ fetch khi drawer mở
     if (props.isOpenCatPanel) {
       fetchCategories();
     }
@@ -71,10 +72,22 @@ const Category = (props) => {
     setSubmenuIndex(submenuIndex === index ? null : index);
   };
 
-  const handleSubmenuClick = () => {
-    if (window.innerWidth <= 768) {
-      props.setIsOpenCatPanel(false);
-    }
+  // Navigate to category page
+  const handleCategoryClick = (category) => {
+    props.setIsOpenCatPanel(false);
+    navigate(`/category/${category.slug}`);
+  };
+
+  // Navigate to subcategory page
+  const handleSubCategoryClick = (subItem) => {
+    props.setIsOpenCatPanel(false);
+    navigate(`/category/${subItem.parentSlug}/${subItem.slug}`);
+  };
+
+  // Navigate to third level category page
+  const handleThirdLevelClick = (level3Item) => {
+    props.setIsOpenCatPanel(false);
+    navigate(`/category/${level3Item.grandParentSlug}/${level3Item.parentSlug}/${level3Item.slug}`);
   };
 
   const DrawerList = (
@@ -91,21 +104,18 @@ const Category = (props) => {
 
         <div className='Category_Panel_List'>
           <div className='scroll'>
-            {/* Loading State */}
             {loading && (
               <div className='Category_Loading'>
                 <p>Đang tải danh mục...</p>
               </div>
             )}
 
-            {/* Error State */}
             {error && !loading && (
               <div className='Category_Error'>
                 <p>{error}</p>
               </div>
             )}
 
-            {/* Categories List */}
             {!loading && !error && (
               <ul className='Category_List'>
                 {categories.length === 0 ? (
@@ -118,12 +128,25 @@ const Category = (props) => {
                     >
                       <Button
                         className='Category_List_Item_Button'
-                        onClick={() => category.submenu ? openSubmenu(category.id) : null}
-                        href={!category.submenu ? `/${category.slug}` : undefined}
+                        onClick={() => {
+                          if (category.submenu) {
+                            openSubmenu(category.id);
+                          } else {
+                            handleCategoryClick(category);
+                          }
+                        }}
                         aria-expanded={submenuIndex === category.id}
                         aria-controls={category.submenu ? `submenu-${category.id}` : undefined}
                       >
-                        {category.title}
+                        <span 
+                          className='Category_Title_Text'
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCategoryClick(category);
+                          }}
+                        >
+                          {category.title}
+                        </span>
                         {category.submenu && (
                           submenuIndex === category.id ? (
                             <HiMinusCircle className='Plus_icon' aria-label="Collapse menu" />
@@ -139,9 +162,8 @@ const Category = (props) => {
                           {category.submenu.map((subItem) => (
                             <li key={subItem.id} className='subMenu_Item'>
                               <Button
-                                href={subItem.href}
                                 className='subMenu_Item_Button'
-                                onClick={handleSubmenuClick}
+                                onClick={() => handleSubCategoryClick(subItem)}
                               >
                                 {subItem.label}
                               </Button>
@@ -152,9 +174,8 @@ const Category = (props) => {
                                   {subItem.children.map((level3) => (
                                     <li key={level3.id}>
                                       <Button
-                                        href={level3.href}
                                         className='subMenu_Level3_Button'
-                                        onClick={handleSubmenuClick}
+                                        onClick={() => handleThirdLevelClick(level3)}
                                       >
                                         {level3.label}
                                       </Button>

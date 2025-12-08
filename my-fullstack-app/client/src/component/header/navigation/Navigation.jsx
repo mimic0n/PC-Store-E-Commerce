@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "/src/styles/Navigation.css"
 
 import Button from '@mui/material/Button'
@@ -9,6 +10,7 @@ import Category from './Category';
 import { getAllCategories } from '/src/api/categoryService';
 
 export const Navigation = () => {
+    const navigate = useNavigate();
     const [isOpenCatPanel, setIsOpenCatPanel] = useState(false);
     const [openMenuIndex, setOpenMenuIndex] = useState(null);
     const [navItems, setNavItems] = useState([]);
@@ -26,16 +28,18 @@ export const Navigation = () => {
                 });
 
                 if (response.success) {
-                    // Transform thành nav items
                     const items = [
-                        { label: "Home", href: "/" },
+                        { label: "Home", href: "/", slug: null },
                         ...response.data.map(cat => ({
                             label: cat.name,
-                            href: `/${cat.slug}`,
+                            href: `/category/${cat.slug}`,
+                            slug: cat.slug,
                             submenu: cat.children?.length > 0
                                 ? cat.children.map(child => ({
                                     label: child.name,
-                                    href: `/${child.slug}`
+                                    href: `/category/${cat.slug}/${child.slug}`,
+                                    slug: child.slug,
+                                    parentSlug: cat.slug
                                 }))
                                 : null
                         }))
@@ -44,7 +48,6 @@ export const Navigation = () => {
                 }
             } catch (err) {
                 console.error('Error fetching nav categories:', err);
-                // Fallback to static items nếu API fail
                 setNavItems([{ label: "Home", href: "/" }]);
             } finally {
                 setLoading(false);
@@ -57,6 +60,18 @@ export const Navigation = () => {
     const openCategory = () => { 
         setIsOpenCatPanel(true)
     }
+
+    const handleNavItemClick = (item, e) => {
+        e.preventDefault();
+        navigate(item.href);
+    };
+
+    const handleSubmenuClick = (subItem, e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigate(subItem.href);
+        setOpenMenuIndex(null);
+    };
 
     return (
         <>
@@ -88,9 +103,14 @@ export const Navigation = () => {
                                             onMouseEnter={() => setOpenMenuIndex(index)}
                                             onMouseLeave={() => setOpenMenuIndex(null)}
                                         >
-                                            <a href={item.href} className='Page_link'>
+                                            <a 
+                                                href={item.href} 
+                                                className='Page_link'
+                                                onClick={(e) => handleNavItemClick(item, e)}
+                                            >
                                                 <Button className='Item_Button'>
                                                     {item.label}
+                                                    {item.submenu && <FaAngleDown className='dropdown-icon' />}
                                                 </Button>
                                             </a>
                                             {item.submenu && openMenuIndex === index && (
@@ -98,7 +118,11 @@ export const Navigation = () => {
                                                     <div>
                                                         {item.submenu.map((subItem, subIndex) => (
                                                             <li key={subIndex} className='submenu_item'>
-                                                                <a href={subItem.href} className='submenu_link'>
+                                                                <a 
+                                                                    href={subItem.href} 
+                                                                    className='submenu_link'
+                                                                    onClick={(e) => handleSubmenuClick(subItem, e)}
+                                                                >
                                                                     {subItem.label}
                                                                 </a>
                                                             </li>
