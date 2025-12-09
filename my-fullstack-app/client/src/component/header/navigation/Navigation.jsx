@@ -110,7 +110,6 @@ export const Navigation = () => {
                                             >
                                                 <Button className='Item_Button'>
                                                     {item.label}
-                                                    {item.submenu && <FaAngleDown className='dropdown-icon' />}
                                                 </Button>
                                             </a>
                                             {item.submenu && openMenuIndex === index && (
