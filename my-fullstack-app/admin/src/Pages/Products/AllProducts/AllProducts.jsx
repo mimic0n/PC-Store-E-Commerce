@@ -36,9 +36,12 @@ import {
   Button,
   CircularProgress,
   Snackbar,
-  Alert
+  Alert,
+  Chip,
+  Divider,
+  IconButton
 } from '@mui/material'
-import { getAllProducts, deleteProduct, getProductsCount } from '../../../api/productService'
+import { getAllProducts, deleteProduct, getProductsCount, getProductById } from '../../../api/productService'
 import { getAllCategories } from '../../../api/categoryService'
 
 const AllProducts = () => {
@@ -49,6 +52,7 @@ const AllProducts = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [viewDialog, setViewDialog] = useState({ open: false, product: null, loading: false })
   const navigate = useNavigate()
 
   // Data states
@@ -81,6 +85,34 @@ const AllProducts = () => {
 
   const handleAddProduct = () => {
     navigate('/products/AddProducts');
+  };
+
+  const handleViewProduct = async (productId) => {
+    setViewDialog({ open: true, product: null, loading: true });
+    setActiveDropdown(null);
+    try {
+      const response = await getProductById(productId);
+      if (response.success) {
+        setViewDialog({ open: true, product: response.data, loading: false });
+      } else {
+        showSnackbar('Error loading product details', 'error');
+        setViewDialog({ open: false, product: null, loading: false });
+      }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      showSnackbar('Error loading product details', 'error');
+      setViewDialog({ open: false, product: null, loading: false });
+    }
+  };
+
+  const handleCloseViewDialog = () => {
+    setViewDialog({ open: false, product: null, loading: false });
+  };
+
+  // Handle Duplicate Product
+  const handleDuplicateProduct = async (product) => {
+    setActiveDropdown(null);
+    showSnackbar('Duplicate feature coming soon!', 'info');
   };
 
   const handleEditProduct = (productId) => {
@@ -607,7 +639,7 @@ const AllProducts = () => {
                           <button 
                             className='cyber-action-btn' 
                             title='View'
-                            onClick={() => navigate(`/products/view/${product.id}`)}
+                            onClick={() => handleViewProduct(product.id)}
                           >
                             <IoEyeOutline />
                           </button>
@@ -618,40 +650,13 @@ const AllProducts = () => {
                           >
                             <IoCreateOutline />
                           </button>
-                          <div className='action-dropdown'>
-                            <button 
-                              className='cyber-action-btn'
-                              onClick={() => toggleDropdown(product.id)}
-                            >
-                              <IoEllipsisVerticalOutline />
-                            </button>
-                            {activeDropdown === product.id && (
-                              <div className='cyber-dropdown-menu'>
-                                <button 
-                                  className='dropdown-item'
-                                  onClick={() => navigate(`/products/view/${product.id}`)}
-                                >
-                                  <IoEyeOutline /> View Details
-                                </button>
-                                <button 
-                                  className='dropdown-item'
-                                  onClick={() => handleEditProduct(product.id)}
-                                >
-                                  <IoCreateOutline /> Edit Product
-                                </button>
-                                <button className='dropdown-item'>
-                                  <IoCopyOutline /> Duplicate
-                                </button>
-                                <div className='dropdown-divider'></div>
-                                <button 
-                                  className='dropdown-item danger'
-                                  onClick={() => handleDeleteClick(product)}
-                                >
-                                  <IoTrashOutline /> Delete
-                                </button>
-                              </div>
-                            )}
-                          </div>
+                          <button 
+                            className='cyber-action-btn danger' 
+                            title='Delete'
+                            onClick={() => handleDeleteClick(product)}
+                          >
+                            <IoTrashOutline />
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -689,7 +694,7 @@ const AllProducts = () => {
                     />
                     <div className='card__image-overlay'></div>
                     <div className='card__actions-overlay'>
-                      <button className='overlay-btn' onClick={() => navigate(`/products/view/${product.id}`)}>
+                      <button className='overlay-btn' onClick={() => handleViewProduct(product.id)}>
                         <IoEyeOutline />
                       </button>
                       <button className='overlay-btn' onClick={() => handleEditProduct(product.id)}>
@@ -807,6 +812,158 @@ const AllProducts = () => {
       </div>
 
       {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={viewDialog.open}
+        onClose={handleCloseViewDialog}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          style: {
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            border: '1px solid rgba(99, 102, 241, 0.3)',
+            borderRadius: '16px',
+            color: '#fff'
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          borderBottom: '1px solid rgba(99, 102, 241, 0.2)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <span>Product Details</span>
+          <IconButton onClick={handleCloseViewDialog} sx={{ color: '#94a3b8' }}>
+            <IoCloseOutline />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent sx={{ mt: 2 }}>
+      {viewDialog.loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+          <CircularProgress />
+        </div>
+      ) : viewDialog.product && (
+        <div className='view-product-content'>
+          {/* Product Images */}
+          <div className='view-product-images'>
+            <img 
+              src={viewDialog.product.thumbnail || viewDialog.product.images?.[0]?.url || '/placeholder.png'} 
+              alt={viewDialog.product.name}
+              className='view-product-main-image'
+            />
+            {viewDialog.product.images && viewDialog.product.images.length > 1 && (
+              <div className='view-product-thumbnails'>
+                {viewDialog.product.images.slice(0, 4).map((img, idx) => (
+                  <img 
+                    key={idx}
+                    src={typeof img === 'string' ? img : img.url}
+                    alt={`${viewDialog.product.name} ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+          {/* Product Info */}
+          <div className='view-product-info'>
+            <h2>{viewDialog.product.name}</h2>
+            
+            <div className='view-product-badges'>
+              {getStatusBadge(viewDialog.product)}
+              {viewDialog.product.isFeatured && (
+                <Chip label="Featured" color="primary" size="small" />
+              )}
+            </div>
+
+            <Divider sx={{ my: 2, borderColor: 'rgba(99, 102, 241, 0.2)' }} />
+
+            <div className='view-product-details'>
+              <div className='detail-row'>
+                <span className='detail-label'>Category:</span>
+                <span className='detail-value'>{viewDialog.product.category?.name || 'N/A'}</span>
+              </div>
+              <div className='detail-row'>
+                <span className='detail-label'>Brand:</span>
+                <span className='detail-value'>{viewDialog.product.brand || 'N/A'}</span>
+              </div>
+              <div className='detail-row'>
+                <span className='detail-label'>Price:</span>
+                <span className='detail-value'>{formatPrice(viewDialog.product.price)}</span>
+              </div>
+              {viewDialog.product.salePrice && (
+                <div className='detail-row'>
+                  <span className='detail-label'>Sale Price:</span>
+                  <span className='detail-value sale-price'>
+                    {formatPrice(viewDialog.product.salePrice)}
+                    <span className='discount-badge'>
+                      -{getDiscountPercentage(viewDialog.product.price, viewDialog.product.salePrice)}%
+                    </span>
+                  </span>
+                </div>
+              )}
+              <div className='detail-row'>
+                <span className='detail-label'>Stock:</span>
+                <span className='detail-value'>{viewDialog.product.quantity} units</span>
+              </div>
+              <div className='detail-row'>
+                <span className='detail-label'>Created:</span>
+                <span className='detail-value'>
+                  {new Date(viewDialog.product.createdAt).toLocaleDateString('vi-VN')}
+                </span>
+              </div>
+                  </div>
+                  {viewDialog.product.description && (
+              <>
+                <Divider sx={{ my: 2, borderColor: 'rgba(99, 102, 241, 0.2)' }} />
+                <div className='view-product-description'>
+                  <h4>Description</h4>
+                  <p>{viewDialog.product.description}</p>
+                </div>
+              </>
+            )}
+
+            {/* Specifications */}
+            {viewDialog.product.specifications && viewDialog.product.specifications.length > 0 && (
+              <>
+                <Divider sx={{ my: 2, borderColor: 'rgba(99, 102, 241, 0.2)' }} />
+                <div className='view-product-specs'>
+                  <h4>Specifications</h4>
+                  <div className='specs-grid'>
+                    {viewDialog.product.specifications.map((spec, idx) => (
+                      spec.description && (
+                        <div key={idx} className='spec-item'>
+                          <span className='spec-category'>{spec.category}:</span>
+                          <span className='spec-description'>{spec.description}</span>
+                        </div>
+                      )
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      </DialogContent>
+        <DialogActions sx={{ borderTop: '1px solid rgba(99, 102, 241, 0.2)', p: 2 }}>
+          <Button 
+            onClick={handleCloseViewDialog}
+            sx={{ color: '#94a3b8' }}
+          >
+            Close
+          </Button>
+          <Button 
+            onClick={() => {
+              handleCloseViewDialog();
+              handleEditProduct(viewDialog.product?.id);
+            }}
+            variant="contained"
+            startIcon={<IoCreateOutline />}
+          >
+            Edit Product
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Dialog
         open={deleteDialog.open}
         onClose={() => setDeleteDialog({ open: false, product: null })}

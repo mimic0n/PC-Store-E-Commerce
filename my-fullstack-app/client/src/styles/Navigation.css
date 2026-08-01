@@ -1,38 +1,38 @@
 :root {
-    /* Cyberpunk Purple & Black Theme - Enhanced */
-    --nav-bg-primary: #000000;
-    --nav-bg-secondary: #0a0a12;
-    --nav-purple-deep: #1a0b2e;
-    --nav-purple-dark: #12001a;
-    --nav-purple-mid: #2d1b4e;
+    /* Goth-Pink (Neon Blossom) Theme */
+    --nav-bg-primary: #0e0e13;
+    --nav-bg-secondary: #131318;
+    --nav-purple-deep: #0D0D1A;
+    --nav-purple-dark: #131318;
+    --nav-purple-mid: #1A1A2E;
 
-    --nav-text: #FFFFFF;
-    --nav-text-secondary: #a0a0b0;
+    --nav-text: #e4e1e9;
+    --nav-text-secondary: #e3bdc6;
 
     /* Neon Colors */
-    --nav-neon-cyan: #00f3ff;
-    --nav-neon-pink: #ff00ff;
-    --nav-neon-purple: #bc13fe;
-    --nav-neon-blue: #0080ff;
-    --nav-neon-green: #00ff88;
+    --nav-neon-cyan: #3CD7FF;
+    --nav-neon-pink: #FF4992;
+    --nav-neon-purple: #FF2D8A;
+    --nav-neon-blue: #3CD7FF;
+    --nav-neon-green: #FFB6D9;
 
-    --nav-hover: rgba(138, 43, 226, 0.3);
-    --dropdown-bg: rgba(5, 5, 15, 0.98);
-    --dropdown-item-hover: rgba(138, 43, 226, 0.3);
+    --nav-hover: rgba(255, 45, 138, 0.25);
+    --dropdown-bg: rgba(26, 26, 46, 0.96);
+    --dropdown-item-hover: rgba(255, 73, 146, 0.25);
 
     --border-radius: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --glow-color: rgba(157, 78, 221, 0.9);
-    --glow-pink: rgba(255, 0, 180, 0.7);
-    --glow-cyan: rgba(0, 243, 255, 0.7);
-    --neon-purple: rgba(138, 43, 226, 0.8);
-    --metal-shine: rgba(200, 200, 220, 0.4);
+    --glow-color: rgba(255, 73, 146, 0.9);
+    --glow-pink: rgba(255, 45, 138, 0.8);
+    --glow-cyan: rgba(60, 215, 255, 0.7);
+    --neon-purple: rgba(255, 45, 138, 0.8);
+    --metal-shine: rgba(228, 225, 233, 0.4);
 
     /* Shadows */
-    --shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.4);
-    --shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.4);
-    --shadow-neon-purple: 0 0 20px rgba(188, 19, 254, 0.4);
+    --shadow-neon-cyan: 0 0 20px rgba(60, 215, 255, 0.4);
+    --shadow-neon-pink: 0 0 20px rgba(255, 45, 138, 0.4);
+    --shadow-neon-purple: 0 0 20px rgba(255, 73, 146, 0.4);
 }
 
 .Navigation_Container {
@@ -57,8 +57,6 @@
             #000000 100%) !important;
     background-size: 60px 60px, 100% 100%;
     padding: 1rem 0;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(0, 243, 255, 0.2);
     border-top: 2px solid var(--nav-neon-cyan);
     box-shadow:
@@ -183,8 +181,6 @@
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     transition: var(--transition) !important;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
     box-shadow:
         0 0 20px rgba(0, 243, 255, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -444,8 +440,6 @@
             rgba(26, 11, 46, 0.95) 50%,
             rgba(5, 5, 15, 0.98) 100%);
     background-size: 40px 40px, 100% 100%;
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
     border-radius: 0;
     list-style: none;
     padding: 0.5rem;

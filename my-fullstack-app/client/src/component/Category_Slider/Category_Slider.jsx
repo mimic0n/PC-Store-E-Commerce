@@ -12,11 +12,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const slideData = [
-  { id: 1, img: "/src/assets/Category_Slide/Category_Slide_1.png", alt: "Slide Category Banner 1" , title : "Gaming Console" },
-  { id: 2, img: "/src/assets/Category_Slide/Category_Slide_2.png", alt: "Slide Category Banner 2" , title : "PC Gaming" },
-  { id: 3, img: "/src/assets/Category_Slide/Category_Slide_3.png", alt: "Slide Category Banner 3" , title : "Gaming Gear" },
-  { id: 4, img: "/src/assets/Category_Slide/Category_Slide_4.png", alt: "Slide Category Banner 4", title: "Gaming Accessories" },
-  { id: 5, img: "/src/assets/Category_Slide/Category_Slide_5.png", alt: "Slide Category Banner 5" , title : "Hardware" },
+  { id: 1, img: "/src/assets/Category_Slide/Category_Slide_1.webp", alt: "Slide Category Banner 1" , title : "Gaming Console" },
+  { id: 2, img: "/src/assets/Category_Slide/Category_Slide_2.webp", alt: "Slide Category Banner 2" , title : "PC Gaming" },
+  { id: 3, img: "/src/assets/Category_Slide/Category_Slide_3.webp", alt: "Slide Category Banner 3" , title : "Gaming Gear" },
+  { id: 4, img: "/src/assets/Category_Slide/Category_Slide_4.webp", alt: "Slide Category Banner 4", title: "Gaming Accessories" },
+  { id: 5, img: "/src/assets/Category_Slide/Category_Slide_5.webp", alt: "Slide Category Banner 5" , title : "Hardware" },
 ];
 
 export const Category_Slider = (props) => {
@@ -39,7 +39,7 @@ export const Category_Slider = (props) => {
               <SwiperSlide className="Category-Slide-content" key={slide.id}>
                 <div className='Category-Slide-box'>
                 <div className='Category-Image'>
-                  <BannerBox img={slide.img} alt={slide.alt} href={slide.link} />
+                  <BannerBox img={slide.img} alt={slide.alt} href={slide.link} loading="lazy" />
                   </div>
                   
                   <div className="Category-Description">

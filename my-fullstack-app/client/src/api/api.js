@@ -50,7 +50,8 @@ api.interceptors.response.use(
                 // Retry request với token mới
                 originalRequest.headers.Authorization = `Bearer ${accessToken}`;
                 return api(originalRequest);
-            } catch (refreshError) {
+            }
+            catch (refreshError) {
                 // Refresh token cũng hết hạn -> logout
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('user');

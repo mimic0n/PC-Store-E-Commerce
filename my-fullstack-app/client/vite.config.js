@@ -1,22 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-
-
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react({ babel: { plugins: [['babel-plugin-react-compiler']], }, }),
   ],
   server: {
-    port: 5173,  // Thay port thành 5174
+    port: 5173, 
     host: 'localhost'
   },
   optimizeDeps: {
     include: ['react-inner-image-zoom']
   },
-  server: {
-    force: true
-  }
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.js$/,
+  },
 })
 

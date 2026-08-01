@@ -1,15 +1,22 @@
 import api from "./api";
 
 export const getAllProducts = async (params = {}) => {
-    const queryParams = new URLSearchParams();
+    const cache = new Map();
+    const CACHE_DURATION = 5 * 60 * 1000;
+
+    const cacheKey = JSON.stringify(params);
+    const cached = cache.get(cacheKey);
     
-    if (params.page) queryParams.append('page', params.page);
-    if (params.limit) queryParams.append('limit', params.limit);
-    if (params.search) queryParams.append('search', params.search);
-    if (params.sortBy) queryParams.append('sortBy', params.sortBy);
-    if (params.order) queryParams.append('order', params.order);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        return cached.data;
+    }
     
-    const response = await api.get(`/api/products/getAllProducts?${queryParams.toString()}`);
+    const response = await api.get(`/api/products/getAllProducts?...`);
+    cache.set(cacheKey, {
+        data: response.data,
+        timestamp: Date.now()
+    });
+    
     return response.data;
 };
 
@@ -78,5 +85,19 @@ export const getFeaturedProducts = async (params = {}) => {
 
 export const getProductsCount = async () => {
     const response = await api.get('/api/products/getAllProductsCount');
+    return response.data;
+};
+
+// Search products by keyword
+export const searchProducts = async (keyword, params = {}) => {
+    const queryParams = new URLSearchParams();
+    
+    queryParams.append('search', keyword);
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+    if (params.sortBy) queryParams.append('sortBy', params.sortBy);
+    if (params.order) queryParams.append('order', params.order);
+    
+    const response = await api.get(`/api/products/getAllProducts?${queryParams.toString()}`);
     return response.data;
 };

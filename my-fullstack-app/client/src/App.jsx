@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useState, useEffect, createContext } from 'react';
 import { CartProvider } from './context/CartContext.jsx';
@@ -17,21 +17,6 @@ import CartSummary from './component/CartSummary/CartSummary.jsx';
 
 import { ProductZoom_ForProductDetailsModel } from '/src/component/ProductZoom_ForProductDetailsModel/ProductZoom_ForProductDetailsModel.jsx'
 import { ProductDetails_For_ProductDetailsModel } from '/src/component/ProductDetails_For_ProductDetailsModel/ProductDetails_For_ProductDetailsModel.jsx'
-import { Home } from '/src/Page/Home/Home';
-import { ProductListing } from './Page/ProductListing/ProductListing.jsx';
-import { ProductDetails } from './Page/ProductDetails/ProductDetails.jsx';
-import { Login } from './Page/Login/Login.jsx';
-import { Register } from './Page/Register/Register.jsx';
-import { CartPage } from './Page/CartPage/CartPage.jsx';
-import { Verify } from './Page/Verify/Verify.jsx';
-import { ForgotPassword } from './Page/ForgotPassword/ForgotPassword.jsx';
-import { CheckOut } from './Page/CheckOut/CheckOut.jsx';
-import { MyAccount } from './Page/MyAccount/MyAccount.jsx';
-import { Orders} from './Page/MyAccount/Orders/Orders.jsx';
-import { Wishlist } from './Page/MyAccount/Wishlist/Wishlist.jsx';
-import { Addresses } from './Page/MyAccount/Addresses/Addresses.jsx';
-import { Profile } from './Page/MyAccount/Profile/Profile.jsx';
-import { OrderSuccess } from './Page/OrderSuccess/OrderSuccess.jsx';
 
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
@@ -42,6 +27,23 @@ import { RiCloseLargeFill } from "react-icons/ri";
 import toast, { Toaster } from 'react-hot-toast';
 
 export const MyContext = createContext()
+
+const Home = lazy(() => import('./Page/Home/Home'));
+const ProductListing = lazy(() => import('./Page/ProductListing/ProductListing'));
+const ProductDetails = lazy(() => import('./Page/ProductDetails/ProductDetails'));
+const Login = lazy(() => import('./Page/Login/Login'));
+const Register = lazy(() => import('./Page/Register/Register'));
+const CartPage = lazy(() => import('./Page/CartPage/CartPage'));
+const CheckOut = lazy(() => import('./Page/CheckOut/CheckOut'));
+const MyAccount = lazy(() => import('./Page/MyAccount/MyAccount'));
+const Addresses = lazy(() => import('./Page/MyAccount/Addresses/Addresses'));
+const Profile = lazy(() => import('./Page/MyAccount/Profile/Profile'));
+const Orders = lazy(() => import('./Page/MyAccount/Orders/Orders'));
+const Wishlist = lazy(() => import('./Page/MyAccount/Wishlist/Wishlist'));
+const ForgotPassword = lazy(() => import('./Page/ForgotPassword/ForgotPassword'));
+const Verify = lazy(() => import('./Page/Verify/Verify'));
+const OrderSuccess = lazy(() => import('./Page/OrderSuccess/OrderSuccess'));
+
 
 function App() {
   const [message, setMessage] = useState('');
@@ -97,7 +99,7 @@ function App() {
     openAlertPanel("success", "Đăng xuất thành công!");
   }
 
-  const values = {
+  const values = useMemo(() => ({
     setOpenProductDetailsModel,
     setSelectedProduct,
     selectedProduct,
@@ -111,7 +113,7 @@ function App() {
     setUser,
     isLoading,
     handleLogout,
-  };
+}), [selectedProduct, openCartPanel, isLogin, user, isLoading]);
 
   return (
     <>
@@ -127,97 +129,89 @@ function App() {
                 zIndex: -1,
                 pointerEvents: 'none'
               }}>
-              <FloatingLines 
-                enabledWaves={['top', 'middle', 'bottom']}
-                lineCount={[10, 15, 20]}
-                lineDistance={[8, 6, 4]}
-                bendRadius={5.0}
-                bendStrength={-0.5}
-                interactive={true}
-                parallax={true}
-              />
+
             </div>
-            <ClickSpark
-                        sparkColor='#fff'
-                        sparkSize={10}
-                        sparkRadius={15}
-                        sparkCount={8}
-                        duration={400}>
               <div className='rootContainer'>
                 <Header className="Header" />
                 </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Routes>
+                    <Route path='/' element={ 
+                      <div className='Swiper_Banner'>
+                        <Home className="Home"/>
+                      </div>
+                    } />
+                    
+                    <Route path='Home' element={ 
+                      <div className='Swiper_Banner'>
+                        <Home className="Home"/>
+                      </div>
+                    } />
+
+                    <Route path={"/ProductDetails/:id"} exact="true" element={ 
+                      <ProductDetails/>
+                    } />
+                    
+                    {/* Route cho tất cả products */}
+                    <Route path={"/ProductListing"} exact="true" element={ 
+                      <ProductListing/>
+                    } />
+
+                    {/* Route cho search */}
+                    <Route path="/search" element={ 
+                      <ProductListing/>
+                    } />
+
+                    <Route path={"/category/:categorySlug"} element={ 
+                      <ProductListing/>
+                    } />
+
+                    <Route path={"/category/:categorySlug/:subCategorySlug"} element={ 
+                      <ProductListing/>
+                    } />
+
+                    <Route path={"/category/:categorySlug/:subCategorySlug/:thirdCategorySlug"} element={ 
+                      <ProductListing/>
+                    } />
+                      
+                    <Route path={"/Login/"} exact="true" element={ 
+                      <Login/>
+                    } />
+                      
+                    <Route path={"/Register/"} exact="true" element={ 
+                      <Register/>
+                    } />
+                      
+                    <Route path={"/CartPage/"} exact="true" element={ 
+                      <CartPage/>
+                    } />
                 
-                <Routes>
-                  <Route path='/' element={ 
-                    <div className='Swiper_Banner'>
-                      <Home className="Home"/>
-                    </div>
-                  } />
-                  
-                  <Route path='Home' element={ 
-                    <div className='Swiper_Banner'>
-                      <Home className="Home"/>
-                    </div>
-                  } />
-
-                  <Route path={"/ProductDetails/:id"} exact="true" element={ 
-                    <ProductDetails/>
-                  } />
-                  
-                  {/* Route cho tất cả products */}
-                  <Route path={"/ProductListing"} exact="true" element={ 
-                    <ProductListing/>
-                  } />
-
-                  <Route path={"/category/:categorySlug"} element={ 
-                    <ProductListing/>
-                  } />
-
-                  <Route path={"/category/:categorySlug/:subCategorySlug"} element={ 
-                    <ProductListing/>
-                  } />
-
-                  <Route path={"/category/:categorySlug/:subCategorySlug/:thirdCategorySlug"} element={ 
-                    <ProductListing/>
-                  } />
-                    
-                  <Route path={"/Login/"} exact="true" element={ 
-                    <Login/>
-                  } />
-                    
-                  <Route path={"/Register/"} exact="true" element={ 
-                    <Register/>
-                  } />
-                    
-                  <Route path={"/CartPage/"} exact="true" element={ 
-                    <CartPage/>
-                  } />
-              
-                  <Route path={"/Verify/"} exact="true" element={ 
-                    <Verify/>
-                  } />  
-              
-                  <Route path={"/ForgotPassword/"} exact="true" element={ 
-                    <ForgotPassword/>
-                  } />
-              
-                  <Route path={"/CheckOut/"} exact="true" element={ 
-                    <CheckOut/>
-                  } />
+                    <Route path={"/Verify/"} exact="true" element={ 
+                      <Verify/>
+                    } />  
                 
-                  <Route path={"/order-success/:orderId"} exact="true" element={
-                    <OrderSuccess />
-                  } />
-              
-                  <Route path="/MyAccount/*" element={<MyAccount />}>
-                    <Route index element={<Profile />} />
-                    <Route path="profile" element={<Profile />} />
-                    <Route path="orders" element={<Orders />} />
-                    <Route path="addresses" element={<Addresses />} />
-                    <Route path="wishlist" element={<Wishlist />} />
-                  </Route>
-              
-              </Routes>
+                    <Route path={"/ForgotPassword/"} exact="true" element={ 
+                      <ForgotPassword/>
+                    } />
+                
+                    <Route path={"/CheckOut/"} exact="true" element={ 
+                      <CheckOut/>
+                    } />
+                  
+                    <Route path={"/order-success/:orderId"} exact="true" element={
+                      <OrderSuccess />
+                    } />
+                
+                    <Route path="/MyAccount/*" element={<MyAccount />}>
+                      <Route index element={<Profile />} />
+                      <Route path="profile" element={<Profile />} />
+                      <Route path="orders" element={<Orders />} />
+                      <Route path="addresses" element={<Addresses />} />
+                      <Route path="wishlist" element={<Wishlist />} />
+                    </Route>
+                
+                  </Routes>
+                </Suspense>
 
               <Footer />
                   <div className="card">
@@ -273,7 +267,6 @@ function App() {
                 <CartSummary />
               </div>
             </Drawer>
-          </ClickSpark>
           </MyContext.Provider>  
           </CartProvider>
       </BrowserRouter>

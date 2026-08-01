@@ -80,8 +80,8 @@ export const ProductItems = ({ product }) => {
   return (
     <div className='ProductItem' onClick={handleProductClick}>
       <div className='imgWrapper'>  
-        <img src={image1} className='image_1' alt={productData.name} />
-        <img src={image2} className='image_2' alt={productData.name} />
+        <img src={image1} className='image_1' alt={productData.name} loading="lazy" />
+        <img src={image2} className='image_2' alt={productData.name} loading="lazy" />
         {discount > 0 && <div className='Discount'>-{discount}%</div>}
         <div className='Product_Box_Button'>
           <Button 

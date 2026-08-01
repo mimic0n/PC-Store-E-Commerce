@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import redis from 'redis';
 import sequelize, { connectDB } from './config/connectDB.js'; 
 import sendEmail from './config/emailService.js';
 import orderRouter from './route/order.route.js';
@@ -21,6 +22,24 @@ import ManageUserRouter from './route/ManageUser.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const redisClient = redis.createClient();
+
+const cacheMiddleware = (duration) => async (req, res, next) => {
+  const key = `cache:${req.originalUrl}`;
+  const cached = await redisClient.get(key);
+  
+  if (cached) {
+      return res.json(JSON.parse(cached));
+  }
+  
+  res.originalJson = res.json;
+  res.json = (data) => {
+      redisClient.setex(key, duration, JSON.stringify(data));
+      res.originalJson(data);
+  };
+  next();
+};
+
 
 // Sử dụng CORS để cho phép client gọi API từ một domain khác
 app.use(cors({
@@ -71,6 +90,7 @@ app.use('/api/cart', cartRouter);
 app.use('/api/wishlist', wishlistRouter); 
 app.use('/api/orders', orderRouter);
 app.use('/api/admin/users', ManageUserRouter);
+app.use('/api/products/getAllProducts', cacheMiddleware(300));
 
 app.use((request, response) => {
   response.status(404).json({

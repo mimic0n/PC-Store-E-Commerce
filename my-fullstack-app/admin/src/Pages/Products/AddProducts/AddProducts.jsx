@@ -101,6 +101,33 @@ const AddProducts = () => {
                     const response = await getProductById(id);
                     if (response.success) {
                         const product = response.data;
+                        
+                        // Parse specifications nếu nó là string
+                        let specs = product.specifications;
+                        if (typeof specs === 'string') {
+                            try {
+                                specs = JSON.parse(specs);
+                            } catch (e) {
+                                specs = null;
+                            }
+                        }
+                        
+                        // Đảm bảo specifications là mảng
+                        if (!Array.isArray(specs)) {
+                            specs = [
+                                { rank: 1, category: 'CPU', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 2, category: 'Mainboard', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 3, category: 'Ram', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 4, category: 'SSD hard drive', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 5, category: 'Power Supply Unit (PSU)', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 6, category: 'VGA', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 7, category: 'Water Cooling', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 8, category: 'CASE', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 9, category: 'Extension Power Cord', description: '', quantity: 1, guarantee: '36M' },
+                                { rank: 10, category: 'Accessories', description: '', quantity: 1, guarantee: '36M' },
+                            ];
+                        }
+                        
                         setFormData({
                             name: product.name || '',
                             categoryId: product.categoryId || '',
@@ -113,8 +140,9 @@ const AddProducts = () => {
                             thumbnail: product.thumbnail || '',
                             isFeatured: product.isFeatured || false,
                             isActive: product.isActive !== false,
-                            specifications: product.specifications || formData.specifications
+                            specifications: specs
                         });
+                        
                         // Set preview images from existing images
                         if (product.images && Array.isArray(product.images)) {
                             setPreviewImages(product.images.map(img => ({

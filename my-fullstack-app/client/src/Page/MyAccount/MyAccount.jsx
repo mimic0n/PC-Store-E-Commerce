@@ -94,7 +94,7 @@ export const MyAccount = () => {
             <div className="myaccount-user-card">
               <div className="myaccount-avatar-container">
                 <div className="myaccount-avatar-ring"></div>
-                <img src={userData.avatar} alt="Avatar" className="myaccount-avatar" />
+                <img src={userData.avatar} alt="Avatar" className="myaccount-avatar" loading="lazy" />
                 <div className="myaccount-avatar-glitch"></div>
               </div>
               <div className="myaccount-user-info">

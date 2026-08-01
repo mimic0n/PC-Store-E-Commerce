@@ -1,16 +1,16 @@
 :root {
-    --product-gradient-start: #000000;
-    --product-gradient-mid: #1a0033;
-    --product-gradient-end: #4a0080;
+    --product-gradient-start: #0e0e13;
+    --product-gradient-mid: #131318;
+    --product-gradient-end: #1A1A2E;
 
-    --accent-purple: #9d4edd;
-    --accent-pink: #ff006e;
-    --neon-purple: #c77dff;
-    --neon-cyan: #00f5ff;
+    --accent-purple: #FF4992;
+    --accent-pink: #FF2D8A;
+    --neon-purple: #FFB6D9;
+    --neon-cyan: #3CD7FF;
 
-    --glow-color: rgba(157, 78, 221, 0.9);
-    --glow-pink: rgba(255, 0, 180, 0.7);
-    --metal-shine: rgba(200, 200, 220, 0.4);
+    --glow-color: rgba(255, 73, 146, 0.9);
+    --glow-pink: rgba(255, 45, 138, 0.8);
+    --metal-shine: rgba(228, 225, 233, 0.4);
 }
 
 .ProductItem {
@@ -18,20 +18,21 @@
     max-width: 280px;
     min-height: 350px;
     background: linear-gradient(135deg,
-            rgba(0, 0, 0, 0.95),
-            rgba(26, 0, 51, 0.95));
-    border-radius: 12px;
-    border: 2px solid rgba(157, 78, 221, 0.5);
+            rgba(19, 19, 24, 0.95),
+            rgba(26, 26, 46, 0.95));
+    backdrop-filter: blur(16px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 177, 198, 0.2);
     padding: 0rem;
     box-shadow:
-        0 8px 32px rgba(157, 78, 221, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 8px 32px rgba(255, 45, 138, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
     margin: 0 auto;
     overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ProductItem::before {

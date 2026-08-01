@@ -27,7 +27,7 @@ export const BrandBar = () => {
           {extendedLogos.map((logo, index) => (
             <div className="logo-item" key={index}>
               <a href={logo.link} target="_blank" rel="noopener noreferrer">
-                <img src={logo.url} alt={`${logo.name} logo`} />
+                <img src={logo.url} alt={`${logo.name} logo`} loading="lazy" />
               </a>
             </div>
           ))}

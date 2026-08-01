@@ -26,22 +26,22 @@ export const HomeSliderV2 = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-1.png" />
+          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-1.png" loading="lazy" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-2.png" />
+          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-2.png" loading="lazy" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-3.png" />
+          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-3.png" loading="lazy" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-4.png" />
+          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-4.png" loading="lazy" />
           </SwiperSlide>
         <SwiperSlide>
-          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-5.png" />
+          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-5.png" loading="lazy" />
           </SwiperSlide>
         <SwiperSlide>
-          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-6.png" />
+          <img src="/src/assets/Home_Slider_V2/HomeSliderV2-6.png" loading="lazy" />
           </SwiperSlide>
       </Swiper>
   )

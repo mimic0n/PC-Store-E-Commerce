@@ -26,68 +26,34 @@ export const Home = () => {
   // Categories for tabs
   const [categoryTabs, setCategoryTabs] = useState([]);
 
-  // Fetch root categories cho tabs
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await getAllCategories({
-          parentId: 'null',
-          isActive: true,
-          limit: 10
-        });
-        
-        if (response.success) {
-          // Lấy tối đa 4-5 categories cho tabs
-          const tabs = response.data.slice(0, 5).map(cat => ({
-            id: cat.id,
-            name: cat.name,
-            slug: cat.slug
-          }));
-          setCategoryTabs(tabs);
-        }
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-        // Fallback static tabs nếu API fail
-        setCategoryTabs([
-          { id: 1, name: 'PC Gaming', slug: 'pc-gaming' },
-          { id: 2, name: 'PC Workstation', slug: 'pc-workstation' },
-          { id: 3, name: 'Gaming Gear', slug: 'gaming-gear' },
-          { id: 4, name: 'Hardware', slug: 'hardware' }
-        ]);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  // Fetch initial products
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
+    const fetchData = async () => {
         setLoading(true);
-        
-        // Fetch tất cả products
-        const allProductsRes = await getAllProducts({ limit: 10 });
-        if (allProductsRes.success) {
-          setProducts(allProductsRes.data);
-          setFilteredProducts(allProductsRes.data); // Default hiển thị tất cả
+        try {
+            const [categoriesRes, productsRes, featuredRes] = await Promise.all([
+                getAllCategories({ parentId: 'null', isActive: true, limit: 5 }),
+                getAllProducts({ limit: 10 }),
+                getFeaturedProducts({ limit: 10 })
+            ]);
+            
+            if (categoriesRes.success) setCategoryTabs(categoriesRes.data.slice(0, 5));
+            if (productsRes.success) setProducts(productsRes.data);
+            if (featuredRes.success) setFeaturedProducts(featuredRes.data);
+        } catch (error) {
+          console.error('Error fetching :', error);
+          setCategoryTabs([
+            { id: 1, name: 'PC Gaming', slug: 'pc-gaming' },
+            { id: 2, name: 'PC Workstation', slug: 'pc-workstation' },
+            { id: 3, name: 'Gaming Gear', slug: 'gaming-gear' },
+            { id: 4, name: 'Hardware', slug: 'hardware' }
+          ]);
+        } finally {
+            setLoading(false);
         }
-        
-        // Fetch featured products
-        const featuredRes = await getFeaturedProducts({ limit: 10 });
-        if (featuredRes.success) {
-          setFeaturedProducts(featuredRes.data);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
+    }; 
+    fetchData();
   }, []);
-
+  
   // Handle tab change - fetch products by category
   const handleTabChange = async (event, newValue) => {
     setSelectedTab(newValue);

@@ -1,115 +1,242 @@
-@font-face {
-  font-family: 'TT_Mussels_Trial_Regular';
-  src: url("/src/assets/Font/tt_mussels/TT Mussels Trial Regular.otf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Neon Blossom / Goth-Pink Theme Core Stylesheet
+   Gothic Cyberpunk x Kawaii Punk Aesthetic
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap');
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-
-
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Goth-Pink (Neon Blossom) Color Tokens */
+  --surface: #131318;
+  --surface-dim: #131318;
+  --surface-bright: #39383e;
+  --surface-container-lowest: #0e0e13;
+  --surface-container-low: #1b1b20;
+  --surface-container: #1f1f25;
+  --surface-container-high: #2a292f;
+  --surface-container-highest: #35343a;
   
+  --on-surface: #e4e1e9;
+  --on-surface-variant: #e3bdc6;
+  --inverse-surface: #e4e1e9;
+  --inverse-on-surface: #303036;
+  
+  --outline: #aa8890;
+  --outline-variant: #5b3f47;
+  --surface-tint: #ffb1c6;
+
+  /* Primary Palette (Neon Pink) */
+  --primary: #ffb1c6;
+  --on-primary: #650031;
+  --primary-container: #ff4992;
+  --on-primary-container: #59002a;
+  --inverse-primary: #ba005f;
+
+  /* Secondary Palette (Hot Pink / Magenta) */
+  --secondary: #ffb0d0;
+  --on-secondary: #63003d;
+  --secondary-container: #90015a;
+  --on-secondary-container: #ff99c6;
+
+  /* Tertiary Palette (Ice Blue Cyber Accent) */
+  --tertiary: #3cd7ff;
+  --on-tertiary: #003642;
+  --tertiary-container: #009ebe;
+  --on-tertiary-container: #002e3a;
+
+  /* Error Palette */
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  /* Background Tokens */
+  --background: #131318;
+  --on-background: #e4e1e9;
+  --surface-variant: #35343a;
+
+  /* Aesthetic Named Colors */
+  --sakura-pink: #FFB6D9;
+  --deep-navy: #0D0D1A;
+  --charcoal: #1A1A2E;
+  --gunmetal: #2A2A3D;
+  --cosmic-purple: #4A1A6B;
+  --star-white: #E8E0F0;
+  --mist-gray: #8888AA;
+  --neon-pink: #FF4992;
+  --hot-pink: #FF2D8A;
+  --ice-blue: #3CD7FF;
+
+  /* Compatibility mappings for legacy variables */
+  --primary-purple: #ff4992;
+  --deep-purple: #4A1A6B;
+  --dark-purple: #1A1A2E;
+  --electric-purple: #FFB6D9;
+  --cyber-blue: #3CD7FF;
+  --metal-silver: #aa8890;
+  --gold-accent: #ffb0d0;
+  --void-black: #0e0e13;
+  --deep-black: #131318;
+  --carbon-black: #1b1b20;
+  --shadow-black: #0e0e13;
+
+  --glitch-red: #ff4992;
+  --glitch-cyan: #3cd7ff;
+  --glitch-green: #FFB6D9;
+
+  --gradient-start: #0A0A0F;
+  --gradient-mid: #1A0A2E;
+  --gradient-end: #0D0D1A;
+
+  /* Theme Gradients */
+  --cosmic-sky: linear-gradient(135deg, #0A0A0F 0%, #1A0A2E 50%, #0D0D1A 100%);
+  --neon-energy: linear-gradient(90deg, #FF2D8A 0%, #FF69B4 50%, #FFB6D9 100%);
+  --glass-surface: linear-gradient(135deg, rgba(255, 45, 138, 0.08) 0%, rgba(26, 26, 46, 0.6) 100%);
+
+  /* Fonts */
+  --font-hero: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-label: 'Rajdhani', sans-serif;
+
+  /* Glow Effects */
+  --neon-glow: 0 0 15px rgba(255, 73, 146, 0.4), 0 0 30px rgba(255, 45, 138, 0.2);
+  --cyan-glow: 0 0 15px rgba(60, 215, 255, 0.4), 0 0 30px rgba(0, 158, 190, 0.2);
+  --glass-border: 1px solid rgba(255, 177, 198, 0.15);
 }
 
-:root {
-  /* Cyberpunk Purple Palette */
-  --primary-purple: #9D4EDD;
-  --deep-purple: #7209B7;
-  --dark-purple: #3C096C;
-  --electric-purple: #C77DFF;
-
-  /* Metallic & Neon Accents */
-  --neon-pink: #FF006E;
-  --cyber-blue: #00F5FF;
-  --metal-silver: #C0C0C0;
-  --gold-accent: #FFD60A;
-
-  /* Dark Backgrounds */
-  --void-black: #0A0A0A;
-  --deep-black: #121212;
-  --carbon-black: #1A1A1A;
-  --shadow-black: #0D0D0D;
-
-  /* Glitch Colors */
-  --glitch-red: #FF0055;
-  --glitch-cyan: #00FFFF;
-  --glitch-green: #00FF41;
-
-  --gradient-start: #0A0A0A;
-  --gradient-mid: #3C096C;
-  --gradient-end: #7209B7;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background-image: linear-gradient(to right, #0A0A0A 0%, #121212 51%, #0A0A0A 100%);
+  background-color: var(--background);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(74, 26, 107, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(255, 45, 138, 0.12) 0%, transparent 45%),
+    linear-gradient(135deg, #0A0A0F 0%, #1A0A2E 50%, #0D0D1A 100%);
+  background-attachment: fixed;
+  color: var(--on-surface);
+  font-family: var(--font-body);
   overflow-x: hidden;
-  padding : 0rem;
-  margin: 0rem;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography Defaults */
+h1, h2, h3, .heading-neon {
+  font-family: var(--font-hero);
+  color: var(--star-white);
+  letter-spacing: 1px;
+}
 
+h1 {
+  text-shadow: 0 0 10px rgba(255, 73, 146, 0.6), 0 0 20px rgba(255, 45, 138, 0.3);
+}
 
-::-webkit-scrollbar{
+p, span, div, body {
+  font-family: var(--font-body);
+}
+
+.label-tech, .badge-tech, .btn-tech {
+  font-family: var(--font-label);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
   width: 10px !important;
   height: 10px !important;
 }
 
-::-webkit-scrollbar-thumb{
-  background: linear-gradient(180deg, #3C096C, #FF0055) !important;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF2D8A, #4A1A6B) !important;
   border-radius: 10px !important;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  background-size: 100% 200%;
-  animation: gradient-vertical 15s ease infinite;
-
+  box-shadow: 0 0 10px rgba(255, 45, 138, 0.5);
 }
 
-::-webkit-scrollbar-track{
-  background: rgb(101, 99, 99);
+::-webkit-scrollbar-track {
+  background: #0e0e13;
 }
 
-@keyframes gradient-vertical {
-  0% 
-  {
-    background-position: 0% 0%;
-  }
-
-  50% 
-  { 
-    background-position: 0% 100%;
-  }
-
-  100% {
-    background-position: 0% 0%;
-    
-  }
+/* Glassmorphism utility card */
+.glass-card {
+  background: var(--glass-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: var(--glass-border);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.glass-card:hover {
+  border-color: rgba(255, 177, 198, 0.4);
+  transform: translateY(-4px);
+  box-shadow: var(--neon-glow);
+}
+
+/* Energy Trail Separator */
+.energy-trail {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, #FF2D8A 30%, #FFB6D9 50%, #3CD7FF 70%, transparent 100%);
+  box-shadow: 0 0 12px rgba(255, 45, 138, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.energy-trail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #FFFFFF, transparent);
+  animation: energy-sweep 3s ease-in-out infinite;
+}
+
+@keyframes energy-sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Goth-Pink Pill Button */
+.btn-goth-pink {
+  background: var(--neon-energy);
+  color: #650031;
+  font-family: var(--font-label);
+  font-weight: 700;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--neon-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-goth-pink:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 45, 138, 0.8), 0 0 40px rgba(255, 182, 217, 0.4);
+  color: #3f001c;
+}
+
+/* MUI Dialog and Drawer Overrides */
 .Product_Details_Model_Container .MuiDialogContent-root {
-    padding: 0px 0px;
+  padding: 0px 0px;
 }
 
-
-.css-cyqh1t-MuiPaper-root-MuiDrawer-paper {
-  background: linear-gradient(135deg,
-            var(--gradient-start) 0%,
-            var(--gradient-mid) 50%,
-            var(--gradient-end) 100%) !important;
-  box-shadow:
-        4px 0 40px rgba(157, 78, 221, 0.4),
-        0 0 80px rgba(114, 9, 183, 0.3) !important;
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
+.css-cyqh1t-MuiPaper-root-MuiDrawer-paper,
+.MuiPaper-root.MuiDrawer-paper {
+  background: linear-gradient(135deg, #0A0A0F 0%, #1A0A2E 50%, #0D0D1A 100%) !important;
+  box-shadow: 4px 0 40px rgba(255, 45, 138, 0.3) !important;
+  border-right: 1px solid rgba(255, 177, 198, 0.2) !important;
+  color: var(--on-surface) !important;
 }
 
 .Navigation_Container {

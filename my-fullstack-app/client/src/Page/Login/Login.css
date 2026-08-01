@@ -4,27 +4,27 @@
    ROOT VARIABLES - CYBERPUNK THEME (Matching CheckOut)
 ============================================ */
 .Login_Page {
-    --c-bg-primary: #050508;
-    --c-bg-secondary: #0a0a12;
-    --c-bg-panel: rgba(15, 10, 25, 0.85);
-    --c-purple-deep: #1a0b2e;
-    --c-purple-dark: #12001a;
-    --c-purple-mid: #2d1b4e;
-    --c-neon-cyan: #00f3ff;
-    --c-neon-pink: #ff00ff;
-    --c-neon-purple: #bc13fe;
-    --c-neon-blue: #0080ff;
-    --c-text-primary: #e8e8f0;
-    --c-text-secondary: #9090a8;
-    --c-text-muted: #606080;
-    --c-border: rgba(188, 19, 254, 0.2);
-    --c-border-hover: rgba(0, 243, 255, 0.5);
-    --c-error: #ff3366;
-    --c-success: #00ff88;
+    --c-bg-primary: #0e0e13;
+    --c-bg-secondary: #131318;
+    --c-bg-panel: rgba(26, 26, 46, 0.85);
+    --c-purple-deep: #0D0D1A;
+    --c-purple-dark: #131318;
+    --c-purple-mid: #1A1A2E;
+    --c-neon-cyan: #3CD7FF;
+    --c-neon-pink: #FF4992;
+    --c-neon-purple: #FF2D8A;
+    --c-neon-blue: #3CD7FF;
+    --c-text-primary: #e4e1e9;
+    --c-text-secondary: #e3bdc6;
+    --c-text-muted: #aa8890;
+    --c-border: rgba(255, 177, 198, 0.2);
+    --c-border-hover: rgba(255, 73, 146, 0.6);
+    --c-error: #ffb4ab;
+    --c-success: #3CD7FF;
 
-    --shadow-neon-cyan: 0 0 20px rgba(0, 243, 255, 0.3);
-    --shadow-neon-pink: 0 0 20px rgba(255, 0, 255, 0.3);
-    --shadow-glow: 0 0 40px rgba(188, 19, 254, 0.2);
+    --shadow-neon-cyan: 0 0 20px rgba(60, 215, 255, 0.4);
+    --shadow-neon-pink: 0 0 20px rgba(255, 73, 146, 0.4);
+    --shadow-glow: 0 0 40px rgba(255, 45, 138, 0.3);
 }
 
 /* ============================================
@@ -46,72 +46,6 @@
     gap: 3rem;
     position: relative;
     overflow: hidden;
-}
-
-/* ============================================
-   BACKGROUND EFFECTS - CYBER GRID & CIRCUIT
-============================================ */
-.Login_Page::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        /* Circuit pattern */
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v20M30 40v20M0 30h20M40 30h20M30 30m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0' stroke='%23bc13fe' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E"),
-        /* Grid */
-        linear-gradient(rgba(188, 19, 254, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(188, 19, 254, 0.03) 1px, transparent 1px),
-        /* Radial glow */
-        radial-gradient(ellipse at 20% 20%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.08) 0%, transparent 50%),
-        /* Base gradient */
-        linear-gradient(180deg, var(--c-purple-dark) 0%, var(--c-bg-primary) 30%, var(--c-bg-primary) 100%);
-    background-size: 60px 60px, 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
-    pointer-events: none;
-    z-index: 0;
-    animation: gridScroll 20s linear infinite;
-}
-
-@keyframes gridScroll {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(60px);
-    }
-}
-
-/* Scanlines Overlay */
-.Login_Page::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        repeating-linear-gradient(0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.1) 2px,
-            rgba(0, 0, 0, 0.1) 4px);
-    pointer-events: none;
-    z-index: 1;
-    animation: scanline 8s linear infinite;
-}
-
-@keyframes scanline {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 0 100vh;
-    }
 }
 
 /* ============================================
@@ -206,8 +140,6 @@
     flex-direction: column;
     gap: 25px;
     background: var(--c-bg-panel);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
     border: 1px solid var(--c-border);
     box-shadow:
         var(--shadow-glow),

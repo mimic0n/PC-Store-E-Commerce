@@ -8,8 +8,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './HomeSlider.css';
 
-
-
 export const HomeSlider = () => {
   return (
     <div className='HomeSlider'>
@@ -28,10 +26,10 @@ export const HomeSlider = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_1-1920x560px.jpg" alt='Banner'></img></div></SwiperSlide>
-        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_2-1920x560px.jpg" alt='Banner'></img></div></SwiperSlide>
-        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_3-1920x560px.jpg" alt='Banner'></img></div></SwiperSlide>
-        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_4-1920x560px.jpg" alt='Banner'></img></div></SwiperSlide>
+        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_1-1920x560px.jpg" alt='Banner' loading="lazy"></img></div></SwiperSlide>
+        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_2-1920x560px.jpg" alt='Banner' loading="lazy"></img></div></SwiperSlide>
+        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_3-1920x560px.jpg" alt='Banner' loading="lazy"></img></div></SwiperSlide>
+        <SwiperSlide><div className="slide_content"><img src = "/src/assets/Home_Banner/HomeSlider_4-1920x560px.jpg" alt='Banner' loading="lazy"></img></div></SwiperSlide>
 
       </Swiper>
     </div>

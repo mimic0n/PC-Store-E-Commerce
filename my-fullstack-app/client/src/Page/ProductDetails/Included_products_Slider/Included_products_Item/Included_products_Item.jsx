@@ -15,8 +15,8 @@ export const Included_products_Item = () => {
   return (
       <div className='Included_products_Item'>
           <div className='imgWrapper'>  
-        <img src="/src/assets/Product/Keyboard/AULA S98 Pro/250_12664_ban_phim_co_aula_s98_pro_3_mode_starry_cloud_paleo_dust_switch_4.png" className='image_1'></img>
-        <img src="/src/assets/Product/Keyboard/AULA S98 Pro/12664_ban_phim_co_aula_s98_pro_3_mode_starry_cloud_paleo_dust_switch_1.png" className='image_2'></img>
+        <img src="/src/assets/Product/Keyboard/AULA S98 Pro/250_12664_ban_phim_co_aula_s98_pro_3_mode_starry_cloud_paleo_dust_switch_4.png" className='image_1' loading="lazy"></img>
+        <img src="/src/assets/Product/Keyboard/AULA S98 Pro/12664_ban_phim_co_aula_s98_pro_3_mode_starry_cloud_paleo_dust_switch_1.png" className='image_2' loading="lazy"></img>
         </div>
       
       <div className='Product_Info'>

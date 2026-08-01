@@ -1,24 +1,24 @@
 .Category_Container {
-    /* Cyberpunk Dark Gradients */
-    --gradient-start: #0A0A0A;
-    --gradient-mid: #3C096C;
-    --gradient-end: #7209B7;
+    /* Goth-Pink (Neon Blossom) Gradients & Tokens */
+    --gradient-start: #0A0A0F;
+    --gradient-mid: #1A0A2E;
+    --gradient-end: #0D0D1A;
 
-    --menu-bg: rgba(157, 78, 221, 0.15);
-    --menu-hover: rgba(157, 78, 221, 0.35);
-    --menu-active: #9D4EDD;
+    --menu-bg: rgba(255, 73, 146, 0.15);
+    --menu-hover: rgba(255, 45, 138, 0.35);
+    --menu-active: #FF4992;
 
-    --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-primary: #e4e1e9;
+    --text-secondary: #e3bdc6;
 
     --border-radius: 8px;
     --border-radius-small: 6px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.2s ease;
 
-    --glow-color: rgba(157, 78, 221, 0.8);
-    --glow-pink: rgba(255, 0, 110, 0.6);
-    --neon-cyan: rgba(0, 245, 255, 0.5);
+    --glow-color: rgba(255, 73, 146, 0.8);
+    --glow-pink: rgba(255, 45, 138, 0.6);
+    --neon-cyan: rgba(60, 215, 255, 0.5);
 
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
@@ -54,8 +54,6 @@
     box-shadow:
         4px 0 40px rgba(157, 78, 221, 0.4),
         0 0 80px rgba(114, 9, 183, 0.3) !important;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
     position: relative;
 }
 
@@ -151,8 +149,6 @@
     box-shadow:
             4px 0 40px rgba(157, 78, 221, 0.4),
             0 0 80px rgba(114, 9, 183, 0.3) !important;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
     overflow-y: auto !important;
 }
 
@@ -162,7 +158,6 @@
     max-height: calc(100vh - 140px);
     padding: 0 1rem;
     scroll-behavior: smooth;
-    scrollbar-gutter: stable;
 }
 
 .Category_Container .scroll::-webkit-scrollbar-thumb {
@@ -241,8 +236,6 @@
     font-size: clamp(0.875rem, 3vw, 0.95rem);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
     text-decoration: none;
     position: relative;
     overflow: hidden;

@@ -1,7 +1,7 @@
 :root {
-    --dropdown-bg: rgba(5, 5, 15, 0.98);
-    --dropdown-border: rgba(0, 243, 255, 0.3);
-    --dropdown-hover: rgba(138, 43, 226, 0.3);
+    --dropdown-bg: rgba(26, 26, 46, 0.98);
+    --dropdown-border: rgba(255, 177, 198, 0.3);
+    --dropdown-hover: rgba(255, 73, 146, 0.3);
 }
 
 /* ============================================

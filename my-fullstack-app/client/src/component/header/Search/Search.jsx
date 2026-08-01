@@ -1,16 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "/src/styles/Search.css"
 import Button from '@mui/material/Button';
 import { IoSearch } from "react-icons/io5";
 
 const Search = () => {
     const [searchValue, setSearchValue] = useState("");
+    const navigate = useNavigate();
 
     const handleSearch = (e) => {
         e.preventDefault();
         if (searchValue.trim()) {
-            // TODO: Implement search functionality
-            console.log("Searching for:", searchValue);
+            // Navigate to ProductListing with search query
+            navigate(`/search?q=${encodeURIComponent(searchValue.trim())}`);
+            setSearchValue(""); // Clear input after search
         }
     };
 

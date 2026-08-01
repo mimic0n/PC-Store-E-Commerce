@@ -16,7 +16,7 @@ export const Register = () => {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
-        fuleName: '',
+        fullName: '',
         email: '',
         password: '',
         confirmPassword: ''

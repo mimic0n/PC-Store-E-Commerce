@@ -1,16 +1,16 @@
 :root {
-    --listing-gradient-start: #000000;
-    --listing-gradient-mid: #1a0033;
-    --listing-gradient-end: #4a0080;
+    --listing-gradient-start: #0A0A0F;
+    --listing-gradient-mid: #1A0A2E;
+    --listing-gradient-end: #0D0D1A;
 
-    --accent-purple: #9d4edd;
-    --accent-pink: #ff006e;
-    --neon-purple: #c77dff;
-    --neon-cyan: #00f5ff;
+    --accent-purple: #FF4992;
+    --accent-pink: #FF2D8A;
+    --neon-purple: #FFB6D9;
+    --neon-cyan: #3CD7FF;
 
-    --glow-color: rgba(157, 78, 221, 0.9);
-    --glow-pink: rgba(255, 0, 180, 0.7);
-    --metal-shine: rgba(200, 200, 220, 0.4);
+    --glow-color: rgba(255, 73, 146, 0.9);
+    --glow-pink: rgba(255, 45, 138, 0.8);
+    --metal-shine: rgba(228, 225, 233, 0.4);
 }
 
 .ProductListingSection {

@@ -105,8 +105,8 @@ const CartSummary = () => {
                         </h2>
                     </div>
                     <div className="cart-summary-empty">
-                        <FiShoppingCart size={60} />
-                        <p>Your cart is empty</p>
+                        <FiShoppingCart size={60} className='Empty-cart-icon' />
+                        <p className='Empty-cart-text'>Your cart is empty</p>
                         <Link to="/ProductListing" className="continue-shopping-btn">
                             Continue Shopping
                         </Link>

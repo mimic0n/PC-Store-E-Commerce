@@ -20,7 +20,7 @@
 .homeCatSlider {
     padding: 3rem 0;
     position: relative;
-    background: linear-gradient(180deg, rgba(26, 15, 46, 0.5) 0%, rgba(10, 10, 20, 0.5) 100%);
+    background: linear-gradient(180deg, rgba(26, 26, 46, 0.6) 0%, rgba(14, 14, 19, 0.6) 100%);
 }
 
 .homeCatSlider::before {
@@ -99,11 +99,6 @@
     border-radius: 8px;
     padding: 2px;
     background: linear-gradient(135deg, #8a2be2, #00ffff, #ff00ff);
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.4s ease;
 }

@@ -18,7 +18,7 @@ import { ProductItems } from '../../component/ProductItems/ProductItems';
 import { IoGrid } from "react-icons/io5";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 
-import { getAllProducts, getProductsByCategoryId, getProductsByPrice } from '../../api/productService';
+import { getAllProducts, getProductsByCategoryId, getProductsByPrice, searchProducts } from '../../api/productService';
 import { getCategoryBySlug } from '../../api/categoryService';
 
 // Loading Skeleton
@@ -40,6 +40,9 @@ export const ProductListing = () => {
   const { categorySlug, subCategorySlug, thirdCategorySlug } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  // Get search query from URL
+  const searchQuery = searchParams.get('q') || '';
 
   const [itemView, setItemView] = useState('grid');
   const [anchorEl, setAnchorEl] = useState(null);
@@ -95,9 +98,24 @@ export const ProductListing = () => {
     setPagination(prev => ({ ...prev, page: 1 }));
   };
 
+  // Handle search query breadcrumbs
+  useEffect(() => {
+    if (searchQuery) {
+      setBreadcrumbs([
+        { label: 'Home', href: '/' },
+        { label: `Kết quả tìm kiếm: "${searchQuery}"`, href: `/search?q=${encodeURIComponent(searchQuery)}` }
+      ]);
+      setCurrentCategory(null);
+      setFilters(prev => ({ ...prev, categoryId: null }));
+    }
+  }, [searchQuery]);
+
   // Fetch category by slug
   useEffect(() => {
     const fetchCategory = async () => {
+      // Skip if there's a search query
+      if (searchQuery) return;
+      
       // Xác định slug cần fetch (ưu tiên từ level 3 xuống)
       const slug = thirdCategorySlug || subCategorySlug || categorySlug;
       
@@ -132,7 +150,7 @@ export const ProductListing = () => {
     };
 
     fetchCategory();
-  }, [categorySlug, subCategorySlug, thirdCategorySlug]);
+  }, [categorySlug, subCategorySlug, thirdCategorySlug, searchQuery]);
 
   // Fetch products based on filters
   useEffect(() => {
@@ -148,8 +166,12 @@ export const ProductListing = () => {
           order: order
         };
 
+        // Nếu có search query
+        if (searchQuery) {
+          response = await searchProducts(searchQuery, params);
+        }
         // Nếu có categoryId thì fetch theo category
-        if (filters.categoryId) {
+        else if (filters.categoryId) {
           response = await getProductsByCategoryId(filters.categoryId, params);
         } 
         // Nếu có filter giá
@@ -182,7 +204,7 @@ export const ProductListing = () => {
     };
 
     fetchProducts();
-  }, [pagination.page, sortBy, order, filters.categoryId, filters.minPrice, filters.maxPrice]);
+  }, [pagination.page, sortBy, order, filters.categoryId, filters.minPrice, filters.maxPrice, searchQuery]);
 
   const StyledBreadcrumb = styled(Chip)(({ theme }) => {
     return {

@@ -1241,6 +1241,18 @@
     box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
 }
 
+.cyber-action-btn.danger {
+    color: var(--c-neon-danger);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.cyber-action-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: var(--c-neon-danger);
+    color: var(--c-neon-danger);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
 .action-dropdown {
     position: relative;
 }

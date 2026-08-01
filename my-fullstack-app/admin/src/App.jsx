@@ -128,6 +128,10 @@ function AppContent() {
             element: <AddProducts />
           },
           {
+            path: "products/EditProduct/:id",
+            element: <AddProducts />  
+          },
+          {
             path: "products/Categories",
             element: <Categories />
           },

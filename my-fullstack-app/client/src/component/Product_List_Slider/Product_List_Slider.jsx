@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+
 // Loading Skeleton Component
 const ProductSkeleton = () => (
   <div className='ProductItem ProductItem-Skeleton'>

@@ -2,24 +2,24 @@
 
 /* SCOPED VARIABLES */
 .cart-page-section {
-    --dark-purple: #1a0b2e;
-    --deep-purple: #2d1b4e;
-    --neon-blue: #00fff9;
-    --neon-pink: #ff006e;
-    --neon-purple: #b24bf3;
-    --pure-black: #000000;
-    --dark-gray: #0f0f0f;
-    --text-gray: #a8a8a8;
+    --dark-purple: #131318;
+    --deep-purple: #1A1A2E;
+    --neon-blue: #3CD7FF;
+    --neon-pink: #FF4992;
+    --neon-purple: #FF2D8A;
+    --pure-black: #0e0e13;
+    --dark-gray: #1b1b20;
+    --text-gray: #e3bdc6;
 }
 
 .cart-page-section {
     padding: 2rem 1rem !important;
     background: linear-gradient(135deg,
-            rgba(0, 0, 0, 0.98) 0%,
-            rgba(26, 11, 46, 0.95) 25%,
-            rgba(45, 27, 78, 0.9) 50%,
-            rgba(26, 11, 46, 0.95) 75%,
-            rgba(0, 0, 0, 0.98) 100%);
+            #0A0A0F 0%,
+            #1A0A2E 25%,
+            #0D0D1A 50%,
+            #1A0A2E 75%,
+            #0A0A0F 100%);
     min-height: 100vh;
     position: relative;
     overflow: hidden;

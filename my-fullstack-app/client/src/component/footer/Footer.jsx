@@ -136,11 +136,7 @@ export const Footer = () => {
             <p className='footerBottom_Font'> HKTshop © 2025 - Eccomerce PC Store!</p>
 
             <div className='footer-payment'>
-              <img src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/modules/cz_blockpaymentlogo/views/img/carte_bleue.png" alt="Payment Methods" className='footer-payment_img' />
-              <img src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/modules/cz_blockpaymentlogo/views/img/visa.png" alt="Payment Methods" className='footer-payment_img' />
-              <img src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/modules/cz_blockpaymentlogo/views/img/master_card.png" alt="Payment Methods" className='footer-payment_img' />
-              <img src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/modules/cz_blockpaymentlogo/views/img/american_express.png" alt="Payment Methods" className='footer-payment_img' />
-              <img src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/modules/cz_blockpaymentlogo/views/img/paypal.png" alt="Payment Methods" className='footer-payment_img' />
+              <img src="/src/assets/Payment/payment-2021.png" alt="Payment Methods" className='footer-payment_img' />
             </div>
           </div>
         </div>

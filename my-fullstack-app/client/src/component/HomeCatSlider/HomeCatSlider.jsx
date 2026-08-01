@@ -32,25 +32,25 @@ export const HomeCatSlider = () => {
             >
                       <SwiperSlide>
                           <div className="slide-content">
-                            <img src = "/src/assets/Home_Cat_Slider/Home_Cat_Slider_1.jpg" alt='Banner' className='image'></img>
+                            <img src = "/src/assets/Home_Cat_Slider/Home_Cat_Slider_1.jpg" alt='Banner' className='image' loading="lazy"></img>
                           </div>
                       </SwiperSlide>
 
                       <SwiperSlide>
                           <div className="slide-content">
-                            <img src = "/src/assets/Home_Cat_Slider/Home_Cat_Slider_2.jpg" alt='Banner' className='image'></img>
+                            <img src = "/src/assets/Home_Cat_Slider/Home_Cat_Slider_2.jpg" alt='Banner' className='image' loading="lazy"></img>
                           </div>
                       </SwiperSlide>
 
                       <SwiperSlide>
                           <div className="slide-content">
-                            <img src = "/src/assets/Home_Cat_Slider/Home_Cat_Slider_3.png" alt='Banner' className='image'></img>
+                            <img src = "/src/assets/Home_Cat_Slider/Home_Cat_Slider_3.png" alt='Banner' className='image' loading="lazy"></img>
                           </div>
                       </SwiperSlide>
 
                       <SwiperSlide>
                           <div className="slide-content">
-                            <img src = "/src/assets/Home_Cat_Slider/HomeCatSlider_4.jpg" alt='Banner' className='image'></img>
+                            <img src = "/src/assets/Home_Cat_Slider/HomeCatSlider_4.jpg" alt='Banner' className='image' loading="lazy"></img>
                           </div>
                       </SwiperSlide>
 

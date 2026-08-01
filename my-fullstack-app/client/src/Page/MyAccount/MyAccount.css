@@ -1,24 +1,24 @@
 /* ===== ROOT VARIABLES ===== */
 .myaccount-root {
-    --ma-primary-dark: #0a0a0f;
-    --ma-primary-purple: #1a0a2e;
-    --ma-deep-purple: #2d1b4e;
-    --ma-neon-blue: #00f0ff;
-    --ma-neon-pink: #ff00ff;
-    --ma-neon-purple: #bf00ff;
-    --ma-neon-green: #00ff9f;
-    --ma-text-primary: #ffffff;
-    --ma-text-secondary: #a0a0b0;
-    --ma-glass-bg: rgba(26, 10, 46, 0.7);
-    --ma-border-glow: rgba(0, 240, 255, 0.3);
+    --ma-primary-dark: #0e0e13;
+    --ma-primary-purple: #0D0D1A;
+    --ma-deep-purple: #1A1A2E;
+    --ma-neon-blue: #3CD7FF;
+    --ma-neon-pink: #FF4992;
+    --ma-neon-purple: #FF2D8A;
+    --ma-neon-green: #FFB6D9;
+    --ma-text-primary: #e4e1e9;
+    --ma-text-secondary: #e3bdc6;
+    --ma-glass-bg: rgba(26, 26, 46, 0.75);
+    --ma-border-glow: rgba(255, 177, 198, 0.3);
 
-    --c-purple-deep: #1a0b2e;
-    --c-purple-dark: #12001a;
-    --c-purple-mid: #2d1b4e;
-    --c-neon-cyan: #00f3ff;
-    --c-neon-pink: #ff00ff;
-    --c-neon-purple: #bc13fe;
-    --c-neon-blue: #0080ff;
+    --c-purple-deep: #0D0D1A;
+    --c-purple-dark: #131318;
+    --c-purple-mid: #1A1A2E;
+    --c-neon-cyan: #3CD7FF;
+    --c-neon-pink: #FF4992;
+    --c-neon-purple: #FF2D8A;
+    --c-neon-blue: #3CD7FF;
 
     position: relative;
     min-height: 100vh;

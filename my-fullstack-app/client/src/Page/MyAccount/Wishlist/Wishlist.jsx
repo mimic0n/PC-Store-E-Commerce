@@ -41,7 +41,7 @@ export const Wishlist = () => {
           <div key={item.id} className="myaccount-wishlist-card">
             <div className="myaccount-wishlist-image">
               {item.image ? (
-                <img src={item.image} alt={item.name} />
+                <img src={item.image} alt={item.name} loading="lazy" />
               ) : (
                 <div className="myaccount-image-placeholder">
                   <span className="myaccount-circuit-pattern">◇◆◇</span>

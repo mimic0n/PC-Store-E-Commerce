@@ -2,29 +2,12 @@
 
 .infobar-container {
     position: relative;
-    font-family: "Orbitron", "Share Tech", sans-serif;
-    background: linear-gradient(180deg, #0a0a14 0%, #1a0f2e 50%, #0a0a14 100%);
+    font-family: "Orbitron", "Inter", sans-serif;
+    background: linear-gradient(180deg, #0e0e13 0%, #1A0A2E 50%, #0D0D1A 100%);
     padding: 3rem 0;
     width: 100vw;
     box-sizing: border-box;
     overflow: hidden;
-}
-
-/* Circuit board pattern overlay */
-.infobar-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(138, 43, 226, 0.1) 2px, rgba(138, 43, 226, 0.1) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(138, 43, 226, 0.1) 2px, rgba(138, 43, 226, 0.1) 4px),
-        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 255, 255, 0.02) 10px, rgba(0, 255, 255, 0.02) 20px);
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.5;
 }
 
 /* Top neon line */
@@ -37,9 +20,9 @@
     height: 3px;
     background: linear-gradient(90deg,
             transparent 0%,
-            #8a2be2 20%,
-            #00ffff 50%,
-            #ff00ff 80%,
+            #FF2D8A 20%,
+            #FF4992 50%,
+            #3CD7FF 80%,
             transparent 100%);
     box-shadow:
         0 0 20px rgba(0, 255, 255, 0.6),
@@ -74,7 +57,7 @@
         0 0 20px rgba(138, 43, 226, 0.6),
         0 0 30px rgba(255, 0, 255, 0.4);
     z-index: 3;
-    animation: textGlow 2s ease-in-out infinite alternate;
+
 }
 
 @keyframes textGlow {
@@ -104,7 +87,7 @@
     background: transparent;
     overflow: hidden;
     clip: rect(0, 900px, 0, 0);
-    animation: glitchEffect 3s infinite linear alternate-reverse;
+
 }
 
 .infobar-container .infobar-title::after {
@@ -117,7 +100,7 @@
     background: transparent;
     overflow: hidden;
     clip: rect(0, 900px, 0, 0);
-    animation: glitchEffect 2s infinite linear alternate-reverse;
+
 }
 
 @keyframes glitchEffect {
@@ -263,7 +246,6 @@
     content: '';
     position: absolute;
     inset: 10px;
-    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     background: linear-gradient(135deg,
             rgba(138, 43, 226, 0.1) 0%,
             rgba(88, 28, 135, 0.2) 100%);

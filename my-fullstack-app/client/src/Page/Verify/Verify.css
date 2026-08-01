@@ -1,13 +1,13 @@
 /* ===== COLOR VARIABLES (SCOPED) ===== */
 /* Đổi từ :root sang class cụ thể để biến không ảnh hưởng toàn trang web */
 .verify-container {
-    --cyber-black: #0a0a0f;
-    --deep-purple: #1a0d2e;
-    --dark-purple: #2d1b4e;
-    --neon-blue: #00f0ff;
-    --neon-pink: #ff006e;
-    --neon-purple: #b000ff;
-    --electric-cyan: #00ffff;
+    --cyber-black: #0e0e13;
+    --deep-purple: #0D0D1A;
+    --dark-purple: #1A1A2E;
+    --neon-blue: #3CD7FF;
+    --neon-pink: #FF4992;
+    --neon-purple: #FF2D8A;
+    --electric-cyan: #FFB6D9;
 }
 
 /* ===== MAIN CONTAINER ===== */

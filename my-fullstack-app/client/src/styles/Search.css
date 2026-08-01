@@ -3,23 +3,23 @@
     --search-height-mobile: 44px;
     --search-border-radius: 9999px;
 
-    --search-gradient-primary: #7209B7;
-    --search-gradient-secondary: #9D4EDD;
-    --search-gradient-dark: #3C096C;
-    --search-accent: #C77DFF;
-    --search-neon: #00F5FF;
+    --search-gradient-primary: #FF2D8A;
+    --search-gradient-secondary: #FF4992;
+    --search-gradient-dark: #1A1A2E;
+    --search-accent: #FFB6D9;
+    --search-neon: #3CD7FF;
 
-    --accent-purple: #9d4edd;
-    --accent-pink: #ff006e;
+    --accent-purple: #FF4992;
+    --accent-pink: #FF2D8A;
 
-    --glow-color: rgba(157, 78, 221, 0.8);
-    --glow-pink: rgba(255, 0, 110, 0.6);
+    --glow-color: rgba(255, 73, 146, 0.8);
+    --glow-pink: rgba(255, 45, 138, 0.6);
 
-    --search-transition: all 0.3s ease;
+    --search-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --search-shadow-glow:
-        0 0 15px rgba(157, 78, 221, 0.6),
-        0 0 30px rgba(114, 9, 183, 0.4),
-        0 0 45px rgba(60, 9, 108, 0.2);
+        0 0 15px rgba(255, 73, 146, 0.6),
+        0 0 30px rgba(255, 45, 138, 0.4),
+        0 0 45px rgba(74, 26, 107, 0.2);
 }
 .searchBox {
     width: 100%;
